@@ -41,9 +41,15 @@ E.g. : node_modules/.
 │   │   ├──🔷 [ComponentTemplate.jsx]
 │   │   ├──🔹 [ComponentTemplate.module.css]
 │   │   │
-│   │   └──📁 functions/
+│   │   ├──📁 functions/
+│   │   │   │
+│   │   │   └──⚙️ [singleFunction]
+│   │   │
+│   │   └──📁 utility/
 │   │       │
-│   │       └──⚙️ [singleFunction]       
+│   │       ├──📄 [file]
+│   │       ├──🔻 [media]
+│   │       └──➜ [utility]       
 │   │
 │   └──📁 componentName/
 │       │

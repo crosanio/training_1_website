@@ -38,8 +38,8 @@ E.g. : node_modules/.
 │   │
 │   ├──📁 componentTemplate/
 │   │   │
-│   │   ├──🔷 [componentTemplate.jsx]
-│   │   ├──🔹 [componentTemplate.module.css]
+│   │   ├──🔷 [ComponentTemplate.jsx]
+│   │   ├──🔹 [ComponentTemplate.module.css]
 │   │   │
 │   │   └──📁 functions/
 │   │       │
@@ -47,8 +47,8 @@ E.g. : node_modules/.
 │   │
 │   └──📁 componentName/
 │       │
-│       ├──🔷 [componentName.jsx]
-│       ├──🔹 [componentName.module.css]
+│       ├──🔷 [ComponentName.jsx]
+│       ├──🔹 [ComponentName.module.css]
 │       │
 │       ├──📁 functions/
 │       │   │
@@ -62,7 +62,7 @@ E.g. : node_modules/.
 │
 ├──📁 contexts/
 │   │
-│   └──⚙️ [contextName.jsx] 
+│   └──⚙️ [ContextName.jsx] 
 │
 ├──📁 notes/
 │   │

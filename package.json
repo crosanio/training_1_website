@@ -1,0 +1,32 @@
+{
+  "name": "training_1_website",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/crosanio/training_1_website.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/crosanio/training_1_website/issues"
+  },
+  "homepage": "https://github.com/crosanio/training_1_website#readme",
+  "dependencies": {
+    "next": "^15.5.5",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^9.37.0",
+    "eslint-config-next": "^15.5.5"
+  }
+}

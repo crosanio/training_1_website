@@ -1,0 +1,15 @@
+Utilizza la cartella attuale come root di progetto.
+
+Voglio configurare un ambiente di sviluppo con le seguenti specifiche:
+- basato sulal versione più recente di Next Js
+- basato sulla versione più recente di React Js compatibile con la versione di Next scelta
+- deve usare il più recente sistema di routing di Next Js basato su src/app
+- voglio che i file dell'applicativo siano contenuti in src/
+- non voglio usare Tailwind
+- il progetto deve utilizzare Javascript (non Typescript) come linguaggio di programmazione preferito
+- non deve essere rimossa alcuna cartella o file già presente nella root di progetto al momento della configurazione
+- il progetto deve usare la versione più recente di Eslint
+- i componenti devono essere in formato .jsx e non in formato .js
+
+Devi chiedermi il permesso prima di eseguire qualsiasi azione che modifichi la cartella di progetto locale o la repository su GitHub
+

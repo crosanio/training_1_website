@@ -18,8 +18,8 @@
 ## SCAFFOLDING STRUCTURE
 
 ### NOTE
-Some system's necessary files and folders are not mentioned in the diagram.
-E.g. : node_modules/.
+Part of system's necessary files and folders are not mentioned in the diagram.
+E.g. : 📁 node_modules/.
 
 
 📁 root/

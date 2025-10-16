@@ -1,3 +1,4 @@
+import styles from './page.module.css';
 import ComponentTemplate from "../../components/ComponentTemplate/ComponentTemplate"
 
 

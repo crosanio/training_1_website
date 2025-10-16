@@ -1,4 +1,4 @@
 export function testFunction() {
-    alert("This is a local, component-related test function. \n\n RELATIVE FUNCTION IMPORT PATH: [ OK ]");
-    console.log("This is a local, component-related test function. \n\n RELATIVE FUNCTION IMPORT PATH: [ OK ]");
+    alert("✅ RELATIVE IMPORT PATH WORKING \n\n This is a local, component-related test function.");
+    console.log("✅ RELATIVE IMPORT PATH WORKING \n\n This is a local, component-related test function.");
 }

@@ -6,6 +6,8 @@ import ComponentTemplate from "../../components/ComponentTemplate/ComponentTempl
 export default function HomePage() {
     return <>
 
+        <p className='debug'>Debug class element</p>
+
         <ComponentTemplate />
 
     </>

@@ -29,7 +29,9 @@ export default function RootLayout({ children }) {
             <body>
                 <div className='wrapper'>
 
-                    <header>Header</header>
+                    <header>
+                        Header
+                    </header>
 
                     <main>
                         <div className="container">
@@ -39,7 +41,9 @@ export default function RootLayout({ children }) {
                         </div>
                     </main>
 
-                    <footer>Footer</footer>
+                    <footer>
+                        Footer
+                    </footer>
 
                 </div>
             </body>

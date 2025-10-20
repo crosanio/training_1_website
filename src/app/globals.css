@@ -304,7 +304,7 @@ main {
 ************************************************************************************/
 
 .debug {
-    background-color: rgb(227, 227, 255);
-    border: 1px solid blue;
-    /* padding: 15px; */
+    background-color: rgb(36, 36, 0);
+    border: 1px solid yellow;
+    padding: 10px;
 }

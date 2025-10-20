@@ -1,47 +1,186 @@
-/* Global CSS Reset and Base Styles */
+/************************************************************************************
+# RESET
+************************************************************************************/
+
 * {
     box-sizing: border-box;
-    padding: 0;
     margin: 0;
-}
+    padding: 0;
 
-html,
-body {
-    max-width: 100vw;
-    overflow-x: hidden;
-}
-
-body {
-    color: #333;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-        sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-    color: inherit;
+    list-style: none;
+    list-style-type: none;
     text-decoration: none;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    line-height: 1.2;
+button {
+    all: unset;
 }
 
-/* Basic utility classes */
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1rem;
+a:-webkit-any-link {
+    color: blue;
 }
 
-.main {
-    min-height: 100vh;
-    padding: 4rem 0;
+input {
+    all: unset;
 }
+
+select {
+    all: unset;
+}
+
+img {
+    display: block;
+}
+
+/* ## FONTS
+-----------------------------------------------------------------------------------*/
+:root {
+    --font-poppins: 'Poppins', sans-serif;
+}
+
+
+
+/************************************************************************************
+# UNIT
+************************************************************************************/
+
+:root {
+    --unit-1: 1rem;
+
+    --unit--05: calc(var(--unit-1) / 2);
+    --unit-2: calc(var(--unit-1) * 2);
+    --unit-4: calc(var(--unit-1) * 4);
+    --unit-6: calc(var(--unit-1) * 6);
+}
+
+/* ## UNIT MEDIAQUERY
+-----------------------------------------------------------------------------------*/
+/* TABLET */
+@media (min-width: 768px) {
+    :root {
+        --unit-1: calc(var(--unit-1) * 0.66);
+    }
+}
+
+/* DESKTOP */
+@media (min-width: 1024px) {
+    :root {
+        --unit-1: calc(var(--unit-1) * 0.5);
+    }
+}
+
+
+
+/************************************************************************************
+# CUSTOM PROPERTIES
+************************************************************************************/
+
+/* ## CONTAINER
+-----------------------------------------------------------------------------------*/
+:root {
+    --container-width: 80%;
+    --container-width-max: 1200px;
+    --container-padding: var(--unit-2);
+}
+
+
+
+/************************************************************************************
+# TYPOGRAPHY
+************************************************************************************/
+
+:root {
+    /* VW */
+    --typo-vw-mobile: .6vw;
+    --typo-vw-tablet: calc(var(--typo-vw-mobile) * 0.66);
+    --typo-vw-desktop: calc(var(--typo-vw-mobile) * 0.5);
+
+    /* TYPO */
+    --typo-p: calc(.8rem + var(--typo-vw-mobile));
+    --typo-small: calc(var(--typo-p) * 0.8);
+    --typo-h6: calc(var(--typo-p) * 1.125);
+    --typo-h5: calc(var(--typo-p) * 1.25);
+    --typo-h4: calc(var(--typo-p) * 1.5);
+    --typo-h3: calc(var(--typo-p) * 1.75);
+    --typo-h2: calc(var(--typo-p) * 2.25);
+    --typo-h1: calc(var(--typo-p) * 3);
+}
+
+/* ## TYPO MEDIAQUERY
+-----------------------------------------------------------------------------------*/
+
+/* BREAKPOINTS */
+:root {
+    --bp-tablet: 768px;
+    --bp-desktop: 1024px;
+}
+
+/* TABLET */
+@media (min-width: 768px) {
+    :root {
+        --typo-p: calc(.8rem + var(--typo-vw-tablet));
+    }
+}
+
+/* DESKTOP */
+@media (min-width: 1024px) {
+    :root {
+        --typo-p: calc(.8rem + var(--typo-vw-desktop));
+    }
+}
+
+/* ## TYPO CLASSES
+-----------------------------------------------------------------------------------*/
+* {
+    letter-spacing: calc(var(--typo-p) * 0.02);
+}
+
+.p {
+    font-size: var(--typo-p);
+}
+
+.p-05 {
+    font-size: var(--typo-small);
+}
+
+.h1 {
+    font-size: var(--typo-h1);
+    font-weight: 700;
+}
+
+.h2 {
+    font-size: var(--typo-h2);
+    font-weight: 600;
+}
+
+.h3 {
+    font-size: var(--typo-h3);
+    font-weight: 600;
+}
+
+.h4 {
+    font-size: var(--typo-h4);
+    font-weight: 600;
+}
+
+.h5 {
+    font-size: var(--typo-h5);
+    font-weight: 500;
+}
+
+.h6 {
+    font-size: var(--typo-h6);
+    font-weight: 500;
+}
+
+
+
+/************************************************************************************
+# GENERAL
+************************************************************************************/
+
+
+
+/************************************************************************************
+# UTILITY
+************************************************************************************/

@@ -3,7 +3,7 @@
 *******************************************************************/
 
 /**
- * Funzione per gestire l'ordinamento di un array di stringhe o oggetti
+ * Function to handle the sorting of an array of strings or objects
  * 
  * @param {string|number} criteria - Current sort order (object property for array of objects)
  * @param {string|number} newCriteria - New sorting criteria requested

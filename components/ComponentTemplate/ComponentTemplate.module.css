@@ -1,5 +1,5 @@
 .test {
-    background-color: yellow;
+    background-color: rgb(48, 0, 0);
     border: 1px solid red;
-    padding: 1rem;
+    padding: 10px;
 }

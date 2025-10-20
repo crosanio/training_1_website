@@ -27,13 +27,21 @@ export default function RootLayout({ children }) {
 
 
             <body>
+                <div className='wrapper'>
 
-                <header>Header</header>
+                    <header>Header</header>
 
-                {children}
+                    <main>
+                        <div className="container">
 
-                <footer>Footer</footer>
+                            {children}
 
+                        </div>
+                    </main>
+
+                    <footer>Footer</footer>
+
+                </div>
             </body>
 
         </html>

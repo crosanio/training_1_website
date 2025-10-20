@@ -5,11 +5,8 @@ import ComponentTemplate from "../../components/ComponentTemplate/ComponentTempl
 
 export default function HomePage() {
     return <>
-        <div className="container">
-            <main>
-                <ComponentTemplate />
-            </main>
-        </div>
+
+        <ComponentTemplate />
 
     </>
 }

@@ -6,26 +6,16 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-
     list-style: none;
     list-style-type: none;
     text-decoration: none;
 }
 
-button {
-    all: unset;
-}
-
-a:-webkit-any-link {
-    color: blue;
-}
-
-input {
-    all: unset;
-}
-
+button,
+input,
 select {
     all: unset;
+    cursor: pointer
 }
 
 img {
@@ -79,6 +69,193 @@ img {
 # CUSTOM PROPERTIES
 ************************************************************************************/
 
+:root {
+
+    /* PALETTE */
+    --color-primary: white;
+    --color-warning: rgb(226, 43, 67);
+    --color-active: rgb(0, 132, 255);
+    --color-hover: rgb(130, 230, 255);
+
+    --color-1: red;
+    --color-2: blue;
+    --color-3: yellow;
+
+    /* BACKGROUNDS */
+    --background-primary: rgb(21, 21, 21);
+    --overlay-dark: rgba(0, 0, 0, 0.8);
+
+    /* INTERACTIVE ELEMENTS */
+    --hover-transition: all 0.5s ease;
+}
+
+body {
+    color: var(--color-primary);
+    background-color: var(--background-primary);
+}
+
+
+
+/************************************************************************************
+# TYPOGRAPHY
+************************************************************************************/
+
+/* ## TYPO ROOT
+-----------------------------------------------------------------------------------*/
+:root {
+
+    /* FONT FAMILY */
+    --font-family-primary: 'Poppins', sans-serif;
+
+    /* TYPO UNIT */
+    --font-size-p: clamp(0.9rem, 0.8rem + 0.6vw, 1.25rem);
+
+    /* TYPO SCALES */
+    --typo-scale-small-text: 0.75;
+    --typo-scale-h6: 1;
+    --typo-scale-h5: 1.15;
+    --typo-scale-h4: 1.25;
+    --typo-scale-h3: 1.5;
+    --typo-scale-h2: 1.75;
+    --typo-scale-h1: 2.1;
+
+    /* Derived sizes based on p */
+    --font-size-small: calc(var(--font-size-p) * var(--typo-scale-small-text));
+    --font-size-h6: calc(var(--font-size-p) * var(--typo-scale-h6));
+    --font-size-h5: calc(var(--font-size-p) * var(--typo-scale-h5));
+    --font-size-h4: calc(var(--font-size-p) * var(--typo-scale-h4));
+    --font-size-h3: calc(var(--font-size-p) * var(--typo-scale-h3));
+    --font-size-h2: calc(var(--font-size-p) * var(--typo-scale-h2));
+    --font-size-h1: calc(var(--font-size-p) * var(--typo-scale-h1));
+
+    /* TYPO SPACING */
+    --letter-spacing: calc(var(--font-size-p) * 0.02);
+    --line-height: 1.5;
+}
+
+/* ## TYPO BASE STYLES
+-----------------------------------------------------------------------------------*/
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+a,
+a:-webkit-any-link,
+li,
+span {
+    font-family: var(--font-family-primary);
+    color: var(--color-primary);
+    letter-spacing: var(--letter-spacing);
+    line-height: var(--line-height);
+}
+
+a,
+a:-webkit-any-link {
+    color: var(--color-active);
+}
+
+a:hover,
+a:-webkit-any-link:hover {
+    color: var(--color-hover);
+}
+
+/* ## TYPO CLASSES
+-----------------------------------------------------------------------------------*/
+
+.small-text {
+    font-size: var(--font-size-small);
+}
+
+p,
+.p {
+    font-size: var(--font-size-p);
+}
+
+h1,
+.h1 {
+    font-size: var(--font-size-h1);
+    font-weight: 700;
+}
+
+h2,
+.h2 {
+    font-size: var(--font-size-h2);
+    font-weight: 600;
+}
+
+h3,
+.h3 {
+    font-size: var(--font-size-h3);
+    font-weight: 600;
+}
+
+h4,
+.h4 {
+    font-size: var(--font-size-h4);
+    font-weight: 600;
+}
+
+h5,
+.h5 {
+    font-size: var(--font-size-h5);
+    font-weight: 600;
+}
+
+h6,
+.h6 {
+    font-size: var(--font-size-h6);
+    font-weight: 600;
+}
+
+/* ## TYPO MEDIAQUERY
+-----------------------------------------------------------------------------------*/
+
+/* TABLET */
+@media (min-width: 768px) {
+    :root {
+        --typo-scale-h1: 2.7;
+        --typo-scale-h2: 2.3;
+        --typo-scale-h3: 2;
+        --font-size-h3: calc(var(--font-size-p) * var(--typo-scale-h3));
+        --font-size-h2: calc(var(--font-size-p) * var(--typo-scale-h2));
+        --font-size-h1: calc(var(--font-size-p) * var(--typo-scale-h1));
+    }
+
+}
+
+/* DESKTOP */
+@media (min-width: 1024px) {
+    :root {
+        --typo-scale-h1: 3.25;
+        --typo-scale-h2: 2.5;
+        --typo-scale-h3: 1.9;
+        --font-size-h3: calc(var(--font-size-p) * var(--typo-scale-h3));
+        --font-size-h2: calc(var(--font-size-p) * var(--typo-scale-h2));
+        --font-size-h1: calc(var(--font-size-p) * var(--typo-scale-h1));
+    }
+
+}
+
+
+
+/************************************************************************************
+# LAYOUT
+************************************************************************************/
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+main {
+    flex-grow: 1;
+}
+
 /* ## CONTAINER
 -----------------------------------------------------------------------------------*/
 :root {
@@ -90,116 +267,8 @@ img {
 .container {
     width: var(--container-width);
     max-width: var(--container-width-max);
-    padding: var(--unit-2) var(--unit-4);
+    padding: var(--unit-2) 0;
     margin: auto;
-}
-
-
-
-/************************************************************************************
-# TYPOGRAPHY
-************************************************************************************/
-
-/* ## TYPO
------------------------------------------------------------------------------------*/
-:root {
-    /* BREAKPOINTS */
-    --bp-tablet: 768px;
-    --bp-desktop: 1024px;
-
-    /* FONT */
-    --font-poppins: 'Poppins', sans-serif;
-
-    /* FLUID TYPOGRAPHY */
-    --typo-vw-mobile: 0.6vw;
-    --typo-vw-tablet: 0.4vw;
-    --typo-vw-desktop: 0.3vw;
-
-    /* BASE TYPO */
-    --typo-p: calc(0.8rem + var(--typo-vw-mobile));
-    --typo-small: calc(var(--typo-p) * 0.8);
-    --typo-h6: calc(var(--typo-p) * 1.125);
-    --typo-h5: calc(var(--typo-p) * 1.25);
-    --typo-h4: calc(var(--typo-p) * 1.5);
-    --typo-h3: calc(var(--typo-p) * 1.75);
-    --typo-h2: calc(var(--typo-p) * 2.25);
-    --typo-h1: calc(var(--typo-p) * 3);
-}
-
-/* ## TYPO MEDIA QUERY
------------------------------------------------------------------------------------*/
-
-/* TABLET */
-@media (min-width: 768px) {
-    :root {
-        --typo-p: calc(0.8rem + var(--typo-vw-tablet));
-        --typo-small: calc(var(--typo-p) * 0.8);
-        --typo-h6: calc(var(--typo-p) * 1.125);
-        --typo-h5: calc(var(--typo-p) * 1.25);
-        --typo-h4: calc(var(--typo-p) * 1.5);
-        --typo-h3: calc(var(--typo-p) * 1.75);
-        --typo-h2: calc(var(--typo-p) * 2.25);
-        --typo-h1: calc(var(--typo-p) * 3);
-    }
-}
-
-/* DESKTOP */
-@media (min-width: 1024px) {
-    :root {
-        --typo-p: calc(0.8rem + var(--typo-vw-desktop));
-        --typo-small: calc(var(--typo-p) * 0.8);
-        --typo-h6: calc(var(--typo-p) * 1.125);
-        --typo-h5: calc(var(--typo-p) * 1.25);
-        --typo-h4: calc(var(--typo-p) * 1.5);
-        --typo-h3: calc(var(--typo-p) * 1.75);
-        --typo-h2: calc(var(--typo-p) * 2.25);
-        --typo-h1: calc(var(--typo-p) * 3);
-    }
-}
-
-/* ## TYPO CLASSES
------------------------------------------------------------------------------------*/
-* {
-    letter-spacing: calc(var(--typo-p) * 0.02);
-    font-family: var(--font-poppins);
-}
-
-.p {
-    font-size: var(--typo-p);
-}
-
-.p-05 {
-    font-size: var(--typo-small);
-}
-
-.h1 {
-    font-size: var(--typo-h1);
-    font-weight: 700;
-}
-
-.h2 {
-    font-size: var(--typo-h2);
-    font-weight: 600;
-}
-
-.h3 {
-    font-size: var(--typo-h3);
-    font-weight: 600;
-}
-
-.h4 {
-    font-size: var(--typo-h4);
-    font-weight: 600;
-}
-
-.h5 {
-    font-size: var(--typo-h5);
-    font-weight: 500;
-}
-
-.h6 {
-    font-size: var(--typo-h6);
-    font-weight: 500;
 }
 
 
@@ -211,5 +280,11 @@ img {
 
 
 /************************************************************************************
-# UTILITY
+# DEBUG
 ************************************************************************************/
+
+.debug {
+    background-color: rgb(227, 227, 255);
+    border: 1px solid blue;
+    /* padding: 15px; */
+}

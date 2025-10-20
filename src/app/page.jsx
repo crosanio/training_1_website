@@ -4,9 +4,12 @@ import ComponentTemplate from "../../components/ComponentTemplate/ComponentTempl
 
 
 export default function HomePage() {
-    return (
-        <main>
-            <ComponentTemplate />
-        </main>
-    )
+    return <>
+        <div className="container">
+            <main>
+                <ComponentTemplate />
+            </main>
+        </div>
+
+    </>
 }

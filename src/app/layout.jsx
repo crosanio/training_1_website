@@ -21,12 +21,21 @@ export default function RootLayout({ children }) {
                 <meta charSet="UTF-8" />
                 <link rel="icon" type="image/svg+xml" href="/favicon.webp" />
                 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-                <title>{metaTitle}</title>
-                <meta name="description" content={metaDescription}></meta>
+                <title>{metadata.metaTitle}</title>
+                <meta name="description" content={metadata.metaDescription}></meta>
             </head>
+
+
             <body>
+
+                <header>Header</header>
+
                 {children}
+
+                <footer>Footer</footer>
+
             </body>
+
         </html>
     )
 }

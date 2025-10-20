@@ -32,40 +32,44 @@ img {
     display: block;
 }
 
-/* ## FONTS
------------------------------------------------------------------------------------*/
-:root {
-    --font-poppins: 'Poppins', sans-serif;
-}
-
 
 
 /************************************************************************************
 # UNIT
 ************************************************************************************/
 
+/* ## BASE UNIT
+-----------------------------------------------------------------------------------*/
 :root {
     --unit-1: 1rem;
-
     --unit--05: calc(var(--unit-1) / 2);
     --unit-2: calc(var(--unit-1) * 2);
     --unit-4: calc(var(--unit-1) * 4);
     --unit-6: calc(var(--unit-1) * 6);
 }
 
-/* ## UNIT MEDIAQUERY
+/* ## UNIT MEDIA QUERY
 -----------------------------------------------------------------------------------*/
+
 /* TABLET */
 @media (min-width: 768px) {
     :root {
-        --unit-1: calc(var(--unit-1) * 0.66);
+        --unit-1: 0.66rem;
+        --unit--05: calc(var(--unit-1) / 2);
+        --unit-2: calc(var(--unit-1) * 2);
+        --unit-4: calc(var(--unit-1) * 4);
+        --unit-6: calc(var(--unit-1) * 6);
     }
 }
 
 /* DESKTOP */
 @media (min-width: 1024px) {
     :root {
-        --unit-1: calc(var(--unit-1) * 0.5);
+        --unit-1: 0.5rem;
+        --unit--05: calc(var(--unit-1) / 2);
+        --unit-2: calc(var(--unit-1) * 2);
+        --unit-4: calc(var(--unit-1) * 4);
+        --unit-6: calc(var(--unit-1) * 6);
     }
 }
 
@@ -83,20 +87,36 @@ img {
     --container-padding: var(--unit-2);
 }
 
+.container {
+    width: var(--container-width);
+    max-width: var(--container-width-max);
+    padding: var(--unit-2) var(--unit-4);
+    margin: auto;
+}
+
 
 
 /************************************************************************************
 # TYPOGRAPHY
 ************************************************************************************/
 
+/* ## TYPO
+-----------------------------------------------------------------------------------*/
 :root {
-    /* VW */
-    --typo-vw-mobile: .6vw;
-    --typo-vw-tablet: calc(var(--typo-vw-mobile) * 0.66);
-    --typo-vw-desktop: calc(var(--typo-vw-mobile) * 0.5);
+    /* BREAKPOINTS */
+    --bp-tablet: 768px;
+    --bp-desktop: 1024px;
 
-    /* TYPO */
-    --typo-p: calc(.8rem + var(--typo-vw-mobile));
+    /* FONT */
+    --font-poppins: 'Poppins', sans-serif;
+
+    /* FLUID TYPOGRAPHY */
+    --typo-vw-mobile: 0.6vw;
+    --typo-vw-tablet: 0.4vw;
+    --typo-vw-desktop: 0.3vw;
+
+    /* BASE TYPO */
+    --typo-p: calc(0.8rem + var(--typo-vw-mobile));
     --typo-small: calc(var(--typo-p) * 0.8);
     --typo-h6: calc(var(--typo-p) * 1.125);
     --typo-h5: calc(var(--typo-p) * 1.25);
@@ -106,26 +126,34 @@ img {
     --typo-h1: calc(var(--typo-p) * 3);
 }
 
-/* ## TYPO MEDIAQUERY
+/* ## TYPO MEDIA QUERY
 -----------------------------------------------------------------------------------*/
-
-/* BREAKPOINTS */
-:root {
-    --bp-tablet: 768px;
-    --bp-desktop: 1024px;
-}
 
 /* TABLET */
 @media (min-width: 768px) {
     :root {
-        --typo-p: calc(.8rem + var(--typo-vw-tablet));
+        --typo-p: calc(0.8rem + var(--typo-vw-tablet));
+        --typo-small: calc(var(--typo-p) * 0.8);
+        --typo-h6: calc(var(--typo-p) * 1.125);
+        --typo-h5: calc(var(--typo-p) * 1.25);
+        --typo-h4: calc(var(--typo-p) * 1.5);
+        --typo-h3: calc(var(--typo-p) * 1.75);
+        --typo-h2: calc(var(--typo-p) * 2.25);
+        --typo-h1: calc(var(--typo-p) * 3);
     }
 }
 
 /* DESKTOP */
 @media (min-width: 1024px) {
     :root {
-        --typo-p: calc(.8rem + var(--typo-vw-desktop));
+        --typo-p: calc(0.8rem + var(--typo-vw-desktop));
+        --typo-small: calc(var(--typo-p) * 0.8);
+        --typo-h6: calc(var(--typo-p) * 1.125);
+        --typo-h5: calc(var(--typo-p) * 1.25);
+        --typo-h4: calc(var(--typo-p) * 1.5);
+        --typo-h3: calc(var(--typo-p) * 1.75);
+        --typo-h2: calc(var(--typo-p) * 2.25);
+        --typo-h1: calc(var(--typo-p) * 3);
     }
 }
 
@@ -133,6 +161,7 @@ img {
 -----------------------------------------------------------------------------------*/
 * {
     letter-spacing: calc(var(--typo-p) * 0.02);
+    font-family: var(--font-poppins);
 }
 
 .p {

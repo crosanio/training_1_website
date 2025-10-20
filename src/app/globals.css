@@ -108,10 +108,11 @@ body {
     --font-family-primary: 'Poppins', sans-serif;
 
     /* TYPO UNIT */
-    --font-size-p: clamp(0.9rem, 0.8rem + 0.6vw, 1.25rem);
+    --font-size-unit: clamp(0.9rem, 0.8rem + 0.6vw, 1.25rem);
 
     /* TYPO SCALES */
     --typo-scale-small-text: 0.75;
+    --typo-scale-p: 1;
     --typo-scale-h6: 1;
     --typo-scale-h5: 1.15;
     --typo-scale-h4: 1.25;
@@ -119,17 +120,18 @@ body {
     --typo-scale-h2: 1.75;
     --typo-scale-h1: 2.1;
 
-    /* Derived sizes based on p */
-    --font-size-small: calc(var(--font-size-p) * var(--typo-scale-small-text));
-    --font-size-h6: calc(var(--font-size-p) * var(--typo-scale-h6));
-    --font-size-h5: calc(var(--font-size-p) * var(--typo-scale-h5));
-    --font-size-h4: calc(var(--font-size-p) * var(--typo-scale-h4));
-    --font-size-h3: calc(var(--font-size-p) * var(--typo-scale-h3));
-    --font-size-h2: calc(var(--font-size-p) * var(--typo-scale-h2));
-    --font-size-h1: calc(var(--font-size-p) * var(--typo-scale-h1));
+    /* DEPENDENT TYPO SIZES */
+    --font-size-small-text: calc(var(--font-size-unit) * var(--typo-scale-small-text));
+    --font-size-p: calc(var(--font-size-unit) * var(--typo-scale-p));
+    --font-size-h6: calc(var(--font-size-unit) * var(--typo-scale-h6));
+    --font-size-h5: calc(var(--font-size-unit) * var(--typo-scale-h5));
+    --font-size-h4: calc(var(--font-size-unit) * var(--typo-scale-h4));
+    --font-size-h3: calc(var(--font-size-unit) * var(--typo-scale-h3));
+    --font-size-h2: calc(var(--font-size-unit) * var(--typo-scale-h2));
+    --font-size-h1: calc(var(--font-size-unit) * var(--typo-scale-h1));
 
     /* TYPO SPACING */
-    --letter-spacing: calc(var(--font-size-p) * 0.02);
+    --letter-spacing: calc(var(--font-size-unit) * 0.02);
     --line-height: 1.5;
 }
 
@@ -167,7 +169,7 @@ a:-webkit-any-link:hover {
 -----------------------------------------------------------------------------------*/
 
 .small-text {
-    font-size: var(--font-size-small);
+    font-size: var(--font-size-small-text);
 }
 
 p,
@@ -211,6 +213,11 @@ h6,
     font-weight: 600;
 }
 
+a,
+a:-webkit-any-link {
+    font-size: var(--font-size-p);
+}
+
 /* ## TYPO MEDIAQUERY
 -----------------------------------------------------------------------------------*/
 
@@ -220,9 +227,9 @@ h6,
         --typo-scale-h1: 2.7;
         --typo-scale-h2: 2.3;
         --typo-scale-h3: 2;
-        --font-size-h3: calc(var(--font-size-p) * var(--typo-scale-h3));
-        --font-size-h2: calc(var(--font-size-p) * var(--typo-scale-h2));
-        --font-size-h1: calc(var(--font-size-p) * var(--typo-scale-h1));
+        --font-size-h3: calc(var(--font-size-unit) * var(--typo-scale-h3));
+        --font-size-h2: calc(var(--font-size-unit) * var(--typo-scale-h2));
+        --font-size-h1: calc(var(--font-size-unit) * var(--typo-scale-h1));
     }
 
 }
@@ -230,12 +237,25 @@ h6,
 /* DESKTOP */
 @media (min-width: 1024px) {
     :root {
-        --typo-scale-h1: 3.25;
-        --typo-scale-h2: 2.5;
-        --typo-scale-h3: 1.9;
-        --font-size-h3: calc(var(--font-size-p) * var(--typo-scale-h3));
-        --font-size-h2: calc(var(--font-size-p) * var(--typo-scale-h2));
-        --font-size-h1: calc(var(--font-size-p) * var(--typo-scale-h1));
+        /* TYPO SCALES */
+        --typo-scale-small-text: 0.9;
+        --typo-scale-p: 1.25;
+        --typo-scale-h6: 1.25;
+        --typo-scale-h5: 1.5;
+        --typo-scale-h4: 1.75;
+        --typo-scale-h3: 2.25;
+        --typo-scale-h2: 2.75;
+        --typo-scale-h1: 3.5;
+
+        /* DEPENDENT TYPO SIZES */
+        --font-size-small-text: calc(var(--font-size-unit) * var(--typo-scale-small-text));
+        --font-size-p: calc(var(--font-size-unit) * var(--typo-scale-p));
+        --font-size-h6: calc(var(--font-size-unit) * var(--typo-scale-h6));
+        --font-size-h5: calc(var(--font-size-unit) * var(--typo-scale-h5));
+        --font-size-h4: calc(var(--font-size-unit) * var(--typo-scale-h4));
+        --font-size-h3: calc(var(--font-size-unit) * var(--typo-scale-h3));
+        --font-size-h2: calc(var(--font-size-unit) * var(--typo-scale-h2));
+        --font-size-h1: calc(var(--font-size-unit) * var(--typo-scale-h1));
     }
 
 }

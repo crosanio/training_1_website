@@ -71,6 +71,8 @@ function ComponentTemplate() {
 
         <a href="">Link</a>
 
+        <p>Text with <a href="">Link</a> in the middle.</p>
+
         <button onClick={testFunction} className={styles.test}>Test Function button</button>
 
     </>

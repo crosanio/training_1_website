@@ -238,9 +238,9 @@ a:-webkit-any-link {
 @media (min-width: 1024px) {
     :root {
         /* TYPO SCALES */
-        --typo-scale-small-text: 0.9;
-        --typo-scale-p: 1.25;
-        --typo-scale-h6: 1.25;
+        --typo-scale-small-text: 0.8;
+        --typo-scale-p: 1.1;
+        --typo-scale-h6: 1.1;
         --typo-scale-h5: 1.5;
         --typo-scale-h4: 1.75;
         --typo-scale-h3: 2.25;

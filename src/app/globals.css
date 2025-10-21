@@ -44,7 +44,7 @@ img {
 /* TABLET */
 @media (min-width: 768px) {
     :root {
-        --unit-1: 0.66rem;
+        --unit-1: 1.25rem;
         --unit--05: calc(var(--unit-1) / 2);
         --unit-2: calc(var(--unit-1) * 2);
         --unit-4: calc(var(--unit-1) * 4);
@@ -55,7 +55,7 @@ img {
 /* DESKTOP */
 @media (min-width: 1024px) {
     :root {
-        --unit-1: 0.5rem;
+        --unit-1: 1.5rem;
         --unit--05: calc(var(--unit-1) / 2);
         --unit-2: calc(var(--unit-1) * 2);
         --unit-4: calc(var(--unit-1) * 4);
@@ -108,7 +108,7 @@ body {
     --font-family-primary: 'Poppins', sans-serif;
 
     /* TYPO UNIT */
-    --font-size-unit: clamp(0.9rem, 0.8rem + 0.6vw, 1.25rem);
+    --font-size-unit: clamp(0.9rem, 0.8rem + 0.6vw, 1.4rem);
 
     /* TYPO SCALES */
     --typo-scale-small-text: 0.75;
@@ -170,11 +170,13 @@ a:-webkit-any-link:hover {
 
 .small-text {
     font-size: var(--font-size-small-text);
+    font-weight: 300;
 }
 
 p,
 .p {
     font-size: var(--font-size-p);
+    font-weight: 300;
 }
 
 h1,

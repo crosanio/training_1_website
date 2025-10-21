@@ -2,6 +2,9 @@
 import "./globals.css";
 import { Poppins } from 'next/font/google';
 
+import Header from "../../components/Header/Header";
+import Footer from "../../components/Footer/Footer";
+
 const poppins = Poppins({
     subsets: ['latin'],
     weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
@@ -29,9 +32,10 @@ export default function RootLayout({ children }) {
             <body>
                 <div className='wrapper'>
 
-                    <header>
-                        Header
-                    </header>
+                    <Header>
+                        <p>Header Logo</p>
+                        <p>Header Content</p>
+                    </Header>
 
                     <main>
                         <div className="container">
@@ -41,9 +45,10 @@ export default function RootLayout({ children }) {
                         </div>
                     </main>
 
-                    <footer>
-                        Footer
-                    </footer>
+                    <Footer>
+                        <p>Footer Content 1</p>
+                        <p>Footer Content 2</p>
+                    </Footer>
 
                 </div>
             </body>

@@ -3,6 +3,7 @@ import styles from './page.module.css';
 
 import ComponentTemplate from "../../components/ComponentTemplate/ComponentTemplate"
 import LazySection from '../../components/LazySection/LazySection';
+import SocialMedia from '../../components/SocialMedia/SocialMedia';
 
 
 
@@ -10,6 +11,8 @@ export default function HomePage() {
     return <>
 
         <p className='debug'>Debug class element</p>
+
+        <SocialMedia />
 
         <ComponentTemplate />
 

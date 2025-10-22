@@ -108,7 +108,7 @@ body {
     --font-family-primary: 'Poppins', sans-serif;
 
     /* TYPO UNIT */
-    --font-size-unit: clamp(0.9rem, 0.8rem + 0.6vw, 1.4rem);
+    --font-size-unit: clamp(0.9rem, 0.9rem + 0.6vw, 1.2rem);
 
     /* TYPO SCALES */
     --typo-scale-small-text: 0.75;
@@ -246,8 +246,8 @@ a:-webkit-any-link {
         --typo-scale-h5: 1.5;
         --typo-scale-h4: 1.75;
         --typo-scale-h3: 2.25;
-        --typo-scale-h2: 2.75;
-        --typo-scale-h1: 3.5;
+        --typo-scale-h2: 3;
+        --typo-scale-h1: 4;
 
         /* DEPENDENT TYPO SIZES */
         --font-size-small-text: calc(var(--font-size-unit) * var(--typo-scale-small-text));

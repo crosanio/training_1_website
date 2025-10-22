@@ -4,6 +4,7 @@ import { Poppins } from 'next/font/google';
 
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
+import SocialMedia from "../../components/SocialMedia/SocialMedia";
 
 const poppins = Poppins({
     subsets: ['latin'],
@@ -35,6 +36,7 @@ export default function RootLayout({ children }) {
                     <Header>
                         <p>Header Logo</p>
                         <p>Header Content</p>
+                        <SocialMedia />
                     </Header>
 
                     <main>

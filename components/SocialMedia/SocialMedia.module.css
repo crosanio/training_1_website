@@ -5,10 +5,14 @@
 }
 
 .socialMedia_iconContainer {
-    height: 42px;
+    height: 35px;
     aspect-ratio: 1;
 }
 
 .socialMedia_icon {
     height: 100%;
+}
+
+.light {
+    filter: brightness(.25);
 }

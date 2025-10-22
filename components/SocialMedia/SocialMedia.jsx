@@ -1,3 +1,9 @@
+/* NOTES
+# VISIBILITY: Social Media icons can be hidden by setting "visible: false" in the socialMedia array below.
+# COLOR (dark/light): icons color can switch to light version by changing the "themeColor" variable to a value other than 'dark'.
+# ADD SOCIAL: a new 48x48 pixels image is required and must be imported to add a new social media icon. The array must be expanded too, adding the new social's infos. */
+
+
 // READY FOR CLIENT SIDE
 "use client";
 
@@ -49,60 +55,78 @@ function SocialMedia() {
     }, []);
 
     // SOCIAL MEDIA LINKS ARRAY
-    const socialMediaLinks = [
+    const socialMedia = [
         {
             icon: icon_whatsapp,
             alt: "WhatsApp icon",
-            href: "#"
-
+            account: 391234567890,
+            hrefMobile: 'whatsapp://send?phone=',
+            hrefDesktop: 'https://wa.me/',
+            visible: true,
         },
         {
             icon: icon_telegram,
             alt: "Telegram icon",
-            href: "#"
-
+            account: "telegram-username",
+            hrefMobile: 'tg://resolve?domain=',
+            hrefDesktop: 'https://t.me/',
+            visible: true,
         },
         {
             icon: icon_facebook,
             alt: "Facebook icon",
-            href: "#"
-
+            account: "facebook-profile_or_id_(number)",
+            hrefMobile: 'fb://profile/',
+            hrefDesktop: 'https://www.facebook.com/',
+            visible: true,
         },
         {
             icon: icon_instagram,
             alt: "Instagram icon",
-            href: "#"
-
+            account: "instagram-username",
+            hrefMobile: 'instagram://user?username=',
+            hrefDesktop: 'https://www.instagram.com/',
+            visible: true,
         },
         {
             icon: icon_x,
             alt: "X icon",
-            href: "#"
-
+            account: "x-username",
+            hrefMobile: 'twitter://user?screen_name=',
+            hrefDesktop: 'https://x.com/',
+            visible: true,
         },
         {
             icon: icon_tiktok,
             alt: "TikTok icon",
-            href: "#"
-
+            account: "tiktok-username",
+            hrefMobile: 'tiktok://@',
+            hrefDesktop: 'https://www.tiktok.com/@',
+            visible: true,
         },
         {
             icon: icon_linkedin,
             alt: "LinkedIn icon",
-            href: "#"
-
+            account: "linkedin-profile-name",
+            hrefMobile: 'linkedin://profile/',
+            hrefDesktop: 'https://www.linkedin.com/in/',
+            visible: true,
         },
         {
             icon: icon_youtube,
             alt: "YouTube icon",
-            href: "#"
-
+            account: "youtube-channel-id",
+            hrefMobile: 'vnd.youtube://channel/',
+            hrefDesktop: 'https://www.youtube.com/channel/',
+            visible: true,
         },
         {
             icon: icon_trustpilot,
             alt: "Trustpilot icon",
-            href: "#"
-
+            account: "business.domain",
+            hrefMobile: 'trustpilot://review/',
+            hrefDesktop: 'https://www.trustpilot.com/review/',
+            visible: true,
         },
     ];
 
@@ -110,23 +134,25 @@ function SocialMedia() {
 
         <div className={styles.socialMedia_container}>
 
-            {socialMediaLinks.map((item, index) => (
-                <a
-                    key={index}
-                    className={styles.socialMedia_iconContainer}
-                    href={item.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    <img
-                        className={styles.socialMedia_icon}
-                        src={item.icon.src}
-                        alt={item.alt}
-                        loading="lazy"
-                        decoding="async"
-                    />
-                </a>
-            ))}
+            {socialMedia.map((item, index) =>
+                item.visible && (
+                    <a
+                        key={index}
+                        className={styles.socialMedia_iconContainer}
+                        href={deviceType === 'desktop' ? item.hrefDesktop + item.account : item.hrefMobile + item.account}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        <img
+                            className={`${styles.socialMedia_icon} ${themeColor !== 'dark' ? styles.light : ''}`}
+                            src={item.icon.src}
+                            alt={item.alt}
+                            loading="lazy"
+                            decoding="async"
+                        />
+                    </a>
+                )
+            )}
 
         </div>
 

@@ -1,46 +1,53 @@
+// READY FOR CLIENT SIDE
+"use client";
+
+
+// GLOBAL_ASSETS
 import styles from './page.module.css';
 
 
+// LOCAL_CSS
+import stylesLocal from './page.module.css';
+
+
+// COMPONENTS
 import ComponentTemplate from "../../components/ComponentTemplate/ComponentTemplate"
 import LazySection from '../../components/LazySection/LazySection';
 import SocialMedia from '../../components/SocialMedia/SocialMedia';
 
 
-
+// EXPORT
 export default function HomePage() {
     return <>
 
         <p className='debug'>Debug class element</p>
 
-        <SocialMedia />
-
         <ComponentTemplate />
 
         <LazySection>
-            <h2>Lazy Loaded Content 1</h2>
+            <h3>Lazy Loaded Content 1</h3>
             <p>This content is only visible when it enters the viewport.</p>
         </LazySection>
 
         <LazySection>
-            <h2>Lazy Loaded Content 2</h2>
+            <h3>Lazy Loaded Content 2</h3>
             <p>This content is only visible when it enters the viewport.</p>
         </LazySection>
 
         <LazySection>
-            <h2>Lazy Loaded Content 3</h2>
+            <h3>Lazy Loaded Content 3</h3>
             <p>This content is only visible when it enters the viewport.</p>
         </LazySection>
 
         <LazySection>
-            <h2>Lazy Loaded Content 4</h2>
+            <h3>Lazy Loaded Content 4</h3>
             <p>This content is only visible when it enters the viewport.</p>
         </LazySection>
 
         <LazySection>
-            <h2>Lazy Loaded Content 5</h2>
+            <h3>Lazy Loaded Content 5</h3>
             <p>This content is only visible when it enters the viewport.</p>
         </LazySection>
-
 
     </>
 }

@@ -1,10 +1,9 @@
 // UTILITY
 import "./globals.css";
-import { Poppins } from 'next/font/google';
 
-import Header from "../../components/Header/Header";
-import Footer from "../../components/Footer/Footer";
-import SocialMedia from "../../components/SocialMedia/SocialMedia";
+
+// SUPPORT
+import { Poppins } from 'next/font/google';
 
 const poppins = Poppins({
     subsets: ['latin'],
@@ -18,6 +17,15 @@ export const metadata = {
     metaDescription: 'A modern Next.js website',
 }
 
+
+// COMPONENTS
+import LazySection from "../../components/LazySection/LazySection";
+import Header from "../../components/Header/Header";
+import Footer from "../../components/Footer/Footer";
+import SocialMedia from "../../components/SocialMedia/SocialMedia";
+
+
+// EXPORT
 export default function RootLayout({ children }) {
     return (
         <html lang="en" className={poppins.className}>
@@ -46,10 +54,13 @@ export default function RootLayout({ children }) {
                         </div>
                     </main>
 
-                    <Footer>
-                        <p>Footer Content 1</p>
-                        <p>Footer Content 2</p>
-                    </Footer>
+                    <LazySection>
+                        <Footer>
+                            <p>Footer Content 1</p>
+                            <SocialMedia />
+                        </Footer>
+                    </LazySection>
+
 
                 </div>
             </body>

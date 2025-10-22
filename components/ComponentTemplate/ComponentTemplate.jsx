@@ -60,20 +60,25 @@ function ComponentTemplate() {
 
     return <>
 
-        <h1>H1 Title</h1>
-        <h2>H2 Title</h2>
-        <h3>H3 Title</h3>
-        <h4>H4 Title</h4>
-        <h5>H5 Title</h5>
-        <h6>H6 Title</h6>
-        <p>Paragraph text</p>
-        <p className="small-text">Small text</p>
+        <div className={styles.test}>
 
-        <a href="">Link</a>
+            <h1>H1 Title</h1>
+            <h2>H2 Title</h2>
+            <h3>H3 Title</h3>
+            <h4>H4 Title</h4>
+            <h5>H5 Title</h5>
+            <h6>H6 Title</h6>
+            <p>Paragraph text</p>
+            <p className="small-text">Small text</p>
 
-        <p>Text with <a href="">Link</a> in the middle.</p>
+            <a href="">Link</a>
 
-        <button onClick={testFunction} className={styles.test}>Test Function button</button>
+            <p>Text with <a href="">Link</a> in the middle.</p>
+
+            <button onClick={testFunction} className={styles.test}>Test Function button</button>
+
+        </div>
+
 
     </>
 }

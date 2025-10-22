@@ -3,3 +3,12 @@
     align-items: center;
     gap: 2rem;
 }
+
+.socialMedia_iconContainer {
+    height: 42px;
+    aspect-ratio: 1;
+}
+
+.socialMedia_icon {
+    height: 100%;
+}

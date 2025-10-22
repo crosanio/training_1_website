@@ -36,7 +36,6 @@ export default function RootLayout({ children }) {
                     <Header>
                         <p>Header Logo</p>
                         <p>Header Content</p>
-                        <SocialMedia />
                     </Header>
 
                     <main>

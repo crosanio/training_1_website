@@ -53,22 +53,41 @@ function SocialMedia() {
         return () => window.removeEventListener('resize', handleWindowResize);
     }, []);
 
+    // SOCIAL MEDIA LINKS ARRAY
+    const socialMediaLinks = [
+        { icon: icon_whatsapp, alt: "WhatsApp", href: "#" },
+        { icon: icon_telegram, alt: "Telegram", href: "#" },
+        { icon: icon_facebook, alt: "Facebook", href: "#" },
+        { icon: icon_instagram, alt: "Instagram", href: "#" },
+        { icon: icon_x, alt: "X", href: "#" },
+        { icon: icon_tiktok, alt: "TikTok", href: "#" },
+        { icon: icon_linkedin, alt: "LinkedIn", href: "#" },
+        { icon: icon_youtube, alt: "YouTube", href: "#" },
+        { icon: icon_trustpilot, alt: "Trustpilot", href: "#" },
+    ];
+
     return <>
 
         <div className={styles.socialMedia_container}>
 
-            <a
-                href="#"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                <img
-                    src={icon_whatsapp.src}
-                    alt="whatsapp icon"
-                    loading="lazy"
-                    decoding="async"
-                />
-            </a>
+            {socialMediaLinks.map((item, index) => (
+                <a
+                    key={index}
+                    className={styles.socialMedia_iconContainer}
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <img
+                        className={styles.socialMedia_icon}
+                        src={item.icon.src}
+                        alt={item.alt}
+                        loading="lazy"
+                        decoding="async"
+                    />
+                </a>
+            ))}
+
         </div>
 
     </>

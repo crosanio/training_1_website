@@ -28,19 +28,14 @@ import icon_trustpilot from "./utility/socialMediaIcons/icon-white-trustpilot.we
 function SocialMedia() {
 
     // USE-STATE
-    const [windowWidth, setWindowWidth] = useState(570);
-    const [deviceType, setDeviceType] = useState('');
+    const [deviceType, setDeviceType] = useState('mobile');
 
     // SUPPORT
 
-    // Update device type
-    const updateDeviceType = w => setDeviceType(w > 768 ? 'desktop' : w > 576 ? 'tablet' : 'mobile');
-
-    // Window size
+    // Handle window resize and update device type
     const handleWindowResize = () => {
         const width = window.innerWidth;
-        setWindowWidth(width);
-        updateDeviceType(width);
+        setDeviceType(width > 768 ? 'desktop' : width > 576 ? 'tablet' : 'mobile');
     };
 
     // Theme Color
@@ -55,15 +50,60 @@ function SocialMedia() {
 
     // SOCIAL MEDIA LINKS ARRAY
     const socialMediaLinks = [
-        { icon: icon_whatsapp, alt: "WhatsApp", href: "#" },
-        { icon: icon_telegram, alt: "Telegram", href: "#" },
-        { icon: icon_facebook, alt: "Facebook", href: "#" },
-        { icon: icon_instagram, alt: "Instagram", href: "#" },
-        { icon: icon_x, alt: "X", href: "#" },
-        { icon: icon_tiktok, alt: "TikTok", href: "#" },
-        { icon: icon_linkedin, alt: "LinkedIn", href: "#" },
-        { icon: icon_youtube, alt: "YouTube", href: "#" },
-        { icon: icon_trustpilot, alt: "Trustpilot", href: "#" },
+        {
+            icon: icon_whatsapp,
+            alt: "WhatsApp icon",
+            href: "#"
+
+        },
+        {
+            icon: icon_telegram,
+            alt: "Telegram icon",
+            href: "#"
+
+        },
+        {
+            icon: icon_facebook,
+            alt: "Facebook icon",
+            href: "#"
+
+        },
+        {
+            icon: icon_instagram,
+            alt: "Instagram icon",
+            href: "#"
+
+        },
+        {
+            icon: icon_x,
+            alt: "X icon",
+            href: "#"
+
+        },
+        {
+            icon: icon_tiktok,
+            alt: "TikTok icon",
+            href: "#"
+
+        },
+        {
+            icon: icon_linkedin,
+            alt: "LinkedIn icon",
+            href: "#"
+
+        },
+        {
+            icon: icon_youtube,
+            alt: "YouTube icon",
+            href: "#"
+
+        },
+        {
+            icon: icon_trustpilot,
+            alt: "Trustpilot icon",
+            href: "#"
+
+        },
     ];
 
     return <>

@@ -20,6 +20,7 @@ import styles from './GalleryGrid.module.css';
 
 // LOCAL_ASSETS
 import { getPaths } from "./functions/getPaths";
+import LazyItem from './utility/LazyItem';
 
 
 // EXPORT
@@ -49,61 +50,24 @@ function GalleryGrid() {
         <div className={styles.customCssProperties}>
             <div className={styles.galleryContainer}>
                 <div className={styles.galleryGrid}>
-                    <div className={styles.galleryItem}>
-                        <img
-                            className={styles.galleryImg}
-                            src={imgPaths[0]}
-                            alt={`Gallery image 1`}
-                        />
+
+                    {imgPaths.map((path, index) => (
+                        <LazyItem key={index} extraClass={styles.galleryItem}>
+                            <img
+                                className={styles.galleryImg}
+                                src={path}
+                                alt={`Gallery image ${index + 1}`}
+                            />
+                        </LazyItem>
+                    ))}
+
+                    <div className={styles.loadMoreContainer}>
+                        <button className={styles.loadMoreButton}>Load More ✚</button>
                     </div>
-                    <div className={styles.galleryItem}>
-                        <img
-                            className={styles.galleryImg}
-                            src={imgPaths[1]}
-                            alt={`Gallery image 2`}
-                        />
-                    </div>
-                    <div className={styles.galleryItem}>
-                        <img
-                            className={styles.galleryImg}
-                            src={imgPaths[2]}
-                            alt={`Gallery image 3`}
-                        />
-                    </div>
-                    <div className={styles.galleryItem}>
-                        <img
-                            className={styles.galleryImg}
-                            src={imgPaths[3]}
-                            alt={`Gallery image 4`}
-                        />
-                    </div>
-                    <div className={styles.galleryItem}>
-                        <img
-                            className={styles.galleryImg}
-                            src={imgPaths[4]}
-                            alt={`Gallery image 5`}
-                        />
-                    </div>
+
                 </div>
             </div>
         </div>
-
-
-
-        {/* <div className={styles.galleryContainer}>
-            <div className={styles.galleryGrid}>
-                {imgPaths.map((path, index) => (
-                    <div key={index} className={styles.galleryItem}>
-                        <img
-                            className={styles.galleryImg}
-                            src={path}
-                            alt={`Gallery image ${index + 1}`}
-                        />
-                        <p>Image {index + 1}</p>
-                    </div>
-                ))}
-            </div>
-        </div> */}
     </>
 }
 

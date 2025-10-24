@@ -4,6 +4,11 @@
     --galleryWidth: 80%;
     --maxGalleryWidth: 900px;
     --galleryGap: 5px;
+    --itemWidth: calc((100% - (var(--columns) - 1) * var(--galleryGap)) / var(--columns));
+    --loadMoreGradient: white;
+
+    /* Decomment if global body background color exists to overwrite default. */
+    --loadMoreGradient: var(--background-primary);
 }
 
 .galleryContainer {
@@ -18,13 +23,15 @@
     gap: var(--galleryGap);
     width: var(--galleryWidth);
     max-width: var(--maxGalleryWidth);
+    position: relative;
 }
 
 .galleryItem {
-    width: calc((100% - (var(--columns) - 1) * var(--galleryGap)) / var(--columns));
+    width: var(--itemWidth);
     aspect-ratio: 1 / 1;
     overflow: hidden;
     position: relative;
+    cursor: pointer;
 }
 
 .galleryImg {
@@ -33,4 +40,27 @@
     object-fit: cover;
     object-position: center;
     display: block;
+}
+
+.loadMoreContainer {
+    position: absolute;
+    height: calc(calc(var(--galleryWidth) / var(--columns)) * calc(var(--columns) - 1));
+    width: 100%;
+    bottom: 0;
+    background: linear-gradient(to top,
+            var(--loadMoreGradient) 20%,
+            rgba(255, 255, 255, 0) 100%);
+    display: flex;
+    justify-content: center;
+}
+
+.loadMoreButton {
+    margin: auto;
+    margin-bottom: 2rem;
+
+    color: #3f3f3f;
+    font-weight: 500;
+    padding: 0.5rem 1.5rem;
+    background-color: rgb(231, 231, 231);
+    border-radius: 50px;
 }

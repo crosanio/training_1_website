@@ -218,6 +218,10 @@ a:-webkit-any-link {
     font-size: var(--font-size-p);
 }
 
+button {
+    font-size: var(--font-size-p);
+}
+
 /* ## TYPO MEDIAQUERY
 -----------------------------------------------------------------------------------*/
 

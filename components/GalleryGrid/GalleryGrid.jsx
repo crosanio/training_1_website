@@ -11,7 +11,8 @@ Move the local folder "/utility/GalleryGrid_img" to the public root of the proje
 
 
 // UTILITY
-import { useState, useEffect, memo } from "react";
+import { useState, useEffect, useMemo, memo } from "react";
+import { createPortal } from "react-dom";
 
 
 // LOCAL_CSS
@@ -27,47 +28,89 @@ import LazyItem from './utility/LazyItem';
 function GalleryGrid() {
 
     // SUPPORT
-    const imgPaths = getPaths();
+    const offsetStep = 9;
 
     // USE-STATE
-    const [customState, setCustomState] = useState('');
+    const [offset, setOffset] = useState(offsetStep);
+    const [zoomImg, setZoomImg] = useState(null);
 
-    // USE-EFFECT
+    // SUPPORT
+    const imgPaths = getPaths();
+    const visibleImgs = useMemo(() => {
+        return imgPaths.slice(0, offset);
+    }, [imgPaths, offset]);
+
+
+    // // USE-EFFECT
     useEffect(() => {
+        if (zoomImg) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "";
+        }
+        return () => {
+            document.body.style.overflow = "";
+        };
+    }, [zoomImg]);
 
-        // debug
-        return console.log('USE-EFFECT');
-    }, [customState]);
+    // // INIT USE-EFFECT
+    // useEffect(() => {
 
-    // INIT USE-EFFECT
-    useEffect(() => {
-
-        // debug
-        return console.log('INIT USE-EFFECT');
-    }, []);
+    //     // debug
+    //     return console.log('INIT USE-EFFECT');
+    // }, []);
 
     return <>
+
+        {/* GALLERY GRID */}
+
         <div className={styles.customCssProperties}>
             <div className={styles.galleryContainer}>
                 <div className={styles.galleryGrid}>
 
-                    {imgPaths.map((path, index) => (
+                    {visibleImgs.map((path, index) => (
                         <LazyItem key={index} extraClass={styles.galleryItem}>
                             <img
                                 className={styles.galleryImg}
                                 src={path}
                                 alt={`Gallery image ${index + 1}`}
+                                onClick={() => setZoomImg(path)}
                             />
                         </LazyItem>
                     ))}
 
-                    <div className={styles.loadMoreContainer}>
-                        <button className={styles.loadMoreButton}>Load More ✚</button>
-                    </div>
+                    {
+                        offset < imgPaths.length &&
+                        <div className={styles.loadMoreContainer}>
+                            <button className={styles.loadMoreButton} onClick={() => setOffset(offset + offsetStep)}>Load more ✚</button>
+                        </div>
+                    }
 
                 </div>
             </div>
         </div>
+
+
+
+        {/* ZOOMED IMAGE OVERLAY */}
+
+        {zoomImg && createPortal(
+            <div
+                className={styles.zoomOverlay}
+                onClick={() => setZoomImg(null)}
+            >
+                <div className={styles.zoomImgContainer}>
+                    <img
+                        className={styles.zoomImg}
+                        src={zoomImg}
+                        alt="Zoomed"
+                    />
+                    <button className={styles.zoomCloseButton} onClick={() => setZoomImg(null)}>✖</button>
+                </div>
+            </div>,
+            document.body
+        )}
+
     </>
 }
 

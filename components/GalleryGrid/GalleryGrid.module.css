@@ -1,9 +1,8 @@
 .customCssProperties {
-    --containerPadding: 2rem;
     --columns: 3;
     --galleryWidth: 80%;
     --maxGalleryWidth: 900px;
-    --galleryGap: 5px;
+    --galleryGap: 4px;
     --itemWidth: calc((100% - (var(--columns) - 1) * var(--galleryGap)) / var(--columns));
     --loadMoreGradient: white;
 
@@ -14,7 +13,6 @@
 .galleryContainer {
     display: flex;
     justify-content: center;
-    padding: var(--containerPadding);
 }
 
 .galleryGrid {
@@ -24,6 +22,7 @@
     width: var(--galleryWidth);
     max-width: var(--maxGalleryWidth);
     position: relative;
+    margin-bottom: calc(100% / 3 / 5);
 }
 
 .galleryItem {
@@ -44,14 +43,15 @@
 
 .loadMoreContainer {
     position: absolute;
-    height: calc(calc(var(--galleryWidth) / var(--columns)) * calc(var(--columns) - 1));
     width: 100%;
+    aspect-ratio: 3.5 / 1;
     bottom: 0;
     background: linear-gradient(to top,
-            var(--loadMoreGradient) 20%,
+            var(--loadMoreGradient) 35%,
             rgba(255, 255, 255, 0) 100%);
     display: flex;
     justify-content: center;
+    margin-bottom: calc(100% / 3 / 4 * -1);
 }
 
 .loadMoreButton {
@@ -63,4 +63,48 @@
     padding: 0.5rem 1.5rem;
     background-color: rgb(231, 231, 231);
     border-radius: 50px;
+}
+
+.zoomOverlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.zoomImgContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 15px;
+    height: 95vh;
+    width: 95vw;
+}
+
+.zoomImg {
+    max-width: 100%;
+    max-height: calc(100% - 55px);
+    object-fit: contain;
+    display: block;
+}
+
+.zoomCloseButton {
+    /* font-size: 20px; */
+    line-height: 0;
+    color: #ffffff;
+    font-weight: 600;
+    width: 40px;
+    aspect-ratio: 1 / 1;
+    text-align: center;
+    background-color: rgb(226, 43, 67);
+    border-radius: 100%;
+    padding-right: 1px;
+    padding-top: 1px;
 }

@@ -1,6 +1,6 @@
 /* NOTES
 # VISIBILITY: Social Media icons can be hidden by setting "visible: false" in the socialMedia array below.
-# COLOR (dark/light): icons color can switch to light version by changing the "themeColor" variable to a value other than 'dark'.
+# THEME COLOR (dark/light): icons color can switch to light version by changing the "themeColor" variable to a value other than 'dark'.
 # ADD SOCIAL: a new 48x48 pixels image is required and must be imported to add a new social media icon. The array must be expanded too, adding the new social's infos. */
 
 

@@ -60,7 +60,7 @@ function ComponentTemplate() {
 
     return <>
 
-        <div className={styles.test}>
+        <div className={styles.customCssProperties}>
 
             <h1>H1 Title</h1>
             <h2>H2 Title</h2>

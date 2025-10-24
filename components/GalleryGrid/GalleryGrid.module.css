@@ -1,0 +1,36 @@
+.customCssProperties {
+    --containerPadding: 2rem;
+    --columns: 3;
+    --galleryWidth: 80%;
+    --maxGalleryWidth: 900px;
+    --galleryGap: 5px;
+}
+
+.galleryContainer {
+    display: flex;
+    justify-content: center;
+    padding: var(--containerPadding);
+}
+
+.galleryGrid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--galleryGap);
+    width: var(--galleryWidth);
+    max-width: var(--maxGalleryWidth);
+}
+
+.galleryItem {
+    width: calc((100% - (var(--columns) - 1) * var(--galleryGap)) / var(--columns));
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    position: relative;
+}
+
+.galleryImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}

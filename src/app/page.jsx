@@ -13,7 +13,7 @@ import stylesLocal from './page.module.css';
 // COMPONENTS
 import ComponentTemplate from "../../components/ComponentTemplate/ComponentTemplate"
 import LazySection from '../../components/LazySection/LazySection';
-import SocialMedia from '../../components/SocialMedia/SocialMedia';
+import GalleryGrid from '../../components/GalleryGrid/GalleryGrid';
 
 
 // EXPORT
@@ -23,6 +23,8 @@ export default function HomePage() {
         <p className='debug'>Debug class element</p>
 
         <ComponentTemplate />
+
+        <GalleryGrid />
 
         <LazySection>
             <h3>Lazy Loaded Content 1</h3>

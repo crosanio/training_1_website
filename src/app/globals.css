@@ -113,8 +113,8 @@ body {
     /* TYPO SCALES */
     --typo-scale-small-text: 0.75;
     --typo-scale-p: 1;
-    --typo-scale-h6: 1;
-    --typo-scale-h5: 1.15;
+    --typo-scale-h6: .95;
+    --typo-scale-h5: 1.1;
     --typo-scale-h4: 1.25;
     --typo-scale-h3: 1.5;
     --typo-scale-h2: 1.75;
@@ -137,7 +137,6 @@ body {
 
 /* ## TYPO BASE STYLES
 -----------------------------------------------------------------------------------*/
-
 p,
 h1,
 h2,
@@ -167,7 +166,6 @@ a:-webkit-any-link:hover {
 
 /* ## TYPO CLASSES
 -----------------------------------------------------------------------------------*/
-
 .small-text {
     font-size: var(--font-size-small-text);
     font-weight: 300;
@@ -223,19 +221,6 @@ a:-webkit-any-link {
 /* ## TYPO MEDIAQUERY
 -----------------------------------------------------------------------------------*/
 
-/* TABLET */
-@media (min-width: 768px) {
-    :root {
-        --typo-scale-h1: 2.7;
-        --typo-scale-h2: 2.3;
-        --typo-scale-h3: 2;
-        --font-size-h3: calc(var(--font-size-unit) * var(--typo-scale-h3));
-        --font-size-h2: calc(var(--font-size-unit) * var(--typo-scale-h2));
-        --font-size-h1: calc(var(--font-size-unit) * var(--typo-scale-h1));
-    }
-
-}
-
 /* DESKTOP */
 @media (min-width: 1024px) {
     :root {
@@ -243,7 +228,7 @@ a:-webkit-any-link {
         --typo-scale-small-text: 0.8;
         --typo-scale-p: 1.1;
         --typo-scale-h6: 1.1;
-        --typo-scale-h5: 1.5;
+        --typo-scale-h5: 1.4;
         --typo-scale-h4: 1.75;
         --typo-scale-h3: 2.25;
         --typo-scale-h2: 3;
@@ -259,7 +244,6 @@ a:-webkit-any-link {
         --font-size-h2: calc(var(--font-size-unit) * var(--typo-scale-h2));
         --font-size-h1: calc(var(--font-size-unit) * var(--typo-scale-h1));
     }
-
 }
 
 

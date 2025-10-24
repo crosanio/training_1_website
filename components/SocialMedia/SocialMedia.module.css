@@ -1,11 +1,13 @@
 .socialMedia_container {
     display: flex;
     align-items: center;
-    gap: 2rem;
+    justify-content: end;
+    gap: calc(1.5rem + 0.3vw);
+    flex-wrap: wrap;
 }
 
 .socialMedia_iconContainer {
-    height: 35px;
+    height: calc(1.5rem + 0.3vw);
     aspect-ratio: 1;
 }
 
@@ -15,4 +17,12 @@
 
 .light {
     filter: brightness(.25);
+}
+
+@media (max-width: 480px) {
+    .socialMedia_container {
+        justify-content: center;
+        gap: calc(1.2rem + 0.3vw);
+    }
+
 }

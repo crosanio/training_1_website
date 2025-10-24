@@ -1,5 +1,9 @@
+.customCssProperties {
+    --custom-color: red;
+}
+
 .test {
     background-color: rgb(48, 0, 0);
-    border: 1px solid red;
+    border: 1px solid var(--custom-color);
     padding: 10px;
 }

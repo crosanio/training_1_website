@@ -64,7 +64,6 @@ function LazyItem({
 
     const inlineStyle = {
         opacity: fadeIn ? 1 : 0,
-        transform: fadeIn ? 'none' : 'translateY(20px)',
         transition: 'opacity 1s ease, transform 1s ease',
         ...(showMinHeight && { minHeight: '50vh' })
     }

@@ -1,11 +1,38 @@
-.footer {
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(231, 231, 231);
+
+    margin: auto;
+    height: 30px;
+    width: 60px;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+}
+
+.toTopButton {
+    color: #3f3f3f;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    padding-top: 11px;
+}
+
+.icon {
+    color: #3f3f3f;
+    transform: rotate(45deg);
+    display: inline-block;
+}
+
+.footerContent {
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
+    gap: 2rem;
     padding: 2rem;
     background-color: #3f3f3f;
-    gap: 2rem;
 }
 
 @media (max-width: 480px) {

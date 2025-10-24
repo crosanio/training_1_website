@@ -28,7 +28,7 @@ import LazyItem from './utility/LazyItem';
 function GalleryGrid() {
 
     // SUPPORT
-    const offsetStep = 9;
+    const offsetStep = 6;
 
     // USE-STATE
     const [offset, setOffset] = useState(offsetStep);

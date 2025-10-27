@@ -17,9 +17,11 @@ export const metadata = {
     metaDescription: 'A modern Next.js website',
 }
 
+// CONTEXTS
+import { ContextMainProvider } from "../../contexts/ContextMain";
+
 
 // COMPONENTS
-import LazySection from "../../components/LazySection/LazySection";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import SocialMedia from "../../components/SocialMedia/SocialMedia";
@@ -27,6 +29,7 @@ import SocialMedia from "../../components/SocialMedia/SocialMedia";
 
 // EXPORT
 export default function RootLayout({ children }) {
+
     return (
         <html lang="en" className={poppins.className}>
             <head>
@@ -37,30 +40,31 @@ export default function RootLayout({ children }) {
                 <meta name="description" content={metadata.metaDescription}></meta>
             </head>
 
-
             <body>
-                <div className='wrapper'>
+                <ContextMainProvider>
+                    <div className='wrapper'>
 
-                    <Header>
-                        <p>Header Logo</p>
-                        <p>Header Content</p>
-                    </Header>
+                        <Header>
+                            <p>Header Logo</p>
+                            <p>Header Content</p>
+                        </Header>
 
-                    <main>
-                        <div className="container">
+                        <main>
+                            <div className="container">
 
-                            {children}
+                                {children}
 
-                        </div>
-                    </main>
+                            </div>
+                        </main>
 
-                    <Footer>
-                        <p>Footer Content 1</p>
-                        <SocialMedia />
-                    </Footer>
+                        <Footer>
+                            <p>Footer Content 1</p>
+                            <SocialMedia />
+                        </Footer>
 
 
-                </div>
+                    </div>
+                </ContextMainProvider>
             </body>
 
         </html>

@@ -2,6 +2,10 @@
 "use client";
 
 
+// CONTEXTS
+import { useContextMain } from '../../contexts/ContextMain';
+
+
 // GLOBAL_ASSETS
 import styles from './page.module.css';
 
@@ -18,9 +22,15 @@ import Gallery from '../../components/Gallery/Gallery';
 
 // EXPORT
 export default function HomePage() {
+
+    // CONTEXTS
+    const { contextMainValue } = useContextMain();
+
     return <>
 
         <p className='debug'>Debug class element</p>
+
+        <p className='debug'>{contextMainValue}</p>
 
         <ComponentTemplate />
 

@@ -1,4 +1,4 @@
 Sto lavorando su vsCode a un applicativo realizzato con Next.js e React.js, con sistema di routing modenro di Next basato sulla cartella src/app, linguaggio principale Javascript, senza l'utilizzo di Tailwind.
 
-PROMPT QUI
+PROMPT
 

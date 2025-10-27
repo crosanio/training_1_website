@@ -13,7 +13,7 @@ import stylesLocal from './page.module.css';
 // COMPONENTS
 import ComponentTemplate from "../../components/ComponentTemplate/ComponentTemplate"
 import LazySection from '../../components/LazySection/LazySection';
-import GalleryGrid from '../../components/GalleryGrid/GalleryGrid';
+import Gallery from '../../components/Gallery/Gallery';
 
 
 // EXPORT
@@ -24,7 +24,7 @@ export default function HomePage() {
 
         <ComponentTemplate />
 
-        <GalleryGrid />
+        <Gallery />
 
         <LazySection>
             <h3>Lazy Loaded Content 1</h3>

@@ -1,13 +1,18 @@
+.customCssProperties {
+    --gap: calc(1.5rem + 0.3vw);
+    margin: auto;
+}
+
 .socialMedia_container {
     display: flex;
     align-items: center;
     justify-content: end;
-    gap: calc(1.5rem + 0.3vw);
+    gap: var(--gap);
     flex-wrap: wrap;
 }
 
 .socialMedia_iconContainer {
-    height: calc(1.5rem + 0.3vw);
+    height: var(--gap);
     aspect-ratio: 1;
 }
 
@@ -22,7 +27,7 @@
 @media (max-width: 480px) {
     .socialMedia_container {
         justify-content: center;
-        gap: calc(1.2rem + 0.3vw);
+        gap: calc(var(--gap) * 0.7);
     }
 
 }

@@ -132,28 +132,30 @@ function SocialMedia() {
 
     return <>
 
-        <div className={styles.socialMedia_container}>
+        <div className={styles.customCssProperties}>
+            <div className={styles.socialMedia_container}>
 
-            {socialMedia.map((item, index) =>
-                item.visible && (
-                    <a
-                        key={index}
-                        className={styles.socialMedia_iconContainer}
-                        href={deviceType === 'desktop' ? item.hrefDesktop + item.account : item.hrefMobile + item.account}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        <img
-                            className={`${styles.socialMedia_icon} ${themeColor !== 'dark' ? styles.light : ''}`}
-                            src={item.icon.src}
-                            alt={item.alt}
-                            loading="lazy"
-                            decoding="async"
-                        />
-                    </a>
-                )
-            )}
+                {socialMedia.map((item, index) =>
+                    item.visible && (
+                        <a
+                            key={index}
+                            className={styles.socialMedia_iconContainer}
+                            href={deviceType === 'desktop' ? item.hrefDesktop + item.account : item.hrefMobile + item.account}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <img
+                                className={`${styles.socialMedia_icon} ${themeColor !== 'dark' ? styles.light : ''}`}
+                                src={item.icon.src}
+                                alt={item.alt}
+                                loading="lazy"
+                                decoding="async"
+                            />
+                        </a>
+                    )
+                )}
 
+            </div>
         </div>
 
     </>

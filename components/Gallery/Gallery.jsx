@@ -1,8 +1,8 @@
 // NOTES
 
 /* WARNING:
-This component depends on the existence of the folder "public/GalleryGrid_img", used to extract the paths of images to render in the grid.
-Move the local folder "/utility/GalleryGrid_img" to the public root of the project if not already done.
+This component depends on the existence of the folder "public/gallery_img", used to extract the paths of images to render in the grid.
+Move the local folder "/utility/gallery_img" to the public root of the project if not already done.
 */
 
 
@@ -16,7 +16,7 @@ import { createPortal } from "react-dom";
 
 
 // LOCAL_CSS
-import styles from './GalleryGrid.module.css';
+import styles from './Gallery.module.css';
 
 
 // LOCAL_ASSETS
@@ -25,7 +25,7 @@ import LazyItem from './utility/LazyItem';
 
 
 // EXPORT
-function GalleryGrid() {
+function Gallery() {
 
     // SUPPORT
     const offsetStep = 6;
@@ -53,20 +53,13 @@ function GalleryGrid() {
         };
     }, [zoomImg]);
 
-    // // INIT USE-EFFECT
-    // useEffect(() => {
-
-    //     // debug
-    //     return console.log('INIT USE-EFFECT');
-    // }, []);
-
     return <>
 
         {/* GALLERY GRID */}
 
         <div className={styles.customCssProperties}>
             <div className={styles.galleryContainer}>
-                <div className={styles.galleryGrid}>
+                <div className={styles.gallery}>
 
                     {visibleImgs.map((path, index) => (
                         <LazyItem key={index} extraClass={styles.galleryItem}>
@@ -117,4 +110,4 @@ function GalleryGrid() {
 
 
 // EXPORT MEMO()
-export default memo(GalleryGrid);
+export default memo(Gallery);

@@ -4,7 +4,7 @@
 
 /**
  * Returns an array of public URLs for all image files located inside:
- * /public/GalleryGrid_img/
+ * /public/Gallery/
  *
  * Only files with supported image extensions are included.
  * If the folder does not exist OR is empty OR contains no valid images,
@@ -13,16 +13,16 @@
 export function getPaths() {
     try {
         const context = require.context(
-            "/public/GalleryGrid_img",
+            "/public/Gallery",
             false,
             /\.(jpg|jpeg|png|gif|webp|svg)$/i
         );
 
-        const images = context.keys().map((key) => `/GalleryGrid_img/${key.replace("./", "")}`);
+        const images = context.keys().map((key) => `/Gallery/${key.replace("./", "")}`);
 
         return Array.isArray(images) ? images : [];
     } catch (error) {
-        console.warn("GalleryGrid: Folder missing or no valid images found.");
+        console.warn("Gallery: Folder missing or no valid images found.");
         return [];
     }
 }

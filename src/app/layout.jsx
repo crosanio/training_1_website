@@ -54,12 +54,10 @@ export default function RootLayout({ children }) {
                         </div>
                     </main>
 
-                    <LazySection>
-                        <Footer>
-                            <p>Footer Content 1</p>
-                            <SocialMedia />
-                        </Footer>
-                    </LazySection>
+                    <Footer>
+                        <p>Footer Content 1</p>
+                        <SocialMedia />
+                    </Footer>
 
 
                 </div>

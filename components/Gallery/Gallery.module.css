@@ -1,8 +1,9 @@
 .customCssProperties {
+    --containerPadding: 4rem;
     --columns: 3;
-    --galleryWidth: 80%;
-    --maxGalleryWidth: 900px;
-    --galleryGap: 4px;
+    --galleryWidth: 100%;
+    --maxGalleryWidth: 1200px;
+    --galleryGap: calc(1px + 0.2vw);
     --itemWidth: calc((100% - (var(--columns) - 1) * var(--galleryGap)) / var(--columns));
     --loadMoreGradient: white;
 
@@ -11,18 +12,18 @@
 }
 
 .galleryContainer {
+    padding-top: var(--containerPadding) 0;
     display: flex;
     justify-content: center;
 }
 
-.galleryGrid {
+.gallery {
     display: flex;
     flex-wrap: wrap;
     gap: var(--galleryGap);
     width: var(--galleryWidth);
     max-width: var(--maxGalleryWidth);
     position: relative;
-    margin-bottom: calc(100% / 3 / 5);
 }
 
 .galleryItem {
@@ -35,10 +36,14 @@
 
 .galleryImg {
     width: 100%;
-    height: 100%;
+    max-height: 100%;
+    aspect-ratio: 1 / 1;
     object-fit: cover;
     object-position: center;
     display: block;
+
+
+    background-color: yellow;
 }
 
 .loadMoreContainer {
@@ -51,7 +56,7 @@
             rgba(255, 255, 255, 0) 100%);
     display: flex;
     justify-content: center;
-    margin-bottom: calc(100% / 3 / 4 * -1);
+    margin-bottom: -1px;
 }
 
 .loadMoreButton {
@@ -96,7 +101,7 @@
 }
 
 .zoomCloseButton {
-    /* font-size: 20px; */
+    font-size: 25px;
     line-height: 0;
     color: #ffffff;
     font-weight: 600;

@@ -18,6 +18,7 @@ import stylesLocal from './page.module.css';
 import ComponentTemplate from "../../components/ComponentTemplate/ComponentTemplate"
 import LazySection from '../../components/LazySection/LazySection';
 import Gallery from '../../components/Gallery/Gallery';
+import Modal from '../../components/Modal/Modal';
 
 
 // EXPORT
@@ -27,6 +28,11 @@ export default function HomePage() {
     const { contextMainValue } = useContextMain();
 
     return <>
+
+        <Modal
+            text="This is a modal dialog. Are you sure you want to proceed?"
+            confirmAction={() => console.log("[ Modal.jsx ] Confirme Action executed.")}
+        />
 
         <p className='debug'>Debug class element</p>
 

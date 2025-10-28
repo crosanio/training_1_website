@@ -19,6 +19,7 @@ import ComponentTemplate from "../../components/ComponentTemplate/ComponentTempl
 import LazySection from '../../components/LazySection/LazySection';
 import Gallery from '../../components/Gallery/Gallery';
 import Modal from '../../components/Modal/Modal';
+import HeaderSection from '../../components/HeaderSection/HeaderSection';
 
 
 // EXPORT
@@ -32,6 +33,11 @@ export default function HomePage() {
         <Modal
             text="This is a modal dialog. Are you sure you want to proceed?"
             confirmAction={() => console.log("[ Modal.jsx ] Confirme Action executed.")}
+        />
+
+        <HeaderSection
+            title="Page Title"
+            caption="This is a caption for the header section."
         />
 
         <p className='debug'>Debug class element</p>

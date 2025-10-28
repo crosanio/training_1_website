@@ -12,14 +12,11 @@ import styles from './Modal.module.css';
 
 
 // EXPORT
-function Modal({ text, confirmAction }) {
-
-    // USE-STATE
-    const [showModal, setShowModal] = useState(true);
+function Modal({ visibility, setVisibility, text, confirmAction }) {
 
     return <>
 
-        {(showModal && text && confirmAction) && createPortal(
+        {(visibility && text && confirmAction) && createPortal(
             <div className={styles.customCssProperties}>
 
                 <div className={styles.modalOverlay}>
@@ -29,12 +26,12 @@ function Modal({ text, confirmAction }) {
                         <div className={styles.modalButtonsContainer}>
                             <button onClick={() => {
                                 confirmAction();
-                                setShowModal(false);
+                                setVisibility(false);
                             }}>
                                 CONFIRM
                             </button>
 
-                            <button className={styles.modalCloseButton} onClick={() => setShowModal(false)}>
+                            <button className={styles.modalCloseButton} onClick={() => setVisibility(false)}>
                                 ✖ CANCEL
                             </button>
                         </div>

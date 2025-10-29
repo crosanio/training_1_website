@@ -2,6 +2,10 @@
 "use client";
 
 
+// UTILITY
+import { useState } from 'react';
+
+
 // CONTEXTS
 import { useContextMain } from '../../contexts/ContextMain';
 
@@ -18,32 +22,35 @@ import stylesLocal from './page.module.css';
 import ComponentTemplate from "../../components/ComponentTemplate/ComponentTemplate"
 import LazySection from '../../components/LazySection/LazySection';
 import Gallery from '../../components/Gallery/Gallery';
-import HeaderSection from '../../components/HeaderSection/HeaderSection';
 import Modal from '../../components/Modal/Modal';
 
 
 // EXPORT
 export default function HomePage() {
 
+    const [visibility, setVisibility] = useState(true);
+
     // CONTEXTS
     const { contextMainValue } = useContextMain();
 
+    const confirmAction = () => {
+        console.log("Modal confirmed action executed.");
+    }
+
     return <>
-
-        <Modal
-
-        />
-
-        <HeaderSection
-            title="Page Title"
-            caption="This is a caption for the header section."
-        />
 
         <p className='debug'>Debug class element</p>
 
         <p className='debug'>{contextMainValue}</p>
 
         <ComponentTemplate />
+
+        <Modal
+            visibility={visibility}
+            setVisibility={setVisibility}
+            text="This is the modal content"
+            confirmAction={confirmAction}
+        />
 
         <Gallery />
 

@@ -23,12 +23,13 @@ import ComponentTemplate from "../../components/ComponentTemplate/ComponentTempl
 import LazySection from '../../components/LazySection/LazySection';
 import Gallery from '../../components/Gallery/Gallery';
 import Modal from '../../components/Modal/Modal';
+import HeaderSection from '../../components/HeaderSection/HeaderSection';
 
 
 // EXPORT
 export default function HomePage() {
 
-    const [visibility, setVisibility] = useState(true);
+    const [visibility, setVisibility] = useState(false);
 
     // CONTEXTS
     const { contextMainValue } = useContextMain();
@@ -39,16 +40,24 @@ export default function HomePage() {
 
     return <>
 
+        <HeaderSection
+            title="Header Section Title"
+            caption="Header Section Caption"
+        />
+
         <p className='debug'>Debug class element</p>
 
         <p className='debug'>{contextMainValue}</p>
 
         <ComponentTemplate />
 
+        <button className='button' onClick={() => setVisibility(true)}>Open Modal</button>
+
         <Modal
             visibility={visibility}
             setVisibility={setVisibility}
-            text="This is the modal content"
+            title="Modal Title"
+            text="This is the modal content. Lorem ipsum dolor si amet, consectetur adipiscing elit.  Lorem ipsum dolor si amet, consectetur adipiscing elit.  Lorem ipsum dolor si amet, consectetur adipiscing elit.  Lorem ipsum dolor si amet, consectetur adipiscing elit.  Lorem ipsum dolor si amet, consectetur adipiscing elit.  Lorem ipsum dolor si amet, consectetur adipiscing elit.  Lorem ipsum dolor si amet, consectetur adipiscing elit.  Lorem ipsum dolor si amet, consectetur adipiscing elit.  Lorem ipsum dolor si amet, consectetur adipiscing elit.  Lorem ipsum dolor si amet, consectetur adipiscing elit.  Lorem ipsum dolor si amet, consectetur adipiscing elit.  Lorem ipsum dolor si amet, consectetur adipiscing elit.  Lorem ipsum dolor si amet, consectetur adipiscing elit.  Lorem ipsum dolor si amet, consectetur adipiscing elit.  Lorem ipsum dolor si amet, consectetur adipiscing elit."
             confirmAction={confirmAction}
         />
 

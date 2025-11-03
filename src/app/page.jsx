@@ -28,7 +28,7 @@ import Modal from '../../components/Modal/Modal';
 // EXPORT
 export default function HomePage() {
 
-    const [visibility, setVisibility] = useState(true);
+    const [visibility, setVisibility] = useState(false);
 
     // CONTEXTS
     const { contextMainValue } = useContextMain();
@@ -44,6 +44,8 @@ export default function HomePage() {
         <p className='debug'>{contextMainValue}</p>
 
         <ComponentTemplate />
+
+        <button className='button' onClick={() => setVisibility(true)}>Open Modal</button>
 
         <Modal
             visibility={visibility}

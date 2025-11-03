@@ -3,7 +3,7 @@
 
 
 // UTILITY
-import { useState, memo } from "react";
+import { memo } from "react";
 import { createPortal } from "react-dom";
 
 

@@ -30,7 +30,6 @@ function Modal({ visibility, setVisibility, title, text, confirmAction }) {
 
         {(visibility && text && confirmAction) && createPortal(
             <div className={styles.customCssProperties}>
-
                 <div className={styles.modalOverlay}>
                     <div className={styles.modalContainer}>
 
@@ -53,8 +52,9 @@ function Modal({ visibility, setVisibility, title, text, confirmAction }) {
 
                     </div>
                 </div>
+            </div>
 
-            </div>,
+            ,
             document.body
         )}
 

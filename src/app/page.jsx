@@ -23,6 +23,7 @@ import ComponentTemplate from "../../components/ComponentTemplate/ComponentTempl
 import LazySection from '../../components/LazySection/LazySection';
 import Gallery from '../../components/Gallery/Gallery';
 import Modal from '../../components/Modal/Modal';
+import HeaderSection from '../../components/HeaderSection/HeaderSection';
 
 
 // EXPORT
@@ -38,6 +39,11 @@ export default function HomePage() {
     }
 
     return <>
+
+        <HeaderSection
+            title="Header Section Title"
+            caption="Header Section Caption"
+        />
 
         <p className='debug'>Debug class element</p>
 

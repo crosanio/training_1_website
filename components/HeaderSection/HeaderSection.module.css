@@ -15,3 +15,9 @@
 .caption {
     margin-bottom: calc(var(--spacing-unit) * 2);
 }
+
+@media (max-width: 768px) {
+    .title {
+        margin-bottom: calc(var(--spacing-unit) * .5);
+    }
+}

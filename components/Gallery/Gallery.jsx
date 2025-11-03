@@ -61,16 +61,23 @@ function Gallery() {
             <div className={styles.galleryContainer}>
                 <div className={styles.gallery}>
 
-                    {visibleImgs.map((path, index) => (
-                        <LazyItem key={index} extraClass={styles.galleryItem}>
-                            <img
-                                className={styles.galleryImg}
-                                src={path}
-                                alt={`Gallery image ${index + 1}`}
-                                onClick={() => setZoomImg(path)}
-                            />
-                        </LazyItem>
-                    ))}
+                    {visibleImgs.map((path, index) => {
+                        let extraClass = styles.galleryItem;
+                        if (offset < imgPaths.length && index >= visibleImgs.length - 3) {
+                            extraClass += ` ${styles.transparency}`;
+                        }
+
+                        return (
+                            <LazyItem key={index} extraClass={extraClass}>
+                                <img
+                                    className={styles.galleryImg}
+                                    src={path}
+                                    alt={`Gallery image ${index + 1}`}
+                                    onClick={() => setZoomImg(path)}
+                                />
+                            </LazyItem>
+                        );
+                    })}
 
                     {
                         offset < imgPaths.length &&

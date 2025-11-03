@@ -58,7 +58,7 @@ function Gallery() {
         {/* GALLERY GRID */}
 
         <div className={styles.customCssProperties}>
-            <div className={styles.galleryContainer}>
+            <div className={styles.galleryContainer + ' ' + styles.fullwidthGrid}>
                 <div className={styles.gallery}>
 
                     {visibleImgs.map((path, index) => {
@@ -82,7 +82,7 @@ function Gallery() {
                     {
                         offset < imgPaths.length &&
                         <div className={styles.loadMoreContainer}>
-                            <button className={styles.loadMoreButton} onClick={() => setOffset(offset + offsetStep)}>Load more ✚</button>
+                            <button className={styles.loadMoreButton} onClick={() => setOffset(offset + offsetStep)}>Show more ✚</button>
                         </div>
                     }
 

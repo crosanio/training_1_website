@@ -1,7 +1,7 @@
 .customCssProperties {
     --containerPadding: 4rem;
     --columns: 3;
-    --galleryWidth: 100%;
+    --galleryWidth: 100vw;
     --maxGalleryWidth: 1200px;
     --galleryGap: calc(1px + 0.2vw);
     --itemWidth: calc((100% - (var(--columns) - 1) * var(--galleryGap)) / var(--columns));
@@ -16,6 +16,18 @@
     display: flex;
     justify-content: center;
 }
+
+@media (max-width: 468px) {
+    .fullwidthGrid {
+        position: relative;
+        left: 50%;
+        right: 50%;
+        margin-left: -50vw;
+        margin-right: -50vw;
+        width: 100vw;
+    }
+}
+
 
 .gallery {
     display: flex;
@@ -68,7 +80,7 @@
 
 .loadMoreButton {
     margin: auto;
-    margin-bottom: 2rem;
+    margin-bottom: calc(var(--itemWidth) * 0.15);
     color: #3f3f3f;
     font-weight: 500;
     padding: 0.5rem 1.5rem;

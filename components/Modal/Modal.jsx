@@ -3,7 +3,7 @@
 
 
 // UTILITY
-import { memo } from "react";
+import { useEffect, memo } from "react";
 import { createPortal } from "react-dom";
 
 
@@ -12,7 +12,19 @@ import styles from './Modal.module.css';
 
 
 // EXPORT
-function Modal({ visibility, setVisibility, text, confirmAction }) {
+function Modal({ visibility, setVisibility, title, text, confirmAction }) {
+
+    // USE-EFFECT
+    useEffect(() => {
+        if (visibility) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "";
+        }
+        return () => {
+            document.body.style.overflow = "";
+        };
+    }, [visibility]);
 
     return <>
 
@@ -21,6 +33,9 @@ function Modal({ visibility, setVisibility, text, confirmAction }) {
 
                 <div className={styles.modalOverlay}>
                     <div className={styles.modalContainer}>
+
+                        <h4 className={styles.modalTitle}>{title ? title : "Action required"}</h4>
+
                         <p className={styles.modalText}>{text}</p>
 
                         <div className={styles.modalButtonsContainer}>

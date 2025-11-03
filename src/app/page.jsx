@@ -56,7 +56,8 @@ export default function HomePage() {
         <Modal
             visibility={visibility}
             setVisibility={setVisibility}
-            text="This is the modal content"
+            title="Modal Title"
+            text="This is the modal content. Lorem ipsum dolor si amet, consectetur adipiscing elit.  Lorem ipsum dolor si amet, consectetur adipiscing elit.  Lorem ipsum dolor si amet, consectetur adipiscing elit.  Lorem ipsum dolor si amet, consectetur adipiscing elit.  Lorem ipsum dolor si amet, consectetur adipiscing elit.  Lorem ipsum dolor si amet, consectetur adipiscing elit.  Lorem ipsum dolor si amet, consectetur adipiscing elit.  Lorem ipsum dolor si amet, consectetur adipiscing elit.  Lorem ipsum dolor si amet, consectetur adipiscing elit.  Lorem ipsum dolor si amet, consectetur adipiscing elit.  Lorem ipsum dolor si amet, consectetur adipiscing elit.  Lorem ipsum dolor si amet, consectetur adipiscing elit.  Lorem ipsum dolor si amet, consectetur adipiscing elit.  Lorem ipsum dolor si amet, consectetur adipiscing elit.  Lorem ipsum dolor si amet, consectetur adipiscing elit."
             confirmAction={confirmAction}
         />
 

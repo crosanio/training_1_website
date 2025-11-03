@@ -1,0 +1,17 @@
+.customCssProperties {
+    --spacing-unit: 1rem;
+}
+
+.container {
+
+    margin-bottom: calc(var(--spacing-unit) * 4);
+    border-bottom: 2px solid #3f3f3f;
+}
+
+.title {
+    margin-bottom: var(--spacing-unit);
+}
+
+.caption {
+    margin-bottom: calc(var(--spacing-unit) * 2);
+}

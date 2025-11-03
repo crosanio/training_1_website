@@ -1,0 +1,53 @@
+.customCssProperties {
+    --custom-color: red;
+}
+
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modalContainer {
+    flex: grow -1;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: rgb(231, 231, 231);
+    padding: 2rem;
+    border-radius: 15px;
+    ;
+}
+
+.modalText {
+    color: rgb(99, 99, 99);
+}
+
+.modalButtonsContainer {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+.modalButtonsContainer>button {
+    font-size: 18px;
+    font-weight: 400;
+    border-radius: 25px;
+    padding: 2px 16px;
+    color: #ffffff;
+    background-color: rgb(99, 99, 99);
+}
+
+.modalButtonsContainer>.modalCloseButton {
+    background-color: rgb(226, 43, 67);
+    padding-left: 12px;
+}

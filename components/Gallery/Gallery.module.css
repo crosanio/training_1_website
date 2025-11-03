@@ -17,18 +17,6 @@
     justify-content: center;
 }
 
-@media (max-width: 468px) {
-    .fullwidthGrid {
-        position: relative;
-        left: 50%;
-        right: 50%;
-        margin-left: -50vw;
-        margin-right: -50vw;
-        width: 100vw;
-    }
-}
-
-
 .gallery {
     display: flex;
     flex-wrap: wrap;
@@ -130,4 +118,15 @@
     border-radius: 100%;
     padding-right: 1px;
     padding-top: 1px;
+}
+
+@media (max-width: 468px) {
+    .fullwidthGrid {
+        position: relative;
+        left: 50%;
+        right: 50%;
+        margin-left: -50vw;
+        margin-right: -50vw;
+        width: 100vw;
+    }
 }

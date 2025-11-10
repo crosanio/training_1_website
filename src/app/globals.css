@@ -13,7 +13,8 @@
 
 button,
 input,
-select {
+select,
+textarea {
     all: unset;
     cursor: pointer
 }
@@ -218,7 +219,7 @@ a:-webkit-any-link {
     font-size: var(--font-size-p);
 }
 
-button {
+.button {
     font-size: var(--font-size-p);
 }
 

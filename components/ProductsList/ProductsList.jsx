@@ -85,18 +85,36 @@ function ProductsList({ externalProductsArray }) {
     //     page,
     // ]);
 
+    // SUPPORT
+
+    // Reset Filters
+    const resetAll = () => {
+        setShowFilters(false);
+        setShowSorting(false);
+        setShowTags(false);
+        setQuery([]);
+        setSelectedCategory("");
+        setSelectedTags([]);
+    }
+
     return <>
 
         <div className={styles.customCssProperties}>
 
+            <h3 className={styles.resultsCount}>{productsArray.length} results</h3>
+
             {/* LIST SETTINGS */}
-            <div className={styles.listSettings} >
+            <div className={styles.container}>
 
-                <p className={`${styles.resultsCount} ${styles.settingsButton}`}>{productsArray.length} Results</p>
-
-                {/* SHOW FILTERS */}
                 <button
-                    className={styles.settingsButton}
+                    className={`${styles.button} ${styles.resetButton}`}
+                    onClick={() => { resetAll(); }}
+                >
+                    <span>✖</span><span>Reset all</span>
+                </button>
+
+                <button
+                    className={styles.button}
                     onClick={() => {
                         const newShowFilters = !showFilters;
                         setShowFilters(newShowFilters);
@@ -109,9 +127,8 @@ function ProductsList({ externalProductsArray }) {
                     {showFilters ? '▼' : '▶'} Filters
                 </button>
 
-                {/* SHOW SORTING */}
                 <button
-                    className={styles.settingsButton}
+                    className={styles.button}
                     onClick={() => {
                         const newShowSorting = !showSorting;
                         setShowSorting(newShowSorting);
@@ -119,6 +136,17 @@ function ProductsList({ externalProductsArray }) {
                 >
                     {showSorting ? '▼' : '▶'} Sorting
                 </button>
+
+            </div>
+
+            {/* FILTERS + SORTING */}
+            <div className={styles.container}>
+
+            </div>
+
+            {/* LIST SETTINGS */}
+            <div className={styles.listSettings} >
+
 
                 {/* FILTERS */}
                 {showFilters &&

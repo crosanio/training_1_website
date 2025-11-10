@@ -63,6 +63,8 @@ export default function HomePage() {
 
         <Gallery />
 
+        <Gallery externalImgPaths={['/GalleryFolder/image1.jpg', '/GalleryFolder/image2.png']} />
+
         <LazySection>
             <h3>Lazy Loaded Content 1</h3>
             <p>This content is only visible when it enters the viewport.</p>

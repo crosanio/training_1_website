@@ -104,7 +104,7 @@
 }
 
 .zoomCloseButton {
-    font-size: 21px;
+    font-size: 22px;
     line-height: 0;
     color: #ffffff;
     font-weight: 600;
@@ -113,11 +113,10 @@
     text-align: center;
     background-color: rgb(226, 43, 67);
     border-radius: 100%;
-    padding-right: 1px;
     padding-top: 1px;
 }
 
-@media (max-width: 468px) {
+@media (max-width: 500px) {
     .fullwidthGrid {
         position: relative;
         left: 50%;

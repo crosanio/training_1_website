@@ -50,14 +50,13 @@
     font-size: 18px;
     font-weight: 400;
     border-radius: 25px;
-    padding: 2px 16px;
+    padding: 2px 21px;
     color: #ffffff;
     background-color: rgb(99, 99, 99);
 }
 
 .modalButtonsContainer>.modalCloseButton {
     background-color: rgb(226, 43, 67);
-    padding-left: 12px;
 }
 
 @media (max-width: 468px) {

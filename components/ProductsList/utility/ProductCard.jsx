@@ -21,11 +21,11 @@ import styles from '../ProductsList.module.css';
 
 
 // EXPORT
-function ProductCard({ product, key }) {
+function ProductCard({ product }) {
 
     return <>
 
-        <div key={key} className={styles.productCard}>
+        <div className={styles.productCard}>
             <h4>{product.name}</h4>
             <p>Category: {product.category}</p>
             <p>Value: {product.value} €</p>

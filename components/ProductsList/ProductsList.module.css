@@ -1,11 +1,25 @@
 .customCssProperties {
-    --custom-color: red;
-
-    border: 1px solid var(--custom-color);
+    --input-font-size: 1rem;
+    --input-border-color: blue;
+    --input-padding-unit: 1rem;
 }
 
-.test {
-    background-color: rgb(48, 0, 0);
-    border: 1px solid var(--custom-color);
-    padding: 10px;
+.filterContainer {
+    cursor: pointer;
+    font-size: var(--input-font-size);
+    flex-grow: 1;
+    max-width: 45%;
+    border-radius: 35px;
+    border: 2px solid var(--input-border-color);
+    padding: calc(var(--input-padding-unit)* 0.5) calc(var(--input-padding-unit) * 1);
+    padding-left: calc(var(--input-padding-unit)* 1.5);
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--input-padding-unit);
+}
+
+.searchbarInput {
+    flex-grow: 1;
 }

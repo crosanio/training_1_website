@@ -24,7 +24,7 @@ function Select({ placeholder, options, value, setValue }) {
                 value={value}
                 className={styles.filterInput}
             >
-                <option className={styles.selectOption} value=''>{placeholder || '▼ Filter by..'}</option>
+                <option className={`${styles.selectOption} ${styles.placeholder}`} value=''>{placeholder || '▼ Filter by..'}</option>
 
                 {options ? options.map((option, index) => (
                     <option
@@ -44,8 +44,7 @@ function Select({ placeholder, options, value, setValue }) {
 
             {/* RESET BUTTON */}
             <button
-                onClick={() => { setValue('') }}
-                className={styles.resetButton}
+                onClick={() => setValue('')}
             >
                 ✖
             </button>

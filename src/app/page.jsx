@@ -30,6 +30,7 @@ import ProductsList from '../../components/ProductsList/ProductsList';
 // EXPORT
 export default function HomePage() {
 
+    // Test Modal visibility
     const [visibility, setVisibility] = useState(false);
 
     // CONTEXTS
@@ -41,34 +42,34 @@ export default function HomePage() {
 
     return <>
 
-        <HeaderSection
+        {/* <HeaderSection
             title="Header Section Title"
             caption="Header Section Caption"
-        />
+        /> */}
 
         <ProductsList />
 
-        <p className='debug'>Debug class element</p>
+        {/* <p className='debug'>Debug class element</p> */}
 
-        <p className='debug'>{contextMainValue}</p>
+        {/* <p className='debug'>{contextMainValue}</p> */}
 
-        <ComponentTemplate />
+        {/* <ComponentTemplate /> */}
 
-        <button className='button' onClick={() => setVisibility(true)}>Open Modal</button>
+        {/* <button className='button' onClick={() => setVisibility(true)}>Open Modal</button> */}
 
-        <Modal
+        {/* <Modal
             visibility={visibility}
             setVisibility={setVisibility}
             title="Modal Title"
             text="This is the modal content. Lorem ipsum dolor si amet, consectetur adipiscing elit.  Lorem ipsum dolor si amet, consectetur adipiscing elit.  Lorem ipsum dolor si amet, consectetur adipiscing elit.  Lorem ipsum dolor si amet, consectetur adipiscing elit.  Lorem ipsum dolor si amet, consectetur adipiscing elit.  Lorem ipsum dolor si amet, consectetur adipiscing elit.  Lorem ipsum dolor si amet, consectetur adipiscing elit.  Lorem ipsum dolor si amet, consectetur adipiscing elit.  Lorem ipsum dolor si amet, consectetur adipiscing elit.  Lorem ipsum dolor si amet, consectetur adipiscing elit.  Lorem ipsum dolor si amet, consectetur adipiscing elit.  Lorem ipsum dolor si amet, consectetur adipiscing elit.  Lorem ipsum dolor si amet, consectetur adipiscing elit.  Lorem ipsum dolor si amet, consectetur adipiscing elit.  Lorem ipsum dolor si amet, consectetur adipiscing elit."
             confirmAction={confirmAction}
-        />
+        /> */}
 
-        <Gallery />
+        {/* <Gallery /> */}
 
-        <Gallery externalImgPaths={['/GalleryFolder/image1.jpg', '/GalleryFolder/image2.png']} />
+        {/* <Gallery externalImgPaths={['/GalleryFolder/image1.jpg', '/GalleryFolder/image2.png']} /> */}
 
-        <LazySection>
+        {/* <LazySection>
             <h3>Lazy Loaded Content 1</h3>
             <p>This content is only visible when it enters the viewport.</p>
         </LazySection>
@@ -91,7 +92,7 @@ export default function HomePage() {
         <LazySection>
             <h3>Lazy Loaded Content 5</h3>
             <p>This content is only visible when it enters the viewport.</p>
-        </LazySection>
+        </LazySection> */}
 
     </>
 }

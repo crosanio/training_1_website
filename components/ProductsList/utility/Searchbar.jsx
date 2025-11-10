@@ -63,7 +63,6 @@ function Searchbar({ placeholder, setExternalValue, externalValue }) {
             {/* RESET BUTTON */}
             <button
                 onClick={() => { setLocalValue(''); setExternalValue(['']); }}
-                className={styles.resetButton}
             >
                 ✖
             </button>

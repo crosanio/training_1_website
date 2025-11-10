@@ -74,7 +74,7 @@ img {
     /* PALETTE */
     --color-primary: white;
     --color-warning: rgb(226, 43, 67);
-    --color-active: rgb(0, 132, 255);
+    --color-active: rgb(0, 89, 255);
     --color-hover: rgb(130, 230, 255);
 
     --color-1: red;
@@ -293,6 +293,9 @@ main {
     padding: .5rem 1.5rem;
     background-color: rgb(231, 231, 231);
     border-radius: 50px;
+
+    min-width: 8rem;
+    text-align: center;
 }
 
 

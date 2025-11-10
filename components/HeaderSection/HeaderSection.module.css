@@ -3,9 +3,8 @@
 }
 
 .container {
-
     margin-bottom: calc(var(--spacing-unit) * 4);
-    border-bottom: 2px solid #3f3f3f;
+    border-bottom: 2px solid rgb(68, 68, 68);
 }
 
 .title {
@@ -19,5 +18,15 @@
 @media (max-width: 768px) {
     .title {
         margin-bottom: calc(var(--spacing-unit) * .5);
+        line-height: 2.5rem;
+    }
+
+    .caption {
+        margin-bottom: var(--spacing-unit);
+    }
+
+    .container {
+        margin-bottom: calc(var(--spacing-unit) * 2);
+        border-bottom: 2px solid rgb(68, 68, 68);
     }
 }

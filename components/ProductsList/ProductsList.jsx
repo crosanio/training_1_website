@@ -14,8 +14,12 @@ import styles from './ProductsList.module.css';
 
 
 // LOCAL_ASSETS
+import { getUniqueKeys } from "./functions/getUniqueKeys";
 import { sortBy } from "./functions/sortBy";
-import { productsArray } from "../utility/productsArray";
+
+import { localProductsArray } from "./utility/localProductsArray";
+
+import ProductCard from "./utility/ProductCard";
 
 
 // SUPPORT
@@ -25,18 +29,20 @@ import { productsArray } from "../utility/productsArray";
 
 
 // EXPORT
-function ProductsList() {
+function ProductsList({ externalProductsArray }) {
 
     // SUPPORT
+    const productsArray = externalProductsArray || localProductsArray;
+    const uniqueKeys = getUniqueKeys(productsArray);
 
     // Settings
     const listSettings = {
         showFilters: true,
         showSorting: true,
-        showPagination: true,
-        itemsPerPage: 20,
         offsetTags: 5,
-        offsetItems: 10,
+        offsetProducts: 10,
+        showPagination: true,
+        productsPerPage: 20,
     }
 
     // USE-STATE
@@ -44,7 +50,7 @@ function ProductsList() {
     const [sortDirection, setSortDirection] = useState(1);
 
     const [offsetTags, setOffsetTags] = useState(listSettings.offsetTags);
-    const [offsetItems, setOffsetItems] = useState(listSettings.offsetItems);
+    const [offsetProducts, setOffsetProducts] = useState(listSettings.offsetProducts);
     const [showModal, setShowModal] = useState(false);
 
     // SUPPORT
@@ -54,13 +60,9 @@ function ProductsList() {
 
         <div className={styles.customCssProperties}>
 
-            {itemsArray.map((item, index) =>
+            {productsArray.map((product, index) =>
 
-                <div key={index} className={styles.itemCard}>
-                    <h4>{item.name}</h4>
-                    <p>Category: {item.category}</p>
-                    <p>Value: ${item.value}</p>
-                </div>
+                <ProductCard key={index} product={product} />
 
             )}
 

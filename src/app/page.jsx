@@ -24,6 +24,7 @@ import LazySection from '../../components/LazySection/LazySection';
 import Gallery from '../../components/Gallery/Gallery';
 import Modal from '../../components/Modal/Modal';
 import HeaderSection from '../../components/HeaderSection/HeaderSection';
+import ProductsList from '../../components/ProductsList/ProductsList';
 
 
 // EXPORT
@@ -44,6 +45,8 @@ export default function HomePage() {
             title="Header Section Title"
             caption="Header Section Caption"
         />
+
+        <ProductsList />
 
         <p className='debug'>Debug class element</p>
 

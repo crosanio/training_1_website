@@ -1,4 +1,4 @@
-const productsArray = [
+const localProductsArray = [
     {
         id: 1,
         category: "shoes",
@@ -43,4 +43,4 @@ const productsArray = [
     },
 ];
 
-export { productsArray };
+export { localProductsArray };

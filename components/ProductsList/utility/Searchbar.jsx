@@ -55,7 +55,7 @@ function Searchbar({ placeholder, setExternalValue, externalValue }) {
             <input
                 type="text"
                 placeholder={placeholder}
-                className={styles.searchbarInput}
+                className={styles.filterInput}
                 value={localValue}
                 onChange={e => setLocalValue(e.target.value)}
             />
@@ -63,6 +63,7 @@ function Searchbar({ placeholder, setExternalValue, externalValue }) {
             {/* RESET BUTTON */}
             <button
                 onClick={() => { setLocalValue(''); setExternalValue(['']); }}
+                className={styles.resetButton}
             >
                 ✖
             </button>

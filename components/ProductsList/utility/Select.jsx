@@ -4,39 +4,33 @@
 
 // UTILITY
 import { memo } from "react";
-import styles from '../src/app/products/ProductsPage.module.css';
 
 
-// COMPONENTS
-import RoundButton from "./RoundButton";
-
-
-// SUPPORT
-const { filterContainer, selectInput, selectOption, } = styles;
+// LOCAL_CSS
+// Parent component CSS import
+import styles from '../ProductsList.module.css';
 
 
 // EXPORT
 function Select({ placeholder, options, value, setValue }) {
 
-    // NOTA: utilizzare solo come Select per filtri di ricerca e non come Field non controllato
-
     return <>
 
-        <div className={filterContainer}>
+        <div className={styles.filterContainer}>
 
             {/* OPTIONS */}
             <select
                 onChange={e => setValue(e.target.value)}
                 value={value}
-                className={selectInput}
+                className={styles.filterInput}
             >
-                <option className={selectOption} value=''>{placeholder || '▼ Filter by..'}</option>
+                <option className={styles.selectOption} value=''>{placeholder || '▼ Filter by..'}</option>
 
                 {options ? options.map((option, index) => (
                     <option
                         key={index}
                         value={option}
-                        className={selectOption}
+                        className={styles.selectOption}
                     >
                         {option}
                     </option>
@@ -49,10 +43,12 @@ function Select({ placeholder, options, value, setValue }) {
             </select>
 
             {/* RESET BUTTON */}
-            <RoundButton
+            <button
                 onClick={() => { setValue('') }}
-                extraClass='roundButtonWarning'
-            />
+                className={styles.resetButton}
+            >
+                ✖
+            </button>
         </div>
     </>
 }

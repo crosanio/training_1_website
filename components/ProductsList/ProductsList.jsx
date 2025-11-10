@@ -15,6 +15,7 @@ import styles from './ProductsList.module.css';
 
 // LOCAL_ASSETS
 import { localProductsArray } from "./utility/localProductsArray";
+import { getUniqueValuesByKey } from "./functions/getUniqueValuesByKey";
 import { getUniqueKeys } from "./functions/getUniqueKeys";
 import { sortBy } from "./functions/sortBy";
 
@@ -25,6 +26,7 @@ import { sortBy } from "./functions/sortBy";
 // COMPONENTS
 import ProductCard from "./utility/ProductCard";
 import Searchbar from "./utility/Searchbar";
+import Select from "./utility/Select";
 
 
 // EXPORT
@@ -33,6 +35,7 @@ function ProductsList({ externalProductsArray }) {
     // SUPPORT
     const productsArray = externalProductsArray || localProductsArray;
     const uniqueKeys = getUniqueKeys(productsArray);
+    const categories = getUniqueValuesByKey(productsArray, 'category');
 
     // Settings
     const listSettings = {
@@ -85,11 +88,21 @@ function ProductsList({ externalProductsArray }) {
 
         <div className={styles.customCssProperties}>
 
-            <Searchbar
-                placeholder="Search products..."
-                setExternalValue={setQuery}
-                externalValue={query}
-            />
+            <div className={styles.filtersSection}>
+                <Searchbar
+                    placeholder="Search products..."
+                    setExternalValue={setQuery}
+                    externalValue={query}
+                />
+
+                <Select
+                    placeholder="▼ Filter by category"
+                    options={categories}
+                    value={selectedCategory}
+                    setValue={setSelectedCategory}
+                />
+            </div>
+
 
             {/* {visibleProducts.map((product, index) => */}
             {productsArray.map((product, index) =>

@@ -1,25 +1,46 @@
 .customCssProperties {
     --input-font-size: 1rem;
+    --spacing-unit: 1rem;
     --input-border-color: blue;
-    --input-padding-unit: 1rem;
+}
+
+.filtersSection {
+    width: 100%;
+    display: flex;
+    gap: var(--spacing-unit);
+    flex-wrap: wrap;
+
+    background-color: rgba(255, 255, 0, 0.151);
 }
 
 .filterContainer {
     cursor: pointer;
     font-size: var(--input-font-size);
     flex-grow: 1;
-    max-width: 45%;
+    max-width: 30%;
     border-radius: 35px;
     border: 2px solid var(--input-border-color);
-    padding: calc(var(--input-padding-unit)* 0.5) calc(var(--input-padding-unit) * 1);
-    padding-left: calc(var(--input-padding-unit)* 1.5);
+    padding: calc(var(--spacing-unit)* 0.5) calc(var(--spacing-unit) * 1);
+    padding-left: calc(var(--spacing-unit)* 1.5);
 
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: var(--input-padding-unit);
+    gap: var(--spacing-unit);
 }
 
-.searchbarInput {
+.filterInput {
     flex-grow: 1;
+}
+
+.selectOption {
+    background-color: rgb(128, 128, 128);
+}
+
+.selectOption:hover {
+    transition: var(--hover-transition);
+}
+
+.resetButton:hover {
+    color: red
 }

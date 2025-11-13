@@ -1,9 +1,8 @@
 // NOTES
 
 /* WARNING:
-This component depends on the existence of the folder "public/Gallery", used to extract the paths of images to render in the grid.
-Move the local folder "/utility/Gallery" to the "/public" folder in the root of the project or use another folder at
-"/public/(folder)" and provide an array of image paths via the prop "externalImgPaths".
+This component depends on the existence of the folder "public/Gallery/(subfolders here)", used to extract the paths of images to render, and group them by folder.
+Wherever this component is used, ensure that the images are stored in "/public/(folder)" and provide the relative array of image paths via the prop "imgPaths".
 */
 
 
@@ -21,12 +20,11 @@ import styles from './Gallery.module.css';
 
 
 // LOCAL_ASSETS
-import { getPaths } from "./functions/getPaths";
 import LazyItem from './utility/LazyItem';
 
 
 // EXPORT
-function Gallery({ externalImgPaths }) {
+function Gallery({ imgPaths }) {
 
     // SUPPORT
     const offsetStep = 6;
@@ -36,7 +34,6 @@ function Gallery({ externalImgPaths }) {
     const [zoomImg, setZoomImg] = useState(null);
 
     // SUPPORT
-    const imgPaths = externalImgPaths || getPaths();
     const visibleImgs = useMemo(() => {
         return imgPaths.slice(0, offset);
     }, [imgPaths, offset]);

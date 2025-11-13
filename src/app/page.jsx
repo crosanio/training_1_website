@@ -27,6 +27,10 @@ import HeaderSection from '../../components/HeaderSection/HeaderSection';
 import ProductsList from '../../components/ProductsList/ProductsList';
 
 
+// SUPPORT
+import galleriesPaths from '../../components/Gallery/utility/galleriesPaths';
+
+
 // EXPORT
 export default function HomePage() {
 
@@ -39,6 +43,9 @@ export default function HomePage() {
     const confirmAction = () => {
         console.log("Modal confirmed action executed.");
     }
+
+    // DEBUG
+    const GalleryExample = galleriesPaths.groupA;
 
     return <>
 
@@ -65,7 +72,7 @@ export default function HomePage() {
             confirmAction={confirmAction}
         /> */}
 
-        {/* <Gallery /> */}
+        <Gallery imgPaths={GalleryExample} />
 
         {/* <Gallery externalImgPaths={['/GalleryFolder/image1.jpg', '/GalleryFolder/image2.png']} /> */}
 

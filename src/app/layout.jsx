@@ -34,7 +34,7 @@ export default function RootLayout({ children }) {
         <html lang="en" className={poppins.className}>
             <head>
                 <meta charSet="UTF-8" />
-                <link rel="icon" type="image/svg+xml" href="/favicon.webp" />
+                {/* <link rel="icon" type="image/svg+xml" href="/favicon.webp" /> */}
                 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
                 <title>{metadata.metaTitle}</title>
                 <meta name="description" content={metadata.metaDescription}></meta>

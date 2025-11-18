@@ -54,7 +54,7 @@ export default function HomePage() {
             caption="Header Section Caption"
         /> */}
 
-        <ProductsList />
+        <ProductsList sortByKeys={['name', 'price', 'category']} />
 
         {/* <p className='debug'>Debug class element</p> */}
 

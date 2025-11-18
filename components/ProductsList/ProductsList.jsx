@@ -1,5 +1,12 @@
 // NOTES
-
+/*
+INSTRUCTIONS:
+- This is a Products List component with sorting and filtering functionalities.
+- Assign an array of products to the `externalProductsArray` prop.
+- Assign the value "true" to the `useFilters` variable to enable filters.
+- If filters are enabled, assign an array of sorting keys to the `sortByKeys` prop: e.g.: `['name', 'price', 'category']`.
+- If sorting is enabled, make sure each chosen Key exists in at least one product in the assigned array of products.
+*/
 
 // READY FOR CLIENT SIDE
 "use client";
@@ -30,7 +37,7 @@ import Select from "./utility/Select";
 
 
 // EXPORT
-function ProductsList({ externalProductsArray }) {
+function ProductsList({ externalProductsArray, sortByKeys }) {
 
     // SUPPORT
     const productsArray = externalProductsArray || localProductsArray;
@@ -38,6 +45,7 @@ function ProductsList({ externalProductsArray }) {
     // Settings
     const elementSettings = {
         useFilters: true,
+        sortingKeys: sortByKeys,
         offsetTags: 5,
         offsetProducts: 5,
         showPagination: true,
@@ -63,43 +71,35 @@ function ProductsList({ externalProductsArray }) {
     const [showModal, setShowModal] = useState(false);
 
     // SUPPORT
+
     const sortArrow = sortDirection === 1 ? '▼' : '▲';
-
-    // Visible Products
-    // const visibleProducts = useMemo(() => {
-    //     let filtered = filterByQuery(productsArray, query);
-    //     filtered = filterByCategory(filtered, selectedCategory);
-    //     filtered = scoreByTags(filtered, selectedTags);
-    //     const sorted = sortProducts(filtered, sortByKey, sortDirection);
-    //     return paginate(sorted, page, elementSettings.productsPerPage);
-    // }, [
-    //     productsArray,
-    //     query,
-    //     selectedCategory,
-    //     selectedTags,
-    //     sortByKey,
-    //     sortDirection,
-    //     page,
-    // ]);
-
-    // SUPPORT
 
     const activeFilters = useMemo(() => {
         const realQueryActive = query.filter(v => v !== "").length > 0;
         const realTagsActive = selectedTags.filter(v => v !== "").length > 0;
+        const defaultSorting = sortByKey === 'name' && sortDirection === 1;
 
         return (
             realQueryActive ||
             selectedCategory !== "" ||
-            realTagsActive
+            realTagsActive ||
+            defaultSorting === false
         );
-    }, [query, selectedCategory, selectedTags]);
+    }, [
+        query,
+        selectedCategory,
+        selectedTags,
+        sortByKey,
+        sortDirection
+    ]);
 
     // Reset Filters
     const resetAll = () => {
-        // setShowFilters(false);
+        setShowFilters(false);
         setShowSorting(false);
         setShowTags(false);
+        setSortByKey('name');
+        setSortDirection(1);
         setQuery([]);
         setSelectedCategory("");
         setSelectedTags([]);
@@ -128,11 +128,6 @@ function ProductsList({ externalProductsArray }) {
         )];
     }, [productsArray]);
 
-    // Allowed Sorting Keys
-    const allowedSortingKeys = useMemo(() => {
-        return ['name', 'price', 'category'];
-    }, []);
-
     // Handle Tag Click
     const handleTagClick = (tag) => {
         if (selectedTags.includes(tag)) {
@@ -147,61 +142,79 @@ function ProductsList({ externalProductsArray }) {
         return selectedTags.includes(tag);
     }
 
-    // DEBUG
-    console.log('Tags:');
-    console.log(tags);
-
     return <>
 
         <div className={styles.customCssProperties}>
 
-            <h3 className={styles.resultsCount}>{productsArray.length} results</h3>
+            {elementSettings.useFilters &&
+                <h3 className={styles.resultsCount}>{productsArray.length} results</h3>
+            }
 
-            {/* LIST SETTINGS */}
-            <div className={styles.container}>
+            {/* SHOW / RESET BUTTONS */}
+            {elementSettings.useFilters &&
+                <div className={styles.container}>
 
-                <button
-                    className={styles.button}
-                    onClick={() => {
-                        const newShowSorting = !showSorting;
-                        setShowSorting(newShowSorting);
-                    }}
-                >
-                    {showSorting ? '▼' : '▶'} Sorting
-                </button>
+                    {sortByKeys && sortByKeys.length > 0 &&
+                        <button
+                            className={styles.button}
+                            onClick={() => {
+                                const newShowSorting = !showSorting;
+                                setShowSorting(newShowSorting);
+                            }}
+                        >
+                            {showSorting ? '▼' : '▶'} Sorting
+                        </button>
+                    }
 
-                <button
-                    className={styles.button}
-                    onClick={() => {
-                        const newShowFilters = !showFilters;
-                        setShowFilters(newShowFilters);
+                    <button
+                        className={styles.button}
+                        onClick={() => {
+                            const newShowFilters = !showFilters;
+                            setShowFilters(newShowFilters);
 
-                        if (newShowFilters === false) {
-                            setShowTags(false);
-                        }
-                    }}
-                >
-                    {showFilters ? '▼' : '▶'} Filters
-                </button>
+                            if (newShowFilters === false) {
+                                setShowTags(false);
+                            }
+                        }}
+                    >
+                        {showFilters ? '▼' : '▶'} Filters
+                    </button>
 
-                <button
-                    className={`${styles.button} ${styles.resetButton} ${activeFilters ? '' : styles.unactiveResetButton}`}
-                    onClick={() => { resetAll(); }}
-                    disabled={!activeFilters}
-                >
-                    <span>✖</span><span>Reset all</span>
-                </button>
+                    <button
+                        className={`${styles.button} ${styles.resetButton} ${activeFilters ? '' : styles.unactiveResetButton}`}
+                        onClick={() => { resetAll(); }}
+                        disabled={!activeFilters}
+                    >
+                        <span>✖</span><span>Reset all</span>
+                    </button>
 
-            </div>
+                </div>
+            }
 
 
             {/* SORTING */}
             {showSorting &&
-                <div className={styles.filtersSection}>
-                    <h3 className="debug">Sorting keys here</h3>
+                <div className={styles.labelsContainer}>
+
+                    {elementSettings.sortingKeys.map((key, index) =>
+
+                        <button
+                            key={index}
+                            className={`${styles.label} ${sortByKey === key ? styles.selectedLabel : ''}`}
+                            onClick={() => {
+                                if (sortByKey === key) {
+                                    setSortDirection(sortDirection * -1);
+                                }
+                                setSortByKey(key);
+                            }}
+                        >
+                            {sortByKey === key ? sortArrow : "⊸"} {key}
+                        </button>
+                    )}
                 </div>
             }
 
+            {/* FILTERS */}
             {showFilters && <>
                 <div className={styles.filtersSection}>
 
@@ -242,34 +255,35 @@ function ProductsList({ externalProductsArray }) {
 
             {/* TAGS LIST */}
             {showTags &&
-                <div className={styles.tagsContainer}>
+                <ul className={styles.labelsContainer}>
                     {tags.slice(0, offsetTags).map((tag, index) =>
-                        <p
+                        <li
                             key={index}
-                            className={styles.tagLabel}
+                            className={`${styles.label} ${isSelectedTag(tag) ? styles.selectedLabel : ''}`}
                             onClick={() => handleTagClick(tag)}
                         >
-                            {tag}
-                        </p>
+                            <p>{tag}</p>
+                        </li>
                     )}
                     {offsetTags < tags.length && (
-                        <button
+                        <li
                             onClick={() => setOffsetTags(offsetTags + elementSettings.offsetTags)}
-                            className={`${styles.tagLabel} ${styles.loadMoreTagsButton}`}
+                            className={`${styles.label} ${styles.loadMoreTagsButton}`}
                         >
                             Show more ✚
-                        </button>
+                        </li>
                     )}
-                </div>}
+                </ul>}
 
 
             {/* PRODUCTS LIST */}
-            {/* {visibleProducts.map((product, index) => */}
-            {productsArray.map((product, index) =>
+            <ul>
+                {productsArray.map((product, index) =>
 
-                <ProductCard key={index} product={product} />
+                    <ProductCard key={index} product={product} />
 
-            )}
+                )}
+            </ul>
 
         </div >
 

@@ -4,7 +4,7 @@
 
 .container {
     margin-bottom: calc(var(--spacing-unit) * 4);
-    border-bottom: 2px solid rgb(68, 68, 68);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
 }
 
 .title {

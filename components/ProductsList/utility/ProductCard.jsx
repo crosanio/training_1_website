@@ -25,11 +25,11 @@ function ProductCard({ product }) {
 
     return <>
 
-        <div className={styles.productCard}>
+        <li className={styles.productCard}>
             <h4>{product.name}</h4>
             <p>Category: {product.category}</p>
             <p>Value: {product.value} €</p>
-        </div>
+        </li>
 
     </>
 }

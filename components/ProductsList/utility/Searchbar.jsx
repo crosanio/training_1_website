@@ -1,7 +1,7 @@
 // NOTES
 // The input "value" is linked to "externalValue" so it can be reset by actions outside the Searchbar.
 // This also allows for the enhanced search function for ARRAYS of STRINGS.
-// To filter by an ARRAY of STRINGS, you need an auxiliary function, "splitQuery," that converts the input string into an ARRAY.
+// This element depends on the "splitQuery" function, which converts the input string into an ARRAY.
 
 
 // READY FOR CLIENT SIDE

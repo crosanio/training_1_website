@@ -8,7 +8,7 @@ import { memo } from "react";
 
 // LOCAL_CSS
 // Parent component CSS import
-import styles from '../ProductsList.module.css';
+import styles from '../../ProductsList.module.css';
 
 
 // EXPORT

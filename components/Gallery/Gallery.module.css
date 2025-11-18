@@ -1,15 +1,27 @@
+/************************************************************************************
+# GALLERY SETTINGS
+************************************************************************************/
+
 .customCssProperties {
     --containerPadding: 4rem;
-    --columns: 3;
     --galleryWidth: 100vw;
-    --maxGalleryWidth: 1200px;
-    --galleryGap: calc(1px + 0.2vw);
     --itemWidth: calc((100% - (var(--columns) - 1) * var(--galleryGap)) / var(--columns));
-    --loadMoreGradient: white;
 
-    /* Decomment if global body background color exists to overwrite default. */
-    --loadMoreGradient: var(--background-primary);
+    /* Customizable properties */
+
+    --columns: 3;
+    /* Number of columns */
+    --galleryGap: calc(1px + 0.2vw);
+    /* Gap between items */
+    --maxGalleryWidth: 1200px;
+    /* Absolute max width of the grid */
 }
+
+
+
+/************************************************************************************
+# STRUCTURE
+************************************************************************************/
 
 .galleryContainer {
     padding-top: var(--containerPadding) 0;
@@ -53,6 +65,10 @@
     display: block;
 }
 
+/************************************************************************************
+# LOAD MORE
+************************************************************************************/
+
 .loadMoreContainer {
     position: absolute;
     width: 100%;
@@ -72,6 +88,10 @@
     background-color: rgb(231, 231, 231);
     border-radius: 50px;
 }
+
+/************************************************************************************
+# OVERLAY ZOOMED IMAGE
+************************************************************************************/
 
 .zoomOverlay {
     position: fixed;
@@ -115,6 +135,12 @@
     border-radius: 100%;
     padding-top: 1px;
 }
+
+
+
+/************************************************************************************
+# MEDIAQUERY
+************************************************************************************/
 
 @media (max-width: 500px) {
     .fullwidthGrid {

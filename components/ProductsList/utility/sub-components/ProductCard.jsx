@@ -11,7 +11,7 @@ import { memo } from "react";
 
 // LOCAL_CSS
 // Parent component CSS import
-import styles from '../ProductsList.module.css';
+import styles from '../../ProductsList.module.css';
 
 
 // SUPPORT
@@ -28,7 +28,13 @@ function ProductCard({ product }) {
         <li className={styles.productCard}>
             <h4>{product.name}</h4>
             <p>Category: {product.category}</p>
-            <p>Value: {product.value} €</p>
+            <p>Value: {product.price} €</p>
+
+            <div className={styles.labelsContainer}>
+                {product.tags.map((tag, index) => (
+                    <p key={index} className={styles.label}>{tag}</p>
+                ))}
+            </div>
         </li>
 
     </>

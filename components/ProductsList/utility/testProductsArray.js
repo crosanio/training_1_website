@@ -1,46 +1,46 @@
-const localProductsArray = [
+const testProductsArray = [
     {
         id: 1,
         category: "shoes",
-        name: "Item One",
-        price: 10,
+        name: "Aaa",
+        price: 4,
         tags: ["crossfit", "running", "training"]
     },
     {
         id: 2,
-        category: "accessories",
-        name: "Item Two",
-        price: 20,
+        category: "tools",
+        name: "Bbb",
+        price: 2,
         tags: ["homewear", "fitness", "yoga", "selfcare", "meditation"]
     },
     {
         id: 3,
         category: "sport",
-        name: "Item Three",
-        price: 30,
+        name: "Ccc",
+        price: 1,
         tags: ["weightlifting", "crossfit", "strength", "conditioning"]
     },
     {
         id: 4,
         category: "shoes",
-        name: "Item Four",
-        price: 40,
+        name: "Ddd",
+        price: 6,
         tags: ["outdoor", "trekking", "hiking"]
     },
     {
         id: 5,
         category: "accessories",
-        name: "Item Five",
-        price: 50,
+        name: "Eee",
+        price: 3,
         tags: ["fitness", "swatches", "running"]
     },
     {
         id: 6,
         category: "accessories",
-        name: "Item Six",
-        price: 60,
+        name: "Fff",
+        price: 5,
         tags: ["bottle", "gym", "hydration"]
     },
 ];
 
-export { localProductsArray };
+export { testProductsArray };

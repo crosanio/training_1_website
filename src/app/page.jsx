@@ -29,6 +29,7 @@ import ProductsList from '../../components/ProductsList/ProductsList';
 
 // SUPPORT
 import galleriesPaths from '../../components/Gallery/utility/galleriesPaths';
+import { testProductsArray } from '../../components/ProductsList/utility/testProductsArray';
 
 
 // EXPORT
@@ -54,7 +55,11 @@ export default function HomePage() {
             caption="Header Section Caption"
         /> */}
 
-        <ProductsList sortByKeys={['name', 'price', 'category']} />
+        <ProductsList
+            productsArray={testProductsArray}
+            // useFilters={false}
+            sortByKeys={['name', 'price', 'category']}
+        />
 
         {/* <p className='debug'>Debug class element</p> */}
 

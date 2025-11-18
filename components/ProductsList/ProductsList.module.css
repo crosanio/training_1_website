@@ -6,13 +6,26 @@
     --buttons-border-px: 1px;
     --interactive-item-padding-x: 0px;
     --interactive-item-padding-y: 7px;
-    --interaction-color: rgb(226, 43, 67);
+    --interaction-color: rgb(130, 230, 255);
+    --hover-transition: all 0.5s ease;
+
+    /* BACKGROUND TRANSPARENCY SHADE */
+    --white-transparency-07: rgba(255, 255, 255, 0.07);
+    --white-transparency-10: rgba(255, 255, 255, 0.1);
+    --white-transparency-20: rgba(255, 255, 255, 0.2);
+    --white-transparency-30: rgba(255, 255, 255, 0.3);
 }
+
+
+
+/************************************************************************************
+# GENERAL
+************************************************************************************/
 
 .resultsCount {
     font-size: calc(var(--input-font-size) * 2);
     color: white;
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: var(--white-transparency-10);
     margin-bottom: calc(var(--spacing-unit) * 2);
     font-weight: 500;
     padding: calc(var(--spacing-unit)* 0.5) calc(var(--spacing-unit) * 1);
@@ -28,7 +41,7 @@
     flex-wrap: wrap;
     padding-bottom: calc(var(--spacing-unit) * 2);
     margin-bottom: var(--spacing-unit);
-    border-bottom: 2px dotted rgba(255, 255, 255, 0.2);
+    border-bottom: 2px dotted var(--white-transparency-20);
 }
 
 .button {
@@ -45,9 +58,15 @@
     max-width: 32%;
 }
 
+
+
+/************************************************************************************
+# RESET BUTTON
+************************************************************************************/
+
 .resetButton {
     background-color: rgba(226, 43, 67, 0.05);
-    border: 1px solid rgb(226, 43, 67);
+    border: var(--buttons-border-px) solid rgb(226, 43, 67);
     color: white;
     display: flex;
     justify-content: center;
@@ -55,15 +74,24 @@
     gap: calc(var(--spacing-unit) * .5);
 }
 
-.resetButton.unactiveResetButton {
+.resetButton.inactiveResetButton {
     background-color: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: var(--buttons-border-px) solid var(--white-transparency-30);
     cursor: not-allowed;
+    color: var(--white-transparency-30);
 }
 
-.resetButton.unactiveResetButton span {
-    color: rgba(255, 255, 255, 0.3);
+.h4 {
+    font-size: calc(var(--input-font-size) * 1.5);
+    margin-bottom: var(--spacing-unit);
+    display: block;
 }
+
+
+
+/************************************************************************************
+# FILTERS
+************************************************************************************/
 
 .filtersSection {
     width: 100%;
@@ -73,7 +101,7 @@
     flex-wrap: wrap;
     padding-bottom: var(--spacing-unit);
     margin-bottom: var(--spacing-unit);
-    border-bottom: 2px dotted rgba(255, 255, 255, 0.2);
+    border-bottom: 2px dotted var(--white-transparency-20);
 }
 
 .filterContainer {
@@ -81,7 +109,7 @@
     font-size: var(--input-font-size);
     font-weight: var(--input-font-weight);
     border-radius: 35px;
-    border: 1px solid var(--input-color);
+    border: var(--buttons-border-px) solid var(--input-color);
     padding: calc(var(--spacing-unit)* 0.5) calc(var(--spacing-unit) * 1);
     padding-left: calc(var(--spacing-unit)* 1.3);
     display: flex;
@@ -99,13 +127,19 @@
 }
 
 .filterInput::placeholder {
-    color: rgba(255, 255, 255, 0.3);
+    color: var(--white-transparency-30);
     font-weight: 400;
 }
 
 .selectOption {
     color: rgb(68, 68, 68);
 }
+
+
+
+/************************************************************************************
+# LABELS
+************************************************************************************/
 
 .labelsContainer {
     width: 100%;
@@ -114,12 +148,12 @@
     flex-wrap: wrap;
     padding-bottom: var(--spacing-unit);
     margin-bottom: var(--spacing-unit);
-    border-bottom: 2px dotted rgba(255, 255, 255, 0.2);
+    border-bottom: 2px dotted var(--white-transparency-20);
 }
 
 .label {
     font-size: calc(var(--input-font-size) * .8);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: var(--buttons-border-px) solid var(--white-transparency-20);
     border-radius: 50px;
     padding: calc(var(--spacing-unit) * 0.2) calc(var(--spacing-unit) * 1);
     cursor: pointer;
@@ -134,16 +168,58 @@
     font-size: inherit;
 }
 
-.label:hover,
-.selectedLabel {
-    background-color: rgba(255, 255, 255, 0.08);
+.label:hover {
+    background-color: var(--white-transparency-07);
+    border: var(--buttons-border-px) dashed var(--interaction-color);
+    transition: var(--hover-transition);
+}
+
+.label.selectedLabel {
+    background-color: var(--white-transparency-07);
+    border: var(--buttons-border-px) solid var(--interaction-color);
 }
 
 .loadMoreTagsButton {
     border-color: var(--input-color);
 }
 
+
+
+/************************************************************************************
+# PRODUCTS
+************************************************************************************/
+
+.productsList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-unit);
+    margin-top: calc(var(--spacing-unit) * 2);
+}
+
+.productCard {
+    width: 100%;
+    background-color: rgba(137, 43, 226, 0.37);
+}
+
+.zeroResults {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: calc(var(--spacing-unit) * 4);
+}
+
+
+
+/************************************************************************************
+# MEDIAQUERY
+************************************************************************************/
+
 @media (max-width: 768px) {
+
+    .h4 {
+        font-size: calc(var(--input-font-size) * 1.2);
+        text-align: center;
+    }
 
     .resultsCount {
         font-size: calc(var(--input-font-size) * 1.5);
@@ -152,6 +228,7 @@
 
     .labelsContainer {
         gap: calc(var(--spacing-unit) * 0.5);
+        justify-content: center;
     }
 
     .button,

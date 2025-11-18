@@ -46,7 +46,7 @@ function Gallery({ imgPaths }) {
     }, [imgPaths, offset]);
 
 
-    // // USE-EFFECT
+    // USE-EFFECT
     useEffect(() => {
         if (zoomImg) {
             document.body.style.overflow = "hidden";
@@ -59,8 +59,7 @@ function Gallery({ imgPaths }) {
     }, [zoomImg]);
 
     // DEBUG
-    console.log("galleriesPaths:");
-    console.log(galleriesPaths);
+    // console.log("[ Gallery.jsx ] galleriesPaths:"); console.log(galleriesPaths);
 
     return <>
 

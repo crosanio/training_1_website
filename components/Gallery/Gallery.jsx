@@ -1,8 +1,14 @@
 // NOTES
 
-/* WARNING:
-This component depends on the existence of the folder "public/Gallery/(subfolders here)", used to extract the paths of images to render, and group them by folder.
-Wherever this component is used, ensure that the images are stored in "/public/(folder)" and provide the relative array of image paths via the prop "imgPaths".
+/*
+WARNING:
+This component depends on the existence of the folder "public/Gallery/(sub-folders here)", used to extract the paths of images to render, and group them by folder.
+Wherever this component is used, ensure that the images are stored in "/public/Gallery/(folder)" and provide the relative array of image paths via the prop "imgPaths".
+
+INSTRUCTIONS:
+1. Import this component into your desired page or component.
+2. Import "galleriesPaths" from this component's folder into the desired page to access available arrays of image paths.
+3. Pass the chosen array as the "imgPaths" prop.
 */
 
 
@@ -21,6 +27,7 @@ import styles from './Gallery.module.css';
 
 // LOCAL_ASSETS
 import LazyItem from './utility/LazyItem';
+import galleriesPaths from './utility/galleriesPaths';
 
 
 // EXPORT
@@ -50,6 +57,10 @@ function Gallery({ imgPaths }) {
             document.body.style.overflow = "";
         };
     }, [zoomImg]);
+
+    // DEBUG
+    console.log("galleriesPaths:");
+    console.log(galleriesPaths);
 
     return <>
 

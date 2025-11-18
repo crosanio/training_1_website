@@ -4,42 +4,42 @@ const localProductsArray = [
         category: "shoes",
         name: "Item One",
         value: 10,
-        tags: ["crossfit", "running"]
+        tags: ["crossfit", "running", "training"]
     },
     {
         id: 2,
         category: "accessories",
         name: "Item Two",
         value: 20,
-        tags: ["homewear", "fitness"]
+        tags: ["homewear", "fitness", "yoga", "selfcare", "meditation"]
     },
     {
         id: 3,
         category: "sport",
         name: "Item Three",
         value: 30,
-        tags: ["weightlifting", "crossfit"]
+        tags: ["weightlifting", "crossfit", "strength", "conditioning"]
     },
     {
         id: 4,
         category: "shoes",
         name: "Item Four",
         value: 40,
-        tags: ["outdoor", "trekking"]
+        tags: ["outdoor", "trekking", "hiking"]
     },
     {
         id: 5,
         category: "accessories",
         name: "Item Five",
         value: 50,
-        tags: ["fitness", "swatches"]
+        tags: ["fitness", "swatches", "running"]
     },
     {
         id: 6,
         category: "accessories",
         name: "Item Six",
         value: 60,
-        tags: ["bottle", "gym"]
+        tags: ["bottle", "gym", "hydration"]
     },
 ];
 

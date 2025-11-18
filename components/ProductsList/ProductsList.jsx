@@ -34,15 +34,12 @@ function ProductsList({ externalProductsArray }) {
 
     // SUPPORT
     const productsArray = externalProductsArray || localProductsArray;
-    const uniqueKeys = getUniqueKeys(productsArray);
-    const categories = getUniqueValuesByKey(productsArray, 'category');
-    const tags = getUniqueValuesByKey(productsArray, 'tags');
 
     // Settings
     const elementSettings = {
         useFilters: true,
         offsetTags: 5,
-        offsetProducts: 10,
+        offsetProducts: 5,
         showPagination: true,
         productsPerPage: 20,
     }
@@ -87,15 +84,72 @@ function ProductsList({ externalProductsArray }) {
 
     // SUPPORT
 
+    const activeFilters = useMemo(() => {
+        const realQueryActive = query.filter(v => v !== "").length > 0;
+        const realTagsActive = selectedTags.filter(v => v !== "").length > 0;
+
+        return (
+            realQueryActive ||
+            selectedCategory !== "" ||
+            realTagsActive
+        );
+    }, [query, selectedCategory, selectedTags]);
+
     // Reset Filters
     const resetAll = () => {
-        setShowFilters(false);
+        // setShowFilters(false);
         setShowSorting(false);
         setShowTags(false);
         setQuery([]);
         setSelectedCategory("");
         setSelectedTags([]);
+        setOffsetProducts(elementSettings.offsetProducts);
+        setOffsetTags(elementSettings.offsetTags);
+        setPage(1);
     }
+
+    // Derived Values
+    const uniqueKeys = useMemo(() => {
+        return getUniqueKeys(productsArray);
+    }, [productsArray]);
+
+    const categories = useMemo(() => {
+        return getUniqueValuesByKey(productsArray, 'category');
+    }, [productsArray]);
+    const tags = useMemo(() => {
+        return [...new Set(
+            getUniqueValuesByKey(productsArray, "tags")
+                .flatMap(item =>
+                    Array.isArray(item)
+                        ? item
+                        : String(item).split(",")
+                )
+                .map(tag => tag.trim())
+        )];
+    }, [productsArray]);
+
+    // Allowed Sorting Keys
+    const allowedSortingKeys = useMemo(() => {
+        return ['name', 'price', 'category'];
+    }, []);
+
+    // Handle Tag Click
+    const handleTagClick = (tag) => {
+        if (selectedTags.includes(tag)) {
+            setSelectedTags(selectedTags.filter(t => t !== tag));
+        } else {
+            setSelectedTags([...selectedTags, tag]);
+        }
+    }
+
+    // Selected Tags
+    const isSelectedTag = (tag) => {
+        return selectedTags.includes(tag);
+    }
+
+    // DEBUG
+    console.log('Tags:');
+    console.log(tags);
 
     return <>
 
@@ -107,10 +161,13 @@ function ProductsList({ externalProductsArray }) {
             <div className={styles.container}>
 
                 <button
-                    className={`${styles.button} ${styles.resetButton}`}
-                    onClick={() => { resetAll(); }}
+                    className={styles.button}
+                    onClick={() => {
+                        const newShowSorting = !showSorting;
+                        setShowSorting(newShowSorting);
+                    }}
                 >
-                    <span>✖</span><span>Reset all</span>
+                    {showSorting ? '▼' : '▶'} Sorting
                 </button>
 
                 <button
@@ -128,69 +185,82 @@ function ProductsList({ externalProductsArray }) {
                 </button>
 
                 <button
-                    className={styles.button}
-                    onClick={() => {
-                        const newShowSorting = !showSorting;
-                        setShowSorting(newShowSorting);
-                    }}
+                    className={`${styles.button} ${styles.resetButton} ${activeFilters ? '' : styles.unactiveResetButton}`}
+                    onClick={() => { resetAll(); }}
+                    disabled={!activeFilters}
                 >
-                    {showSorting ? '▼' : '▶'} Sorting
+                    <span>✖</span><span>Reset all</span>
                 </button>
 
             </div>
 
-            {/* FILTERS + SORTING */}
-            <div className={styles.container}>
 
-            </div>
+            {/* SORTING */}
+            {showSorting &&
+                <div className={styles.filtersSection}>
+                    <h3 className="debug">Sorting keys here</h3>
+                </div>
+            }
 
-            {/* LIST SETTINGS */}
-            <div className={styles.listSettings} >
+            {showFilters && <>
+                <div className={styles.filtersSection}>
 
+                    <Searchbar
+                        placeholder="Search"
+                        setExternalValue={setQuery}
+                        externalValue={query}
+                    />
 
-                {/* FILTERS */}
-                {showFilters &&
-                    <div className={styles.filtersSection}>
+                    <Select
+                        placeholder="▶ Category"
+                        options={categories}
+                        value={selectedCategory}
+                        setValue={setSelectedCategory}
+                    />
 
-                        {/* QUERY */}
-                        <Searchbar
-                            placeholder="Search products"
-                            setExternalValue={setQuery}
-                            externalValue={query}
-                        />
+                    <div className={styles.filterContainer}>
+                        <p
+                            className={styles.filterInput}
+                            onClick={() => {
+                                setShowTags(!showTags);
+                                setOffsetTags(elementSettings.offsetTags);
+                            }}
+                        >
+                            {showTags ? '▼' : '▶'} Tags {selectedTags.length > 0 ? `〈${selectedTags.length}〉` : ''}
+                        </p>
 
-                        {/* CATEGORY */}
-                        <Select
-                            placeholder="▶ Filter by category"
-                            options={categories}
-                            value={selectedCategory}
-                            setValue={setSelectedCategory}
-                        />
-
-                        {/* SHOW TAGS */}
-                        <div className={styles.filterContainer}>
-                            <p className={styles.filterInput} onClick={() => setShowTags(!showTags)}>
-                                {showTags ? '▼' : '▶'} Filter by Tags {selectedTags.length > 0 ? `〈${selectedTags.length}〉` : ''}
-                            </p>
-
-                            <button onClick={() => { setSelectedTags([]); setShowTags(false); }}>
-                                ✖
-                            </button>
-                        </div>
-
-                        {/* TAGS LIST */}
-                        {showTags && <p>tags list</p>}
+                        <button onClick={() => { setSelectedTags([]); setShowTags(false); }}>
+                            ✖
+                        </button>
                     </div>
-                }
 
-                {/* SORTING */}
-                {showSorting &&
-                    <div className={styles.filtersSection}>
-                        <h3 className="debug">Sorting keys here</h3>
-                    </div>
-                }
 
-            </div>
+                </div>
+
+            </>
+            }
+
+            {/* TAGS LIST */}
+            {showTags &&
+                <div className={styles.tagsContainer}>
+                    {tags.slice(0, offsetTags).map((tag, index) =>
+                        <p
+                            key={index}
+                            className={styles.tagLabel}
+                            onClick={() => handleTagClick(tag)}
+                        >
+                            {tag}
+                        </p>
+                    )}
+                    {offsetTags < tags.length && (
+                        <button
+                            onClick={() => setOffsetTags(offsetTags + elementSettings.offsetTags)}
+                            className={`${styles.tagLabel} ${styles.loadMoreTagsButton}`}
+                        >
+                            Show more ✚
+                        </button>
+                    )}
+                </div>}
 
 
             {/* PRODUCTS LIST */}

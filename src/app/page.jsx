@@ -62,44 +62,45 @@ export default function HomePage() {
 
         {/* <ComponentTemplate /> */}
 
-        {/* <button className='button' onClick={() => setVisibility(true)}>Open Modal</button> */}
+        {/* <>
+            <button className='button' onClick={() => setVisibility(true)}>Open Modal</button>
+            <Modal
+                visibility={visibility}
+                setVisibility={setVisibility}
+                title="Modal Title"
+                text="This is the modal content. Lorem ipsum dolor si amet, consectetur adipiscing elit.  Lorem ipsum dolor si amet, consectetur adipiscing elit.  Lorem ipsum dolor si amet, consectetur adipiscing elit.  Lorem ipsum dolor si amet, consectetur adipiscing elit.  Lorem ipsum dolor si amet, consectetur adipiscing elit.  Lorem ipsum dolor si amet, consectetur adipiscing elit.  Lorem ipsum dolor si amet, consectetur adipiscing elit.  Lorem ipsum dolor si amet, consectetur adipiscing elit.  Lorem ipsum dolor si amet, consectetur adipiscing elit.  Lorem ipsum dolor si amet, consectetur adipiscing elit.  Lorem ipsum dolor si amet, consectetur adipiscing elit.  Lorem ipsum dolor si amet, consectetur adipiscing elit.  Lorem ipsum dolor si amet, consectetur adipiscing elit.  Lorem ipsum dolor si amet, consectetur adipiscing elit.  Lorem ipsum dolor si amet, consectetur adipiscing elit."
+                confirmAction={confirmAction}
+            />
+        </> */}
 
-        {/* <Modal
-            visibility={visibility}
-            setVisibility={setVisibility}
-            title="Modal Title"
-            text="This is the modal content. Lorem ipsum dolor si amet, consectetur adipiscing elit.  Lorem ipsum dolor si amet, consectetur adipiscing elit.  Lorem ipsum dolor si amet, consectetur adipiscing elit.  Lorem ipsum dolor si amet, consectetur adipiscing elit.  Lorem ipsum dolor si amet, consectetur adipiscing elit.  Lorem ipsum dolor si amet, consectetur adipiscing elit.  Lorem ipsum dolor si amet, consectetur adipiscing elit.  Lorem ipsum dolor si amet, consectetur adipiscing elit.  Lorem ipsum dolor si amet, consectetur adipiscing elit.  Lorem ipsum dolor si amet, consectetur adipiscing elit.  Lorem ipsum dolor si amet, consectetur adipiscing elit.  Lorem ipsum dolor si amet, consectetur adipiscing elit.  Lorem ipsum dolor si amet, consectetur adipiscing elit.  Lorem ipsum dolor si amet, consectetur adipiscing elit.  Lorem ipsum dolor si amet, consectetur adipiscing elit."
-            confirmAction={confirmAction}
-        /> */}
+        {/* <Gallery imgPaths={GalleryExample} /> */}
 
-        <Gallery imgPaths={GalleryExample} />
+        {/* <>
+            <LazySection>
+                <h3>Lazy Loaded Content 1</h3>
+                <p>This content is only visible when it enters the viewport.</p>
+            </LazySection>
 
-        {/* <Gallery externalImgPaths={['/GalleryFolder/image1.jpg', '/GalleryFolder/image2.png']} /> */}
+            <LazySection>
+                <h3>Lazy Loaded Content 2</h3>
+                <p>This content is only visible when it enters the viewport.</p>
+            </LazySection>
 
-        {/* <LazySection>
-            <h3>Lazy Loaded Content 1</h3>
-            <p>This content is only visible when it enters the viewport.</p>
-        </LazySection>
+            <LazySection>
+                <h3>Lazy Loaded Content 3</h3>
+                <p>This content is only visible when it enters the viewport.</p>
+            </LazySection>
 
-        <LazySection>
-            <h3>Lazy Loaded Content 2</h3>
-            <p>This content is only visible when it enters the viewport.</p>
-        </LazySection>
+            <LazySection>
+                <h3>Lazy Loaded Content 4</h3>
+                <p>This content is only visible when it enters the viewport.</p>
+            </LazySection>
 
-        <LazySection>
-            <h3>Lazy Loaded Content 3</h3>
-            <p>This content is only visible when it enters the viewport.</p>
-        </LazySection>
-
-        <LazySection>
-            <h3>Lazy Loaded Content 4</h3>
-            <p>This content is only visible when it enters the viewport.</p>
-        </LazySection>
-
-        <LazySection>
-            <h3>Lazy Loaded Content 5</h3>
-            <p>This content is only visible when it enters the viewport.</p>
-        </LazySection> */}
+            <LazySection>
+                <h3>Lazy Loaded Content 5</h3>
+                <p>This content is only visible when it enters the viewport.</p>
+            </LazySection>
+        </> */}
 
     </>
 }

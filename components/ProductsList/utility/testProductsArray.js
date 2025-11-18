@@ -1,46 +1,34 @@
 const testProductsArray = [
-    {
-        id: 1,
-        category: "shoes",
-        name: "Aaa",
-        price: 4,
-        tags: ["crossfit", "running", "training"]
-    },
-    {
-        id: 2,
-        category: "tools",
-        name: "Bbb",
-        price: 2,
-        tags: ["homewear", "fitness", "yoga", "selfcare", "meditation"]
-    },
-    {
-        id: 3,
-        category: "sport",
-        name: "Ccc",
-        price: 1,
-        tags: ["weightlifting", "crossfit", "strength", "conditioning"]
-    },
-    {
-        id: 4,
-        category: "shoes",
-        name: "Ddd",
-        price: 6,
-        tags: ["outdoor", "trekking", "hiking"]
-    },
-    {
-        id: 5,
-        category: "accessories",
-        name: "Eee",
-        price: 3,
-        tags: ["fitness", "swatches", "running"]
-    },
-    {
-        id: 6,
-        category: "accessories",
-        name: "Fff",
-        price: 5,
-        tags: ["bottle", "gym", "hydration"]
-    },
+    { id: 1, category: "electronics", name: "Aaa1", price: 7, tags: ["eco", "durable", "premium", "compact"] },
+    { id: 2, category: "clothing", name: "Bbb2", price: 3, tags: ["trendy", "summer"] },
+    { id: 3, category: "outdoor", name: "Ccc3", price: 5, tags: ["waterproof", "durable", "premium"] },
+    { id: 4, category: "home", name: "Ddd4", price: 2, tags: ["eco", "compact", "comfortable"] },
+    { id: 5, category: "beauty", name: "Eee5", price: 6, tags: ["premium", "trendy", "discount"] },
+    { id: 6, category: "gadgets", name: "Fff6", price: 4, tags: ["lightweight", "durable"] },
+    { id: 7, category: "books", name: "Aaa7", price: 8, tags: ["trendy", "eco", "premium"] },
+    { id: 8, category: "electronics", name: "Bbb8", price: 3, tags: ["waterproof", "compact"] },
+    { id: 9, category: "clothing", name: "Ccc9", price: 2, tags: ["summer", "trendy"] },
+    { id: 10, category: "outdoor", name: "Ddd10", price: 5, tags: ["durable", "lightweight"] },
+    { id: 11, category: "home", name: "Eee11", price: 7, tags: ["eco", "premium", "professional"] },
+    { id: 12, category: "beauty", name: "Fff12", price: 4, tags: ["trendy", "lightweight"] },
+    { id: 13, category: "gadgets", name: "Aaa13", price: 6, tags: ["compact", "durable"] },
+    { id: 14, category: "books", name: "Bbb14", price: 1, tags: ["eco", "premium"] },
+    { id: 15, category: "electronics", name: "Ccc15", price: 9, tags: ["durable", "trendy", "lightweight"] },
+    { id: 16, category: "clothing", name: "Ddd16", price: 2, tags: ["summer", "premium"] },
+    { id: 17, category: "outdoor", name: "Eee17", price: 3, tags: ["eco", "durable"] },
+    { id: 18, category: "home", name: "Fff18", price: 5, tags: ["trendy", "compact"] },
+    { id: 19, category: "beauty", name: "Aaa19", price: 4, tags: ["premium", "lightweight"] },
+    { id: 20, category: "gadgets", name: "Bbb20", price: 8, tags: ["durable", "eco"] },
+    { id: 21, category: "books", name: "Ccc21", price: 6, tags: ["trendy", "fashion", "super", "premium"] },
+    { id: 22, category: "electronics", name: "Ddd22", price: 2, tags: ["compact", "waterproof"] },
+    { id: 23, category: "clothing", name: "Eee23", price: 7, tags: ["summer", "lightweight"] },
+    { id: 24, category: "outdoor", name: "Fff24", price: 5, tags: ["durable", "eco"] },
+    { id: 25, category: "home", name: "Aaa25", price: 3, tags: ["premium", "trendy"] },
+    { id: 26, category: "beauty", name: "Bbb26", price: 4, tags: ["lightweight", "eco"] },
+    { id: 27, category: "gadgets", name: "Ccc27", price: 6, tags: ["compact", "durable", "trendy"] },
+    { id: 28, category: "books", name: "Ddd28", price: 2, tags: ["premium", "eco", "great"] },
+    { id: 29, category: "electronics", name: "Eee29", price: 9, tags: ["lightweight", "durable"] },
+    { id: 30, category: "clothing", name: "Fff30", price: 1, tags: ["summer", "trendy", "eco"] }
 ];
 
 export { testProductsArray };

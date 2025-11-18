@@ -50,23 +50,27 @@ export default function HomePage() {
 
     return <>
 
-        {/* <HeaderSection
-            title="Header Section Title"
-            caption="Header Section Caption"
-        /> */}
+        {/* HEADER SECTION */}
+        {/* <HeaderSection title="Header Section Title" caption="Header Section Caption" /> */}
 
-        <ProductsList
-            productsArray={testProductsArray}
-            // useFilters={false}
-            sortByKeys={['name', 'price', 'category']}
-        />
+        {/* PRODUCTS LIST */}
+        {/* Simple list */}
+        {/* <ProductsList productsArray={testProductsArray} sortByKeys={['name', 'price', 'category']} /> */}
+        {/* Simple list // Disabled filters */}
+        {/* <ProductsList productsArray={testProductsArray} useFilters={false} sortByKeys={['name', 'price', 'category']} /> */}
+        {/* Paginated list */}
+        <ProductsList productsArray={testProductsArray} /* useFilters={false} */ sortByKeys={['name', 'price', 'category']} usePagination={true} />
 
+        {/* DEBUG CLASS */}
         {/* <p className='debug'>Debug class element</p> */}
 
+        {/* CONTEXT DATA */}
         {/* <p className='debug'>{contextMainValue}</p> */}
 
+        {/* COMPONENT TEMPLATE */}
         {/* <ComponentTemplate /> */}
 
+        {/* MODAL */}
         {/* <>
             <button className='button' onClick={() => setVisibility(true)}>Open Modal</button>
             <Modal
@@ -78,8 +82,10 @@ export default function HomePage() {
             />
         </> */}
 
+        {/* GALLERY */}
         {/* <Gallery imgPaths={GalleryExample} /> */}
 
+        {/* LAZY SECTIONS */}
         {/* <>
             <LazySection>
                 <h3>Lazy Loaded Content 1</h3>

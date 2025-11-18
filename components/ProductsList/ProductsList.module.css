@@ -168,13 +168,13 @@
     font-size: inherit;
 }
 
-.label:hover {
+.labelsContainer .label:hover {
     background-color: var(--white-transparency-07);
     border: var(--buttons-border-px) dashed var(--interaction-color);
     transition: var(--hover-transition);
 }
 
-.label.selectedLabel {
+.labelsContainer .label.selectedLabel {
     background-color: var(--white-transparency-07);
     border: var(--buttons-border-px) solid var(--interaction-color);
 }

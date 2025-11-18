@@ -1,3 +1,10 @@
+// NOTES
+/*
+- This component displays a list of products with filtering and sorting capabilities.
+- By editing the "elementSettings" object, you can customize the behavior of the component, like pagination, products per page, and more.
+*/
+
+
 // READY FOR CLIENT SIDE
 "use client";
 
@@ -21,20 +28,20 @@ import Select from "./utility/sub-components/Select";
 
 
 // EXPORT
-function ProductsList({ productsArray, useFilters, sortByKeys }) {
+function ProductsList({ productsArray, sortByKeys, useFilters, usePagination }) {
 
     // SUPPORT
-    const uniqueKeys = useMemo(() => getUniqueKeys(productsArray), [productsArray]);
-    const allowedSortKeys = useMemo(() => getAllowedSortKeys(sortByKeys, uniqueKeys), [sortByKeys, uniqueKeys]);
+    const uniqueKeys = getUniqueKeys(productsArray);
+    const allowedSortKeys = getAllowedSortKeys(sortByKeys, uniqueKeys);
 
     // Settings
     const elementSettings = {
-        useFilters: useFilters === false ? false : true,
+        useFilters: useFilters !== false,
         sortingKeys: allowedSortKeys || ["name"],
-        offsetTags: 10,
+        offsetTags: 5,
         offsetProducts: 5,
+        usePagination: usePagination !== false,
         productsPerPage: 20,
-        showPagination: true
     };
 
     // USE-STATE
@@ -49,16 +56,17 @@ function ProductsList({ productsArray, useFilters, sortByKeys }) {
     const [showTags, setShowTags] = useState(false);
     const [offsetTags, setOffsetTags] = useState(elementSettings.offsetTags);
 
+    const [offsetProducts, setOffsetProducts] = useState(elementSettings.offsetProducts);
+
     const [page, setPage] = useState(1);
 
     // SUPPORT
 
     // Derived values
-    const categories = useMemo(() => {
-        return getUniqueValuesByKey(productsArray, "category");
-    }, [productsArray]);
+    const categories = useMemo(() => getUniqueValuesByKey(productsArray, "category"), [productsArray]);
 
     const tags = useMemo(() => {
+        // Flatten tags arrays, split strings by comma, trim spaces, remove duplicates and sort
         return [...new Set(
             getUniqueValuesByKey(productsArray, "tags")
                 .flatMap(item => Array.isArray(item) ? item : String(item).split(","))
@@ -106,6 +114,7 @@ function ProductsList({ productsArray, useFilters, sortByKeys }) {
     const sortedProducts = useMemo(() => {
         const list = [...filteredProducts];
 
+        // Sorting logic
         list.sort((a, b) => {
             const aVal = a?.[sortByKey];
             const bVal = b?.[sortByKey];
@@ -133,8 +142,38 @@ function ProductsList({ productsArray, useFilters, sortByKeys }) {
         return list;
     }, [filteredProducts, sortByKey, sortDirection]);
 
-    // SUPPORT
+    // Sort direction arrow
     const sortArrow = sortDirection === 0 ? "▲" : "▼";
+
+    // Paginated products
+    const paginatedProducts = useMemo(() => {
+        if (!elementSettings.showPagination) return sortedProducts;
+
+        const start = (page - 1) * elementSettings.productsPerPage;
+        const end = start + elementSettings.productsPerPage;
+        return sortedProducts.slice(start, end);
+    }, [sortedProducts, page, elementSettings.showPagination, elementSettings.productsPerPage]);
+
+    const totalPages = Math.ceil(sortedProducts.length / elementSettings.productsPerPage);
+
+    const paginationNumbers = useMemo(() => {
+        if (!elementSettings.showPagination || totalPages <= 1) return [];
+
+        const numbers = [];
+
+        // Previous two pages
+        if (page - 2 > 0) numbers.push(page - 2);
+        if (page - 1 > 0) numbers.push(page - 1);
+
+        // Current page
+        numbers.push(page);
+
+        // Next two pages
+        if (page + 1 <= totalPages) numbers.push(page + 1);
+        if (page + 2 <= totalPages) numbers.push(page + 2);
+
+        return numbers;
+    }, [page, totalPages, elementSettings.showPagination]);
 
     // Handle tag click
     const handleTagClick = (tag) => {
@@ -147,7 +186,7 @@ function ProductsList({ productsArray, useFilters, sortByKeys }) {
 
     const isSelectedTag = tag => selectedTags.includes(tag);
 
-    // Active filters boolean
+    // Active filters (boolean)
     const activeFilters = useMemo(() => {
         const hasQuery = query.filter(v => v !== "").length > 0;
         const hasTags = selectedTags.length > 0;
@@ -172,7 +211,6 @@ function ProductsList({ productsArray, useFilters, sortByKeys }) {
 
     return (
         <div className={styles.customCssProperties}>
-
             {elementSettings.useFilters && (
                 <>
                     {/* Results count */}
@@ -180,7 +218,6 @@ function ProductsList({ productsArray, useFilters, sortByKeys }) {
 
                     {/* Top buttons */}
                     <div className={styles.container}>
-
                         {/* Sorting toggle */}
                         <button
                             className={styles.button}
@@ -214,7 +251,6 @@ function ProductsList({ productsArray, useFilters, sortByKeys }) {
                     {/* FILTERS SECTION */}
                     {showFilters && (
                         <div className={styles.filtersSection}>
-
                             {/* Search input */}
                             <Searchbar
                                 placeholder="Search"
@@ -254,13 +290,11 @@ function ProductsList({ productsArray, useFilters, sortByKeys }) {
                     {showTags && (
                         <>
                             <h4 className={styles.h4}>Select tags</h4>
-
                             <ul className={styles.labelsContainer}>
                                 {tags.slice(0, offsetTags).map((tag, i) => (
                                     <li
                                         key={i}
-                                        className={`${styles.label} ${isSelectedTag(tag) ? styles.selectedLabel : ""
-                                            }`}
+                                        className={`${styles.label} ${isSelectedTag(tag) ? styles.selectedLabel : ""}`}
                                         onClick={() => handleTagClick(tag)}
                                     >
                                         <p>{tag}</p>
@@ -283,20 +317,16 @@ function ProductsList({ productsArray, useFilters, sortByKeys }) {
                     {showSorting && (
                         <>
                             <h4 className={styles.h4}>Sort by</h4>
-
                             <div className={styles.labelsContainer}>
                                 {elementSettings.sortingKeys.map((key, index) => (
                                     <button
                                         key={index}
-                                        className={`${styles.label} ${sortByKey === key ? styles.selectedLabel : ""
-                                            }`}
+                                        className={`${styles.label} ${sortByKey === key ? styles.selectedLabel : ""}`}
                                         onClick={() => {
                                             if (sortByKey !== key) {
-                                                // switch to new key → reset to ascending
                                                 setSortByKey(key);
                                                 setSortDirection(0);
                                             } else {
-                                                // same key → toggle asc/desc
                                                 setSortDirection(prev => (prev === 0 ? 1 : 0));
                                             }
                                         }}
@@ -310,6 +340,8 @@ function ProductsList({ productsArray, useFilters, sortByKeys }) {
                 </>
             )}
 
+
+
             {/* PRODUCTS LIST */}
             {sortedProducts.length === 0 ? (
                 <div className={styles.zeroResults}>
@@ -317,14 +349,27 @@ function ProductsList({ productsArray, useFilters, sortByKeys }) {
                 </div>
             ) : (
                 <ul className={styles.productsList}>
-                    {sortedProducts.map((product, index) => (
+                    {sortedProducts.slice(0, offsetProducts).map((product, index) => (
                         <ProductCard key={index} product={product} />
                     ))}
                 </ul>
             )}
+
+            {offsetProducts < sortedProducts.length &&
+                <button
+                    className="button"
+                    onClick={() => setOffsetProducts(offsetProducts + elementSettings.offsetProducts)}
+                >
+                    Load more
+                </button>
+            }
+
+
         </div>
     );
 }
 
-// EXPORT (memoized)
+
+
+// EXPORT MEMO()
 export default memo(ProductsList);

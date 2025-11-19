@@ -65,7 +65,7 @@ export default function HomePage() {
             sortByKeys={['name', 'price', 'category']}
             usePagination={true}
             initialProductsNumber={1}
-            itemsPerPage={7}
+            itemsPerPage={10}
         />
 
         {/* DEBUG CLASS */}

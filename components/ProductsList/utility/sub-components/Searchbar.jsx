@@ -25,29 +25,44 @@ import { splitQuery } from '../../functions/splitQuery';
 // EXPORT
 function Searchbar({ placeholder, setExternalValue, externalValue }) {
 
-    // SUPPORT
-
     // USE-STATE
     const [localValue, setLocalValue] = useState("");
 
+    // SUPPORT
+    const updateExternalValue = (value) => {
+        if (Array.isArray(externalValue)) {
+            // CASE 1: array
+            setExternalValue(value);
+        } else if (typeof externalValue === 'object' && externalValue !== null) {
+            // CASE 2: object
+            setExternalValue(prev => ({ ...prev, externalValue: value }));
+        } else {
+            // CASE 3: primitive value
+            setExternalValue(value);
+        }
+    };
+
     // USE-CALLBACK
     const debouncedChange = useCallback(
-        debounce((localValue) => {
-            setExternalValue(splitQuery(localValue));
+        debounce((val) => {
+            updateExternalValue(splitQuery(val));
         }, 500),
-        [setExternalValue]
+        [setExternalValue, externalValue]
     );
 
-    // USE-EFFECT
-
-    // Debounce
+    // USSE-EFFECT
     useEffect(() => {
         debouncedChange(localValue);
     }, [localValue, debouncedChange]);
 
-    // Reset to resetted External Value
     useEffect(() => {
-        setLocalValue(externalValue.join(' '));
+        if (Array.isArray(externalValue)) {
+            setLocalValue(externalValue.join(' '));
+        } else if (typeof externalValue === 'object' && externalValue !== null) {
+            setLocalValue((externalValue.externalValue || []).join(' '));
+        } else {
+            setLocalValue(String(externalValue ?? ''));
+        }
     }, [externalValue]);
 
     return (
@@ -62,14 +77,22 @@ function Searchbar({ placeholder, setExternalValue, externalValue }) {
 
             {/* RESET BUTTON */}
             <button
-                onClick={() => { setLocalValue(''); setExternalValue(['']); }}
+                onClick={() => {
+                    setLocalValue('');
+                    updateExternalValue(
+                        Array.isArray(externalValue)
+                            ? ['']
+                            : (typeof externalValue === 'object' && externalValue !== null)
+                                ? { ...externalValue, externalValue: [''] }
+                                : ''
+                    );
+                }}
             >
                 ✖
             </button>
         </div>
     );
 }
-
 
 // EXPORT MEMO()
 export default memo(Searchbar);

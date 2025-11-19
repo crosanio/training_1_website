@@ -59,7 +59,14 @@ export default function HomePage() {
         {/* Simple list // Disabled filters */}
         {/* <ProductsList productsArray={testProductsArray} useFilters={false} sortByKeys={['name', 'price', 'category']} /> */}
         {/* Paginated list */}
-        <ProductsList productsArray={testProductsArray} /* useFilters={false} */ sortByKeys={['name', 'price', 'category']} usePagination={true} />
+        <ProductsList
+            productsArray={testProductsArray}
+            /* useFilters={false} */
+            sortByKeys={['name', 'price', 'category']}
+            usePagination={true}
+            initialProductsNumber={1}
+            productsPerPage={2}
+        />
 
         {/* DEBUG CLASS */}
         {/* <p className='debug'>Debug class element</p> */}

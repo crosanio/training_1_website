@@ -14,47 +14,59 @@ import styles from '../../ProductsList.module.css';
 // EXPORT
 function Select({ placeholder, options, value, setValue }) {
 
-    return <>
+    // SUPPORT
+    const updateValue = (newValue) => {
+        if (Array.isArray(value)) {
+            // CASE 1: array
+            setValue(newValue);
+        } else if (typeof value === 'object' && value !== null) {
+            // CASE 2: object
+            setValue(prev => ({ ...prev, value: newValue }));
+        } else {
+            // CASE 3: primitive value
+            setValue(newValue);
+        }
+    };
 
-        <div className={styles.filterContainer}>
+    return (
+        <>
+            <div className={styles.filterContainer}>
 
-            {/* OPTIONS */}
-            <select
-                onChange={e => setValue(e.target.value)}
-                value={value}
-                className={styles.filterInput}
-            >
-                <option className={`${styles.selectOption} ${styles.placeholder}`} value=''>{placeholder || '▼ Filter by..'}</option>
-
-                {options ? options.map((option, index) => (
-                    <option
-                        key={index}
-                        value={option}
-                        className={styles.selectOption}
-                    >
-                        {option}
+                {/* OPTIONS */}
+                <select
+                    onChange={e => updateValue(e.target.value)}
+                    value={typeof value === 'object' && value !== null ? value.value ?? '' : value}
+                    className={styles.filterInput}
+                >
+                    <option className={`${styles.selectOption} ${styles.placeholder}`} value=''>
+                        {placeholder || '▼ Filter by..'}
                     </option>
-                ))
 
-                    :
+                    {options
+                        ? options.map((option, index) => (
+                            <option
+                                key={index}
+                                value={option}
+                                className={styles.selectOption}
+                            >
+                                {option}
+                            </option>
+                        ))
+                        : null
+                    }
+                </select>
 
-                    null
-                }
-            </select>
-
-            {/* RESET BUTTON */}
-            <button
-                onClick={() => setValue('')}
-            >
-                ✖
-            </button>
-        </div>
-    </>
+                {/* RESET BUTTON */}
+                <button
+                    onClick={() => updateValue('')}
+                >
+                    ✖
+                </button>
+            </div>
+        </>
+    );
 }
 
 
 // EXPORT MEMO()
 export default memo(Select);
-
-
-

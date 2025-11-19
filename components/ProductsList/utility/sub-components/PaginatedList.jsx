@@ -55,8 +55,6 @@ function PaginatedList({ itemsArray, itemsPerPage, }) {
 
     return <>
 
-        <h3>PAGINATED LIST</h3>
-
         {paginatedProducts.paginatedItems.filter(item => item.pagination === currentPage).map((product) =>
 
             <ProductCard

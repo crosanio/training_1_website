@@ -15,17 +15,8 @@ import styles from '../../ProductsList.module.css';
 function Select({ placeholder, options, value, setValue }) {
 
     // SUPPORT
-    const updateValue = (newValue) => {
-        if (Array.isArray(value)) {
-            // CASE 1: array
-            setValue(newValue);
-        } else if (typeof value === 'object' && value !== null) {
-            // CASE 2: object
-            setValue(prev => ({ ...prev, value: newValue }));
-        } else {
-            // CASE 3: primitive value
-            setValue(newValue);
-        }
+    const handleChange = (newValue) => {
+        setValue(newValue);
     };
 
     return (
@@ -34,8 +25,8 @@ function Select({ placeholder, options, value, setValue }) {
 
                 {/* OPTIONS */}
                 <select
-                    onChange={e => updateValue(e.target.value)}
-                    value={typeof value === 'object' && value !== null ? value.value ?? '' : value}
+                    onChange={e => handleChange(e.target.value)}
+                    value={value}
                     className={styles.filterInput}
                 >
                     <option className={`${styles.selectOption} ${styles.placeholder}`} value=''>
@@ -58,7 +49,7 @@ function Select({ placeholder, options, value, setValue }) {
 
                 {/* RESET BUTTON */}
                 <button
-                    onClick={() => updateValue('')}
+                    onClick={() => handleChange('')}
                 >
                     ✖
                 </button>

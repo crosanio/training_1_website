@@ -3,7 +3,7 @@
 
 
 // UTILITY
-import { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useContext } from 'react';
 
 
 // CREATE CONTEXT
@@ -13,10 +13,8 @@ const ContextMain = createContext();
 // PROVIDER EXPORT
 export const ContextMainProvider = ({ children }) => {
 
-    // INIT USE-EFFECT
-    useEffect(() => {
-        console.log("[ ContextMainProvider ] mounted.");
-    }, []);
+    // DEBUG
+    // console.log("[ ContextMainProvider ] mounted.");
 
     // debug
     const contextMainValue = "ContextMain data available."

@@ -1,6 +1,6 @@
 // NOTES
 // The input "value" is linked to "externalValue" so it can be reset by actions outside the Searchbar.
-// This also allows for the enhanced search function for ARRAYS of STRINGS.
+// This also allows for the enhanced search function for ARRAYS of STRINGS, even if nested in objects.
 // This element depends on the "splitQuery" function, which converts the input string into an ARRAY.
 
 
@@ -28,45 +28,33 @@ function Searchbar({ placeholder, setExternalValue, externalValue }) {
     // USE-STATE
     const [localValue, setLocalValue] = useState("");
 
-    // SUPPORT
-    const updateExternalValue = (value) => {
-        if (Array.isArray(externalValue)) {
-            // CASE 1: array
-            setExternalValue(value);
-        } else if (typeof externalValue === 'object' && externalValue !== null) {
-            // CASE 2: object
-            setExternalValue(prev => ({ ...prev, externalValue: value }));
-        } else {
-            // CASE 3: primitive value
-            setExternalValue(value);
-        }
-    };
-
     // USE-CALLBACK
     const debouncedChange = useCallback(
         debounce((val) => {
-            updateExternalValue(splitQuery(val));
+            // Split the input string into an array and send it to parent
+            setExternalValue(splitQuery(val));
         }, 500),
-        [setExternalValue, externalValue]
+        [setExternalValue]
     );
 
-    // USSE-EFFECT
+    // USE-EFFECT
+    useEffect(() => {
+        setLocalValue(
+            Array.isArray(externalValue)
+                ? externalValue.join(' ')
+                : String(externalValue ?? '')
+        );
+    }, [externalValue]);
+
+    // USE-EFFECT
     useEffect(() => {
         debouncedChange(localValue);
     }, [localValue, debouncedChange]);
 
-    useEffect(() => {
-        if (Array.isArray(externalValue)) {
-            setLocalValue(externalValue.join(' '));
-        } else if (typeof externalValue === 'object' && externalValue !== null) {
-            setLocalValue((externalValue.externalValue || []).join(' '));
-        } else {
-            setLocalValue(String(externalValue ?? ''));
-        }
-    }, [externalValue]);
-
     return (
         <div className={styles.filterContainer}>
+
+            {/* INPUT FIELD */}
             <input
                 type="text"
                 placeholder={placeholder}
@@ -77,22 +65,14 @@ function Searchbar({ placeholder, setExternalValue, externalValue }) {
 
             {/* RESET BUTTON */}
             <button
-                onClick={() => {
-                    setLocalValue('');
-                    updateExternalValue(
-                        Array.isArray(externalValue)
-                            ? ['']
-                            : (typeof externalValue === 'object' && externalValue !== null)
-                                ? { ...externalValue, externalValue: [''] }
-                                : ''
-                    );
-                }}
+                onClick={() => setLocalValue('')}
             >
                 ✖
             </button>
         </div>
     );
 }
+
 
 // EXPORT MEMO()
 export default memo(Searchbar);

@@ -61,7 +61,7 @@ function ProductsList({ productsArray, sortByKeys, useFilters, initialItemsNumbe
         offsetTags: initOffsetTags,
         offsetProducts: initOffsetProducts,
         usePagination: usePagination !== false,
-        itemsPerPage: itemsPerPage || 5,
+        itemsPerPage: itemsPerPage,
         // Pagination
         usePagination: usePagination !== false,
         page: 1,
@@ -102,6 +102,9 @@ function ProductsList({ productsArray, sortByKeys, useFilters, initialItemsNumbe
         }
 
         // Tags filter
+
+        console.log("Selected Tags:", defaultSettings.selectedTags);
+
         if (defaultSettings.selectedTags.length > 0) {
             list = list.filter(product => {
                 const pTags = Array.isArray(product.tags)
@@ -186,7 +189,8 @@ function ProductsList({ productsArray, sortByKeys, useFilters, initialItemsNumbe
 
     // Reset
     const resetAll = () => {
-        setDefaultSettings({
+        setDefaultSettings(prev => ({
+            ...prev,
             showFilters: false,
             showSorting: false,
             showTags: false,
@@ -197,7 +201,7 @@ function ProductsList({ productsArray, sortByKeys, useFilters, initialItemsNumbe
             selectedTags: [],
             offsetTags: initOffsetTags,
             page: 1,
-        });
+        }));
     };
 
     return (
@@ -209,10 +213,13 @@ function ProductsList({ productsArray, sortByKeys, useFilters, initialItemsNumbe
 
                     {/* Top buttons */}
                     <div className={styles.container}>
+
                         {/* Sorting toggle */}
                         <button
                             className={styles.button}
-                            onClick={() => setDefaultSettings({ ...defaultSettings, showSorting: !defaultSettings.showSorting })}
+                            onClick={() => {
+                                setDefaultSettings(prev => ({ ...prev, showSorting: !prev.showSorting }));
+                            }}
                         >
                             {defaultSettings.showSorting ? "▼" : "▶"} Sorting
                         </button>
@@ -221,9 +228,19 @@ function ProductsList({ productsArray, sortByKeys, useFilters, initialItemsNumbe
                         <button
                             className={styles.button}
                             onClick={() => {
+
+                                console.log("Before click:", defaultSettings);
+                                console.log(defaultSettings);
+
                                 const next = !defaultSettings.showFilters;
-                                setDefaultSettings({ ...defaultSettings, showFilters: next });
-                                if (!next) setDefaultSettings({ ...defaultSettings, showTags: false });
+                                setDefaultSettings(prev => ({
+                                    ...prev,
+                                    showFilters: next,
+                                    showTags: false
+                                }));
+
+                                console.log("After click:", defaultSettings);
+                                console.log(defaultSettings);
                             }}
                         >
                             {defaultSettings.showFilters ? "▼" : "▶"} Filters
@@ -245,8 +262,8 @@ function ProductsList({ productsArray, sortByKeys, useFilters, initialItemsNumbe
                             {/* Search input */}
                             <Searchbar
                                 placeholder="Search"
-                                setExternalValue={setDefaultSettings}
                                 externalValue={defaultSettings.query}
+                                setExternalValue={(newQuery) => setDefaultSettings(prev => ({ ...prev, query: newQuery }))}
                             />
 
                             {/* Select */}
@@ -254,7 +271,7 @@ function ProductsList({ productsArray, sortByKeys, useFilters, initialItemsNumbe
                                 placeholder="▶ Category"
                                 options={categories}
                                 value={defaultSettings.selectedCategory}
-                                setValue={setDefaultSettings}
+                                setValue={(newCategory) => setDefaultSettings(prev => ({ ...prev, selectedCategory: newCategory }))}
                             />
 
                             {/* Tags */}
@@ -262,7 +279,11 @@ function ProductsList({ productsArray, sortByKeys, useFilters, initialItemsNumbe
                                 <p
                                     className={styles.filterInput}
                                     onClick={() => {
-                                        setDefaultSettings({ ...defaultSettings, showTags: !showTags, offsetTags: initOffsetTags });
+                                        setDefaultSettings(prev => ({
+                                            ...prev,
+                                            showTags: !prev.showTags,
+                                            offsetTags: initOffsetTags
+                                        }));
                                     }}
                                 >
                                     {defaultSettings.showTags ? "▼" : "▶"} Tags
@@ -293,7 +314,7 @@ function ProductsList({ productsArray, sortByKeys, useFilters, initialItemsNumbe
 
                                 {defaultSettings.offsetTags < tags.length && (
                                     <button
-                                        onClick={() => setDefaultSettings({ ...defaultSettings, offsetTags: defaultSettings.offsetTags + initOffsetTags })}
+                                        onClick={() => setDefaultSettings(prev => ({ ...prev, offsetTags: prev.offsetTags + initOffsetTags }))}
                                         className={`${styles.label} ${styles.loadMoreTagsButton}`}
                                     >
                                         Show more ✚
@@ -331,33 +352,35 @@ function ProductsList({ productsArray, sortByKeys, useFilters, initialItemsNumbe
                         </>
                     )}
                 </>
-            )}
-
-
-            {/* --------------------------------- PRODUCTS --------------------------------- */}
-            {defaultSettings.usePagination ?
-                <PaginatedList
-                    itemsArray={sortedProducts}
-                    itemsPerPage={defaultSettings.itemsPerPage}
-                />
-                :
-                <>
-                    {sortedProducts.length === 0 ? (
-                        <div className={styles.zeroResults}>
-                            <p>No products found.</p>
-                        </div>
-                    ) : (
-                        <ul className={styles.productsList}>
-                            {sortedProducts.slice(0, defaultSettings.offsetProducts).map((product, index) => (
-                                <ProductCard key={index} product={product} />
-                            ))}
-                        </ul>
-                    )}
-                </>
+            )
             }
 
 
-        </div>
+            {/* --------------------------------- PRODUCTS --------------------------------- */}
+            {
+                defaultSettings.usePagination ?
+                    <PaginatedList
+                        itemsArray={sortedProducts}
+                        itemsPerPage={defaultSettings.itemsPerPage}
+                    />
+                    :
+                    <>
+                        {sortedProducts.length === 0 ? (
+                            <div className={styles.zeroResults}>
+                                <p>No products found.</p>
+                            </div>
+                        ) : (
+                            <ul className={styles.productsList}>
+                                {sortedProducts.slice(0, defaultSettings.offsetProducts).map((product, index) => (
+                                    <ProductCard key={index} product={product} />
+                                ))}
+                            </ul>
+                        )}
+                    </>
+            }
+
+
+        </div >
     );
 };
 

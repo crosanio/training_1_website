@@ -1,3 +1,19 @@
+// NOTES
+/*
+- Import example:
+    Modal's visibility can be easily handled with a useState boolean in the parent component.
+
+<Modal
+                visibility={visibility}
+                setVisibility={setVisibility}
+                title="Delete item"
+                text="By confirming, you will delete this item permanently. Are you sure you want to proceed?"
+                confirmAction={function to be executed here}
+            />
+*/
+
+
+
 // READY FOR CLIENT SIDE
 "use client";
 

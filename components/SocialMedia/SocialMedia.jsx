@@ -17,8 +17,6 @@ import styles from './SocialMedia.module.css';
 
 
 // LOCAL_ASSETS
-import { testFunction } from "./functions/testFunction";
-
 import icon_whatsapp from "./utility/socialMediaIcons/icon-white-whatsapp.webp";
 import icon_telegram from "./utility/socialMediaIcons/icon-white-telegram.webp";
 import icon_facebook from "./utility/socialMediaIcons/icon-white-facebook.webp";

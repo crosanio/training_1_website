@@ -2,6 +2,18 @@
 /*
 - This component displays a list of products with filtering and sorting capabilities.
 - By editing the "defaultSettings" object, you can customize the behavior of the component, like pagination, products per page, and more.
+- Import example:
+
+    In this example, filters are disabled and pagination is enabled.
+
+    <ProductsList
+            productsArray={testProductsArray}
+            sortByKeys={['name', 'price', 'category']}
+            useFilters={false}
+            initialProductsNumber={1}
+            usePagination={true}
+            itemsPerPage={2}
+    />
 */
 
 
@@ -355,7 +367,6 @@ function ProductsList({ productsArray, sortByKeys, useFilters, initialItemsNumbe
             )
             }
 
-
             {/* --------------------------------- PRODUCTS --------------------------------- */}
             {
                 defaultSettings.usePagination ?
@@ -379,11 +390,9 @@ function ProductsList({ productsArray, sortByKeys, useFilters, initialItemsNumbe
                     </>
             }
 
-
         </div >
     );
 };
-
 
 
 // EXPORT MEMO()

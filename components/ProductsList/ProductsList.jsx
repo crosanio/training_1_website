@@ -372,11 +372,21 @@ function ProductsList({
                         itemsPerPage={defaultSettings.itemsPerPage}
                     />
                 ) : (
-                    <ul className={styles.productsList}>
-                        {sortedProducts.slice(0, defaultSettings.offsetProducts).map((product, index) => (
-                            <ProductCard key={product.id ?? index} product={product} />
-                        ))}
-                    </ul>
+                    <>
+                        <ul className={styles.productsList}>
+                            {sortedProducts.slice(0, defaultSettings.offsetProducts).map((product, index) => (
+                                <ProductCard key={product.id ?? index} product={product} />
+                            ))}
+                        </ul>
+
+                        {defaultSettings.offsetProducts < sortedProducts.length && (
+                            <div className={styles.loadMoreContainer}>
+                                <button className={styles.loadMoreButton} onClick={() => updateSettings({ offsetProducts: defaultSettings.offsetProducts + initOffsetProducts })}>
+                                    Load more ✚
+                                </button>
+                            </div>
+                        )}
+                    </>
                 )
             )}
         </div>

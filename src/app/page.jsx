@@ -60,7 +60,7 @@ export default function HomePage() {
             sortByKeys={['name', 'price', 'category']}
             useFilters={true}
             initialProductsNumber={3}
-            usePagination={true}
+            usePagination={false}
             itemsPerPage={6}
         />
 

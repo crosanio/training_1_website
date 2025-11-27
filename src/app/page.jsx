@@ -53,20 +53,18 @@ export default function HomePage() {
         {/* HEADER SECTION */}
         {/* <HeaderSection title="Header Section Title" caption="Header Section Caption" /> */}
 
-        {/* PRODUCTS LIST */}
-        {/* Simple list */}
-        {/* <ProductsList productsArray={testProductsArray} sortByKeys={['name', 'price', 'category']} /> */}
-        {/* Simple list // Disabled filters */}
-        {/* <ProductsList productsArray={testProductsArray} useFilters={false} sortByKeys={['name', 'price', 'category']} /> */}
-        {/* Paginated list */}
+
+        {/* PRODUCTS LIST -------------------------------------------------------------------------------------------------------------*/}
         <ProductsList
             productsArray={testProductsArray}
-            /* useFilters={false} */
             sortByKeys={['name', 'price', 'category']}
+            useFilters={true}
+            initialProductsNumber={3}
             usePagination={true}
-            initialProductsNumber={1}
-            itemsPerPage={10}
+            itemsPerPage={6}
         />
+
+
 
         {/* DEBUG CLASS */}
         {/* <p className='debug'>Debug class element</p> */}

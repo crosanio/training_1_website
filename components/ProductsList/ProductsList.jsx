@@ -75,10 +75,9 @@ function ProductsList({ productsArray, sortByKeys, useFilters, initialItemsNumbe
         // Offsets
         offsetTags: initOffsetTags,
         offsetProducts: initOffsetProducts,
-        usePagination: usePagination !== false,
         itemsPerPage: itemsPerPage,
         // Pagination
-        usePagination: usePagination !== false,
+        usePagination: usePagination,
         page: 1,
     });
 
@@ -225,9 +224,6 @@ function ProductsList({ productsArray, sortByKeys, useFilters, initialItemsNumbe
         <div className={styles.customCssProperties}>
             {defaultSettings.useFilters && (
                 <>
-                    {/* Results count */}
-                    <h3 className={styles.resultsCount}>{sortedProducts.length} results</h3>
-
                     {/* Filters toggles */}
                     <div className={styles.container}>
 
@@ -347,6 +343,10 @@ function ProductsList({ productsArray, sortByKeys, useFilters, initialItemsNumbe
             }
 
             {/* --------------------------------- PRODUCTS --------------------------------- */}
+
+            {/* Results count */}
+            <h3 className={styles.resultsCount}>{sortedProducts.length} results</h3>
+
             {sortedProducts.length === 0 ? (
                 <div className={styles.zeroResults}>
                     <p>No products found.</p>

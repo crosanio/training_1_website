@@ -3,6 +3,7 @@
     --input-font-size: 1rem;
     --input-font-weight: 300;
     --input-color: rgb(0, 89, 255);
+    --input-color-bg-transparency: rgba(0, 89, 255, 0.1);
     --buttons-border-px: 1px;
     --interactive-item-padding-x: 0px;
     --interactive-item-padding-y: 7px;
@@ -26,7 +27,7 @@
     font-size: calc(var(--input-font-size) * 2);
     color: white;
     background-color: var(--white-transparency-10);
-    margin-bottom: calc(var(--spacing-unit) * 2);
+    margin-bottom: var(--spacing-unit);
     font-weight: 500;
     padding: calc(var(--spacing-unit)* 0.5) calc(var(--spacing-unit) * 1);
     text-align: center;
@@ -223,16 +224,39 @@
     padding: var(--spacing-unit);
 }
 
-.paginationControls .paginationTitle {
+.paginationTitleContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--spacing-unit);
+}
+
+.paginationTitle {
     font-size: var(--input-font-size);
     font-weight: 300;
+}
+
+.resetPageButton {
+    cursor: pointer;
+    height: 30px;
+    width: 30px;
+    font-weight: 500;
+    font-size: 20px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: 1px solid var(--input-color);
+    border-radius: 50%;
+    background-color: var(--input-color-bg-transparency);
 }
 
 .pageNumbersContainer {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: calc(var(--spacing-unit) * 1.5);
+    gap: calc(var(--spacing-unit) * 1.2);
 }
 
 .numbersContainer {
@@ -241,12 +265,10 @@
     align-items: center;
     gap: calc(var(--spacing-unit) * .7);
     font-weight: 200;
-    ;
-
-    /* background-color: rgba(255, 255, 0, 0.185); */
 }
 
 .shiftPageButton {
+    font-size: calc(var(--input-font-size) * 1.25);
     color: var(--input-color);
     width: 30px;
     height: 30px;
@@ -298,5 +320,9 @@
     .filterContainer {
         flex-basis: 100%;
         max-width: 100%;
+    }
+
+    .paginationControls {
+        margin: calc(var(--spacing-unit) * 2) 0;
     }
 }

@@ -21,7 +21,7 @@
 
 
 // UTILITY
-import { useState, useMemo, forwardRef, useImperativeHandle } from 'react';
+import { useState, useEffect, useMemo, forwardRef, useImperativeHandle } from 'react';
 
 
 // LOCAL_CSS
@@ -78,18 +78,30 @@ const PaginatedList = forwardRef(({ itemsArray, itemsPerPage }, ref) => {
     const maxPage = Math.max(...paginatedProducts.pages, 1);
     const pageNumbers = getPaginationControls(paginatedProducts.pages, currentPage, 1);
 
-    // -----------------------------
-    // INTERNAL FUNCTION TO RENDER PAGINATION CONTROLS
+    // PAGINATION CONTROLS
     const renderPaginationControls = () => (
         <div className={styles.paginationControls}>
-            <h6 className={styles.paginationTitle}>Page {currentPage} of {maxPage}</h6>
+
+            <div className={styles.paginationTitleContainer}>
+                <h6 className={styles.paginationTitle}>
+                    Page {currentPage} / {maxPage}
+
+                </h6>
+
+                <button
+                    className={styles.resetPageButton}
+                    onClick={() => setCurrentPage(1)}
+                >
+                    ⬅
+                </button>
+            </div>
 
             <div className={styles.pageNumbersContainer}>
 
                 {/* PREVIOUS PAGE */}
                 <button
                     className={styles.shiftPageButton}
-                    onClick={() => { toTop(); setCurrentPage(currentPage - 1); }}
+                    onClick={() => setCurrentPage(currentPage - 1)}
                     disabled={currentPage === pageNumbers[0]}
                 >
                     {currentPage > 1 ? '◀' : '︱'}
@@ -104,7 +116,6 @@ const PaginatedList = forwardRef(({ itemsArray, itemsPerPage }, ref) => {
                             onClick={() => {
                                 if (currentPage !== page) {
                                     setCurrentPage(page);
-                                    setTimeout(() => { toTop(); }, 0); // Scroll to top smoothly
                                 }
                             }}
                             disabled={currentPage === page}
@@ -117,7 +128,7 @@ const PaginatedList = forwardRef(({ itemsArray, itemsPerPage }, ref) => {
                 {/* NEXT PAGE */}
                 <button
                     className={styles.shiftPageButton}
-                    onClick={() => { toTop(); setCurrentPage(currentPage + 1); }}
+                    onClick={() => setCurrentPage(currentPage + 1)}
                     disabled={currentPage === pageNumbers[pageNumbers.length - 1]}
                 >
                     {currentPage < pageNumbers[pageNumbers.length - 1] ? '▶' : '︱'}
@@ -126,6 +137,16 @@ const PaginatedList = forwardRef(({ itemsArray, itemsPerPage }, ref) => {
             </div>
         </div>
     );
+
+    // USE-EFFECT
+
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [itemsArray]);
+
+    useEffect(() => {
+        toTop();
+    }, [currentPage]);
 
     return <>
         {/* PAGINATION CONTROLS - TOP */}

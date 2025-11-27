@@ -92,7 +92,7 @@ const PaginatedList = forwardRef(({ itemsArray, itemsPerPage }, ref) => {
                     className={styles.resetPageButton}
                     onClick={() => setCurrentPage(1)}
                 >
-                    ⬅
+                    |↩
                 </button>
             </div>
 

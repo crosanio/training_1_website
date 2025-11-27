@@ -238,17 +238,14 @@
 
 .resetPageButton {
     cursor: pointer;
-    height: 30px;
-    width: 30px;
-    font-weight: 500;
-    font-size: 20px;
 
     display: flex;
     justify-content: center;
     align-items: center;
 
+    padding: 2px 15px;
     border: 1px solid var(--input-color);
-    border-radius: 50%;
+    border-radius: 25px;
     background-color: var(--input-color-bg-transparency);
 }
 

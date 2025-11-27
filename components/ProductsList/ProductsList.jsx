@@ -78,7 +78,6 @@ function ProductsList({ productsArray, sortByKeys, useFilters, initialItemsNumbe
         itemsPerPage: itemsPerPage,
         // Pagination
         usePagination: usePagination,
-        page: 1,
     });
 
     // SUPPORT
@@ -212,7 +211,6 @@ function ProductsList({ productsArray, sortByKeys, useFilters, initialItemsNumbe
             selectedCategory: "",
             selectedTags: [],
             offsetTags: initOffsetTags,
-            page: 1,
         }));
 
         if (defaultSettings.usePagination && paginatedListRef.current) {

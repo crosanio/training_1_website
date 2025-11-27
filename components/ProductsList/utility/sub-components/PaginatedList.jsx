@@ -1,18 +1,10 @@
 // NOTES
 /*
-- Import example:
-    If the itemsPerPage prop will exceed the "maxItemsPerPage" limit, the component will automatically set it to that limit.
-    In the following example, assuming:
-    - maxItemsPerPage = 5
-    - itemsPerPage = 7
-    - resulting max number of items per page = 5
-    - ref created in parent component to access resetPage() method
-
-    <PaginatedList
-        ref={paginatedListRef}
-        itemsArray={arrayToPaginate}
-        itemsPerPage={7}
-    />
+- Receives items array and itemsPerPage; manages internal pagination state.
+- Calculates paginated items and total pages.
+- Exposes resetPage() to parent via ref.
+- Renders current page items and pagination controls.
+- Optimized with useMemo/useCallback to avoid unnecessary re-renders.
 */
 
 
@@ -21,11 +13,7 @@
 
 
 // UTILITY
-import { useState, useEffect, useMemo, forwardRef, useImperativeHandle } from 'react';
-
-
-// LOCAL_CSS
-// Parent component CSS import
+import React, { useState, useMemo, useEffect, forwardRef, useImperativeHandle, useCallback, memo } from 'react';
 import styles from '../../ProductsList.module.css';
 
 
@@ -35,89 +23,103 @@ import { getPaginationControls } from '../../functions/getPaginationControls';
 
 
 // EXPORT
-const PaginatedList = forwardRef(({ itemsArray, itemsPerPage }, ref) => {
+const PaginatedList = forwardRef(({ itemsArray = [], itemsPerPage = 7 }, ref) => {
 
-    // USE-STATE
+    // DEBUG
+    // console.log("RENDER: PaginatedList");
+
     const [currentPage, setCurrentPage] = useState(1);
 
-    // SUPPORT
+    const MAX_ITEMS_PER_PAGE = 8;
+    const effectiveItemsPerPage = Math.min(itemsPerPage || 1, MAX_ITEMS_PER_PAGE);
 
-    // Maximum items allowed per page
-    const maxItemsPerPage = 8;
-    const itemsPerPageLimit = Math.min(itemsPerPage, maxItemsPerPage);
-
-    // Expose functions to parent via ref
+    // expose resetPage to parent: only set if different to avoid unnecessary renders
     useImperativeHandle(ref, () => ({
-        resetPage: () => setCurrentPage(1) // Expose reset function
-    }));
-
-    // Scroll helper
-    function toTop() {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    // Paginated products calculation
-    const paginatedProducts = useMemo(() => {
-
-        if (!itemsArray || itemsArray.length === 0) {
-            return { paginatedItems: [], pages: [] };
+        resetPage: () => {
+            setCurrentPage(prev => (prev === 1 ? prev : 1));
         }
+    }), []);
 
-        // Assign page number to each item
-        const paginatedItems = itemsArray.map((item, index) => ({
-            ...item,
-            pagination: Math.floor(index / itemsPerPageLimit) + 1
-        }));
+    // compute totalPages only when itemsArray or effectiveItemsPerPage changes
+    const totalPages = useMemo(() => {
+        if (!Array.isArray(itemsArray) || itemsArray.length === 0) return 1;
+        return Math.max(1, Math.ceil(itemsArray.length / effectiveItemsPerPage));
+    }, [itemsArray, effectiveItemsPerPage]);
 
-        // Extract unique page numbers
-        const pages = [...new Set(paginatedItems.map(item => item.pagination))];
+    // ensure currentPage is within bounds when itemsArray changes
+    useEffect(() => {
+        setCurrentPage(prev => {
+            if (prev > totalPages) return totalPages;
+            if (prev < 1) return 1;
+            return prev;
+        });
+    }, [totalPages]);
 
-        return { paginatedItems, pages };
-    }, [itemsArray, itemsPerPageLimit]);
+    const maxPage = totalPages;
 
-    const maxPage = Math.max(...paginatedProducts.pages, 1);
-    const pageNumbers = getPaginationControls(paginatedProducts.pages, currentPage, 1);
+    // pages array for pagination controls
+    const pages = useMemo(() => Array.from({ length: totalPages }, (_, i) => i + 1), [totalPages]);
 
-    // PAGINATION CONTROLS
-    const renderPaginationControls = () => (
+    const pageNumbers = useMemo(() => getPaginationControls(pages, currentPage, 1), [pages, currentPage]);
+
+    const goToPage = useCallback((page) => {
+        setCurrentPage(prev => {
+            if (typeof page !== 'number') return prev;
+            if (page < 1) return prev;
+            if (page > maxPage) return prev;
+            if (page === prev) return prev;
+            return page;
+        });
+    }, [maxPage]);
+
+    // scroll to top on page change (keep)
+    useEffect(() => {
+        // only run client-side when page changes
+        if (typeof window !== "undefined") {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    }, [currentPage]);
+
+    // compute itemsToRender by slicing the original array (no mapping, no new objects)
+    const itemsToRender = useMemo(() => {
+        if (!Array.isArray(itemsArray) || itemsArray.length === 0) return [];
+        const start = (currentPage - 1) * effectiveItemsPerPage;
+        const end = start + effectiveItemsPerPage;
+        return itemsArray.slice(start, end);
+    }, [itemsArray, currentPage, effectiveItemsPerPage]);
+
+    const renderPaginationControls = useMemo(() => (
         <div className={styles.paginationControls}>
-
             <div className={styles.paginationTitleContainer}>
                 <h6 className={styles.paginationTitle}>
                     Page {currentPage} / {maxPage}
-
                 </h6>
-
                 <button
                     className={styles.resetPageButton}
-                    onClick={() => setCurrentPage(1)}
+                    onClick={() => {
+                        // only set if needed
+                        setCurrentPage(prev => (prev === 1 ? prev : 1));
+                    }}
                 >
                     |↩
                 </button>
             </div>
 
             <div className={styles.pageNumbersContainer}>
-
-                {/* PREVIOUS PAGE */}
                 <button
                     className={styles.shiftPageButton}
-                    onClick={() => setCurrentPage(currentPage - 1)}
-                    disabled={currentPage === pageNumbers[0]}
+                    onClick={() => goToPage(currentPage - 1)}
+                    disabled={currentPage === 1}
                 >
-                    {currentPage > 1 ? '◀' : '︱'}
+                    ◀
                 </button>
 
-                {/* PAGE BUTTONS */}
                 <div className={styles.numbersContainer}>
                     {pageNumbers.map(page => (
                         <button
                             key={page}
                             className={`${styles.pageButton} ${currentPage === page ? styles.currentPageButton : ''}`}
-                            onClick={() => {
-                                if (currentPage !== page) {
-                                    setCurrentPage(page);
-                                }
-                            }}
+                            onClick={() => goToPage(page)}
                             disabled={currentPage === page}
                         >
                             {page}
@@ -125,46 +127,30 @@ const PaginatedList = forwardRef(({ itemsArray, itemsPerPage }, ref) => {
                     ))}
                 </div>
 
-                {/* NEXT PAGE */}
                 <button
                     className={styles.shiftPageButton}
-                    onClick={() => setCurrentPage(currentPage + 1)}
-                    disabled={currentPage === pageNumbers[pageNumbers.length - 1]}
+                    onClick={() => goToPage(currentPage + 1)}
+                    disabled={currentPage === maxPage}
                 >
-                    {currentPage < pageNumbers[pageNumbers.length - 1] ? '▶' : '︱'}
+                    ▶
                 </button>
-
             </div>
         </div>
+    ), [currentPage, maxPage, pageNumbers, goToPage]);
+
+    return (
+        <>
+            {renderPaginationControls}
+
+            {itemsToRender.map((product, idx) => (
+                <ProductCard key={product.id ?? idx} product={product} />
+            ))}
+
+            {renderPaginationControls}
+        </>
     );
-
-    // USE-EFFECT
-
-    useEffect(() => {
-        setCurrentPage(1);
-    }, [itemsArray]);
-
-    useEffect(() => {
-        toTop();
-    }, [currentPage]);
-
-    return <>
-        {/* PAGINATION CONTROLS - TOP */}
-        {renderPaginationControls()}
-
-        {/* PRODUCTS LIST */}
-        {paginatedProducts.paginatedItems
-            .filter(item => item.pagination === currentPage)
-            .map(product => (
-                <ProductCard key={product.id} product={product} />
-            ))
-        }
-
-        {/* PAGINATION CONTROLS - BOTTOM */}
-        {renderPaginationControls()}
-    </>
 });
 
 
-// EXPORT
-export default PaginatedList;
+// EXPORT MEMO()
+export default memo(PaginatedList);

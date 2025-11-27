@@ -1,19 +1,10 @@
 // NOTES
 /*
-- This component displays a list of products with filtering and sorting capabilities.
-- By editing the "defaultSettings" object, you can customize the behavior of the component, like pagination, products per page, and more.
-- Import example:
-
-    In this example, filters are disabled and pagination is enabled.
-
-    <ProductsList
-            productsArray={testProductsArray}
-            sortByKeys={['name', 'price', 'category']}
-            useFilters={false}
-            initialProductsNumber={1}
-            usePagination={true}
-            itemsPerPage={2}
-    />
+- Receives products array and manages filtering, sorting, and optional pagination.
+- Computes derived lists: categories, tags, filteredProducts, sortedProducts.
+- Maintains separate states for UI toggles and filter/sort settings.
+- updateSettings() updates filters/sorting and optionally resets pagination.
+- Renders products directly or via PaginatedList if pagination is enabled.
 */
 
 
@@ -40,12 +31,31 @@ import Select from "./utility/sub-components/Select";
 import PaginatedList from "./utility/sub-components/PaginatedList";
 
 
+// SUPPORT
+function shallowArrayEquals(a, b) {
+    if (a === b) return true;
+    if (!Array.isArray(a) || !Array.isArray(b)) return false;
+    if (a.length !== b.length) return false;
+    for (let i = 0; i < a.length; i++) {
+        if (a[i] !== b[i]) return false;
+    }
+    return true;
+}
+
+
 // EXPORT
-function ProductsList({ productsArray, sortByKeys, useFilters, initialItemsNumber, usePagination, itemsPerPage }) {
+function ProductsList({
+    productsArray = [],
+    sortByKeys = [],
+    useFilters = true,
+    initialItemsNumber,
+    usePagination = true,
+    itemsPerPage = 5
+}) {
 
     // SUPPORT
-    const uniqueKeys = getUniqueKeys(productsArray);
-    const allowedSortKeys = getAllowedSortKeys(sortByKeys, uniqueKeys);
+    const uniqueKeys = useMemo(() => getUniqueKeys(productsArray), [productsArray]);
+    const allowedSortKeys = useMemo(() => getAllowedSortKeys(sortByKeys, uniqueKeys), [sortByKeys, uniqueKeys]);
 
     // Initial Settings
     const initOffsetTags = 5;
@@ -55,28 +65,21 @@ function ProductsList({ productsArray, sortByKeys, useFilters, initialItemsNumbe
     const paginatedListRef = useRef(null);
 
     // USE-STATE
+    const [showFilters, setShowFilters] = useState(false);
 
-    // Settings states
     const [defaultSettings, setDefaultSettings] = useState({
-        // Filters
         useFilters: useFilters !== false,
-        showFilters: false,
-        // Query: array of search strings
         query: [],
         selectedCategory: "",
         selectedTags: [],
         showTags: false,
-        // Sorting
         showSorting: false,
-        sortingKeys: allowedSortKeys || ["name"],
-        sortByKey: "name",
-        // Sort direction: 0 = ASC, 1 = DESC
-        sortDirection: 0,
-        // Offsets
+        sortingKeys: allowedSortKeys?.length ? allowedSortKeys : ["name"],
+        sortByKey: allowedSortKeys?.length ? allowedSortKeys[0] : "name",
+        sortDirection: 0, // 0 = ASC, 1 = DESC
         offsetTags: initOffsetTags,
         offsetProducts: initOffsetProducts,
         itemsPerPage: itemsPerPage,
-        // Pagination
         usePagination: usePagination,
     });
 
@@ -85,7 +88,6 @@ function ProductsList({ productsArray, sortByKeys, useFilters, initialItemsNumbe
     // Derived values
     const categories = useMemo(() => getUniqueValuesByKey(productsArray, "category"), [productsArray]);
 
-    // Unique tags
     const tags = useMemo(() => {
         return [...new Set(
             getUniqueValuesByKey(productsArray, "tags")
@@ -94,9 +96,63 @@ function ProductsList({ productsArray, sortByKeys, useFilters, initialItemsNumbe
         )].sort((a, b) => a.localeCompare(b));
     }, [productsArray]);
 
+    // updateSettings: functional setState, avoids updates when nothing changed
+    const updateSettings = (newSettings, resetPage = true) => {
+        setDefaultSettings(prev => {
+            const merged = { ...prev, ...newSettings };
+
+            // quick shallow compare of changed keys to avoid unnecessary state change
+            const keys = Object.keys(newSettings);
+            let changed = false;
+            for (const k of keys) {
+                const a = prev[k];
+                const b = merged[k];
+                if (Array.isArray(a) && Array.isArray(b)) {
+                    if (!shallowArrayEquals(a, b)) { changed = true; break; }
+                } else {
+                    if (a !== b) { changed = true; break; }
+                }
+            }
+            if (!changed) return prev;
+
+            if (resetPage && merged.usePagination && paginatedListRef.current?.resetPage) {
+                try { paginatedListRef.current.resetPage(); } catch (e) { /* ignore */ }
+            }
+
+            return merged;
+        });
+    };
+
+    // Reset all
+    const resetAll = () => {
+        setDefaultSettings(prev => {
+            const merged = {
+                ...prev,
+                query: [],
+                selectedCategory: "",
+                selectedTags: [],
+                sortByKey: prev.sortingKeys && prev.sortingKeys.length ? prev.sortingKeys[0] : "name",
+                sortDirection: 0,
+                offsetTags: initOffsetTags,
+                showTags: false,
+                showSorting: false,
+            };
+
+            // reset pagination on change
+            if (prev.usePagination && paginatedListRef.current?.resetPage) {
+                try { paginatedListRef.current.resetPage(); } catch (e) { /* ignore */ }
+            }
+
+            return merged;
+        });
+
+        setShowFilters(false);
+    };
+
     // Filtered products
     const filteredProducts = useMemo(() => {
-        let list = [...productsArray];
+        let list = productsArray;
+        if (!Array.isArray(list) || list.length === 0) return [];
 
         // Search filter
         if (Array.isArray(defaultSettings.query) && defaultSettings.query.length > 0) {
@@ -115,7 +171,7 @@ function ProductsList({ productsArray, sortByKeys, useFilters, initialItemsNumbe
         }
 
         // Tags filter
-        if (defaultSettings.selectedTags.length > 0) {
+        if (defaultSettings.selectedTags && defaultSettings.selectedTags.length > 0) {
             list = list.filter(product => {
                 const pTags = Array.isArray(product.tags)
                     ? product.tags
@@ -127,105 +183,76 @@ function ProductsList({ productsArray, sortByKeys, useFilters, initialItemsNumbe
             });
         }
 
+        // DEBUG
+        // console.log("CALCULATION: Filtered Products");
+
         return list;
-    }, [productsArray, defaultSettings.query, defaultSettings.selectedCategory, defaultSettings.selectedTags]);
+    }, [
+        productsArray,
+        defaultSettings.query,
+        defaultSettings.selectedCategory,
+        defaultSettings.selectedTags
+    ]);
 
     // Sorted products
     const sortedProducts = useMemo(() => {
+        if (!Array.isArray(filteredProducts) || filteredProducts.length === 0) return [];
+
         const list = [...filteredProducts];
 
-        // Sorting logic
         list.sort((a, b) => {
             const aVal = a?.[defaultSettings.sortByKey];
             const bVal = b?.[defaultSettings.sortByKey];
 
-            // String sorting
             if (typeof aVal === "string" && typeof bVal === "string") {
                 return defaultSettings.sortDirection === 0
                     ? aVal.localeCompare(bVal)
                     : bVal.localeCompare(aVal);
             }
 
-            // Numeric sorting
             if (typeof aVal === "number" && typeof bVal === "number") {
                 return defaultSettings.sortDirection === 0
                     ? aVal - bVal
                     : bVal - aVal;
             }
 
-            // Fallback string comparison
             return defaultSettings.sortDirection === 0
                 ? String(aVal ?? "").localeCompare(String(bVal ?? ""))
                 : String(bVal ?? "").localeCompare(String(aVal ?? ""));
         });
 
+        // DEBUG
+        // console.log("CALCULATION: Sorted Products");
+
         return list;
     }, [filteredProducts, defaultSettings.sortByKey, defaultSettings.sortDirection]);
 
-    // Sort direction arrow
     const sortArrow = defaultSettings.sortDirection === 0 ? "▲" : "▼";
 
-    // Handle tag click
     const handleTagClick = (tag) => {
-        if (defaultSettings.selectedTags.includes(tag)) {
-            updateSettings({
-                selectedTags: defaultSettings.selectedTags.filter(t => t !== tag)
-            });
+        const current = defaultSettings.selectedTags || [];
+        if (current.includes(tag)) {
+            updateSettings({ selectedTags: current.filter(t => t !== tag) });
         } else {
-            updateSettings({
-                selectedTags: [...defaultSettings.selectedTags, tag]
-            });
+            updateSettings({ selectedTags: [...current, tag] });
         }
     };
 
-    const isSelectedTag = tag => defaultSettings.selectedTags.includes(tag);
+    const isSelectedTag = (tag) => (defaultSettings.selectedTags || []).includes(tag);
 
-    // Active filters (boolean)
     const activeFilters = useMemo(() => {
-        const hasQuery = defaultSettings.query.filter(v => v !== "").length > 0;
-        const hasTags = defaultSettings.selectedTags.length > 0;
-        const defaultSorting = defaultSettings.sortByKey === "name" && defaultSettings.sortDirection === 0;
+        const hasQuery = Array.isArray(defaultSettings.query) && defaultSettings.query.filter(v => v !== "").length > 0;
+        const hasTags = Array.isArray(defaultSettings.selectedTags) && defaultSettings.selectedTags.length > 0;
+        const defaultSorting = defaultSettings.sortByKey === (defaultSettings.sortingKeys?.[0] ?? "name") && defaultSettings.sortDirection === 0;
 
         return hasQuery || defaultSettings.selectedCategory || hasTags || !defaultSorting;
-    }, [defaultSettings.query, defaultSettings.selectedCategory, defaultSettings.selectedTags, defaultSettings.sortByKey, defaultSettings.sortDirection]);
-
-    const updateSettings = (newSettings, resetPage = true) => {
-        setDefaultSettings(prev => ({ ...prev, ...newSettings }));
-
-        // Conditional pagination reset
-        if (resetPage && defaultSettings.usePagination && paginatedListRef.current) {
-            paginatedListRef.current.resetPage();
-        }
-    };
-
-    // Reset all
-    const resetAll = () => {
-        setDefaultSettings(prev => ({
-            ...prev,
-            showFilters: false,
-            showSorting: false,
-            showTags: false,
-            sortByKey: "name",
-            sortDirection: 0,
-            query: [],
-            selectedCategory: "",
-            selectedTags: [],
-            offsetTags: initOffsetTags,
-        }));
-
-        if (defaultSettings.usePagination && paginatedListRef.current) {
-            paginatedListRef.current.resetPage();
-        }
-    };
+    }, [defaultSettings.query, defaultSettings.selectedCategory, defaultSettings.selectedTags, defaultSettings.sortByKey, defaultSettings.sortDirection, defaultSettings.sortingKeys]);
 
     return (
         <div className={styles.customCssProperties}>
             {defaultSettings.useFilters && (
                 <>
-                    {/* Filters toggles */}
                     <div className={styles.container}>
-
-                        {/* Sorting toggle */}
                         <button
                             className={styles.button}
                             onClick={() => updateSettings({ showSorting: !defaultSettings.showSorting })}
@@ -233,15 +260,13 @@ function ProductsList({ productsArray, sortByKeys, useFilters, initialItemsNumbe
                             {defaultSettings.showSorting ? "▼" : "▶"} Sorting
                         </button>
 
-                        {/* Filters toggle */}
                         <button
                             className={styles.button}
-                            onClick={() => updateSettings({ showFilters: !defaultSettings.showFilters, showTags: false })}
+                            onClick={() => setShowFilters(prev => !prev)}
                         >
-                            {defaultSettings.showFilters ? "▼" : "▶"} Filters
+                            {showFilters ? "▼" : "▶"} Filters
                         </button>
 
-                        {/* Reset all */}
                         <button
                             className={`${styles.button} ${styles.resetButton} ${activeFilters ? "" : styles.inactiveResetButton}`}
                             onClick={resetAll}
@@ -251,17 +276,14 @@ function ProductsList({ productsArray, sortByKeys, useFilters, initialItemsNumbe
                         </button>
                     </div>
 
-                    {/* FILTERS SECTION */}
-                    {defaultSettings.showFilters && (
+                    {showFilters && (
                         <div className={styles.filtersSection}>
-                            {/* Search input */}
                             <Searchbar
                                 placeholder="Search"
                                 externalValue={defaultSettings.query}
                                 setExternalValue={(newQuery) => updateSettings({ query: newQuery })}
                             />
 
-                            {/* Select */}
                             <Select
                                 placeholder="▶ Category"
                                 options={categories}
@@ -269,14 +291,13 @@ function ProductsList({ productsArray, sortByKeys, useFilters, initialItemsNumbe
                                 setValue={(newCategory) => updateSettings({ selectedCategory: newCategory })}
                             />
 
-                            {/* Tags */}
                             <div className={styles.filterContainer}>
                                 <p
                                     className={styles.filterInput}
                                     onClick={() => updateSettings({ showTags: !defaultSettings.showTags, offsetTags: initOffsetTags })}
                                 >
                                     {defaultSettings.showTags ? "▼" : "▶"} Tags
-                                    {defaultSettings.selectedTags.length > 0 ? `〈${defaultSettings.selectedTags.length}〉` : ""}
+                                    {defaultSettings.selectedTags?.length > 0 ? `〈${defaultSettings.selectedTags.length}〉` : ""}
                                 </p>
 
                                 <button onClick={() => updateSettings({ selectedTags: [], showTags: false })}>
@@ -286,14 +307,13 @@ function ProductsList({ productsArray, sortByKeys, useFilters, initialItemsNumbe
                         </div>
                     )}
 
-                    {/* TAGS LIST */}
                     {defaultSettings.showTags && (
                         <>
                             <h4 className={styles.h4}>Select tags</h4>
                             <ul className={styles.labelsContainer}>
                                 {tags.slice(0, defaultSettings.offsetTags).map((tag, i) => (
                                     <li
-                                        key={i}
+                                        key={tag + "-" + i}
                                         className={`${styles.label} ${isSelectedTag(tag) ? styles.selectedLabel : ""}`}
                                         onClick={() => handleTagClick(tag)}
                                     >
@@ -313,14 +333,13 @@ function ProductsList({ productsArray, sortByKeys, useFilters, initialItemsNumbe
                         </>
                     )}
 
-                    {/* SORTING */}
                     {defaultSettings.showSorting && (
                         <>
                             <h4 className={styles.h4}>Sort by</h4>
                             <div className={styles.labelsContainer}>
                                 {defaultSettings.sortingKeys.map((key, index) => (
                                     <button
-                                        key={index}
+                                        key={key + "-" + index}
                                         className={`${styles.label} ${defaultSettings.sortByKey === key ? styles.selectedLabel : ""}`}
                                         onClick={() => {
                                             if (defaultSettings.sortByKey !== key) {
@@ -337,12 +356,8 @@ function ProductsList({ productsArray, sortByKeys, useFilters, initialItemsNumbe
                         </>
                     )}
                 </>
-            )
-            }
+            )}
 
-            {/* --------------------------------- PRODUCTS --------------------------------- */}
-
-            {/* Results count */}
             <h3 className={styles.resultsCount}>{sortedProducts.length} results</h3>
 
             {sortedProducts.length === 0 ? (
@@ -359,16 +374,14 @@ function ProductsList({ productsArray, sortByKeys, useFilters, initialItemsNumbe
                 ) : (
                     <ul className={styles.productsList}>
                         {sortedProducts.slice(0, defaultSettings.offsetProducts).map((product, index) => (
-                            <ProductCard key={index} product={product} />
+                            <ProductCard key={product.id ?? index} product={product} />
                         ))}
                     </ul>
                 )
             )}
-
-
-        </div >
+        </div>
     );
-};
+}
 
 
 // EXPORT MEMO()
